@@ -1,4 +1,6 @@
 music21
-mongodb
+pymongo
 web.py
 BeautifulSoup
+pylint
+pep8
