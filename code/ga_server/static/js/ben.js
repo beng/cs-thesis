@@ -34,20 +34,20 @@ function euclidean_distance(song1, song2) {
     return score;
 }
 
-function playPattern() { // playback a pattern
+function playPattern(pattern) { // playback a pattern
     //var next = Math.random() * NOTES.length >> 0,
     var i = 0;
     //PATTERN[PATTERN.length] = next;
 
     (function play() { // recursive loop to play pattern
         setTimeout( function() {
-            console.log("pattern i :: "+PATTERN[i]);
+            console.log("pattern i :: "+pattern[i]);
 
-            playSingle( PATTERN[i]);
+            playSingle( pattern[i]);
 
             i++;
 
-            if( i < PATTERN.length ) {
+            if( i < pattern.length ) {
                 play();
             } else {
                 setTimeout( function() { LISTEN = true; }, SPEED + SPACING );
@@ -70,6 +70,21 @@ function playSingle(note) { // play a color/note
 }
 
 $(function() {
+    $(".terminate-listen").each(function(i) {
+        var pattern_order = []
+        var generation = $(this).attr('id');
+        $(this).click(function() {
+            $("div.hidden-notes").each(function(idx,r) {
+                if($(this).attr('id') === generation) {
+                    $(this).each(function(idx, child) {
+                        pattern_order.push($(this).children().attr('id'));
+
+                    })
+                }
+            });
+            playPattern(pattern_order);
+        });
+    });
     original_notes = [];
 
     $("div#orig_notes > div").each(function(index) {
@@ -111,7 +126,7 @@ $(function() {
         //var ed = euclidean_distance(original_notes, adjusted_order);
         //$("#current_score").html('Current Score: <small id="cs">' + ed + '/100</small>');
 
-        playPattern();
+        playPattern(PATTERN);
     });
 
     $("#next-song").click(function() {
