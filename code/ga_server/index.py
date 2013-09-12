@@ -157,26 +157,19 @@ class SaveFitness:
         saved_traits = model.pop_find_trait(int(indi_id), int(t_id))
         model.pop_update_user_trait(saved_traits, {"$set": {"user_note":_note}})
         model.pop_update_indi_fitness(int(indi_id), int(fitness_score))
-        # ga.convert_midi(ga.create_pheno(int(indi_id)),int(indi_id))
 
 
 class Terminate(object):
     def GET(self):
         """Return the best individual from each generation"""
-        # ga.convert_midi(ga.create_pheno(0),0)
-        # return 'game over...'
         best_individuals = model.find_top_individuals()
         individuals = defaultdict(list)
         for k, v in best_individuals.items():
             for indi in v:
                 for trait in indi:
-                    individuals[k].append(trait['user_note'])
-        # return render.terminate(title, individuals)
-        tmp = {
-            0: ['A5','A5','C5','B5'],
-            # 1: ['B','C','B','D','E']
-        }
-        return render.terminate(title, tmp)
+                    trait = trait['user_note'].replace('-', 'b')
+                    individuals[k].append(trait)
+        return render.terminate(title, individuals)
 
 
 if __name__ == "__main__":

@@ -18,7 +18,6 @@ function get_ed() {
     });
 
     var ed = euclidean_distance(original_notes, adjusted_order);
-    //console.log(ed);
     $("#current_score").html('Current Score: <small id="cs">' + ed + '/MAX(euclidean_distance())</small>');
 
     return ed;
@@ -27,14 +26,12 @@ function get_ed() {
 function euclidean_distance(song1, song2) {
     var score = 0;
     for(var i=0; i < song1.length; i++) {
-        //console.log(song1[i][1]);
-        //console.log(song2[i][1]);
         score += Math.sqrt(Math.pow((song1[i][1] - song2[i][1]), 2));
     }
     return score;
 }
 
-function playPattern(pattern) { // playback a pattern
+function playPattern(pattern, highlight) { // playback a pattern
     //var next = Math.random() * NOTES.length >> 0,
     var i = 0;
     //PATTERN[PATTERN.length] = next;
@@ -43,7 +40,7 @@ function playPattern(pattern) { // playback a pattern
         setTimeout( function() {
             console.log("pattern i :: "+pattern[i]);
 
-            playSingle( pattern[i]);
+            playSingle(pattern[i], highlight);
 
             i++;
 
@@ -57,11 +54,15 @@ function playPattern(pattern) { // playback a pattern
     })(); // end recursion
 }
 
-function playSingle(note) { // play a color/note
+function playSingle(note, highlight) { // play a color/note
     MIDI.loadPlugin(function() {
-        default_bg = $('#'+note).css('background-color');
-        $('#'+note).css('background-color', 'white');
         MIDI.noteOn(0, MIDI.keyToNote[note], 127, 0);
+
+        if(highlight) {
+            default_bg = $('#'+note).css('background-color');
+            $('#'+note).css('background-color', 'white');
+        }
+
         setTimeout(function() { // turn off color
             MIDI.noteOff(0, MIDI.keyToNote[note], 0);
             $('#'+note).css('background-color', default_bg);
@@ -82,7 +83,7 @@ $(function() {
                     })
                 }
             });
-            playPattern(pattern_order);
+            playPattern(pattern_order, false);
         });
     });
     original_notes = [];
@@ -92,13 +93,14 @@ $(function() {
     });
 
     colors = {
-            'A': '#'+(Math.random()*0xFFFFFF<<0).toString(16),
-            'B': '#'+(Math.random()*0xFFFFFF<<0).toString(16),
-            'C': '#'+(Math.random()*0xFFFFFF<<0).toString(16),
-            'D': '#'+(Math.random()*0xFFFFFF<<0).toString(16),
-            'E': '#'+(Math.random()*0xFFFFFF<<0).toString(16),
-            'F': '#'+(Math.random()*0xFFFFFF<<0).toString(16),
-            'G': '#'+(Math.random()*0xFFFFFF<<0).toString(16)};
+        'A': '#'+(Math.random()*0xFFFFFF<<0).toString(16),
+        'B': '#'+(Math.random()*0xFFFFFF<<0).toString(16),
+        'C': '#'+(Math.random()*0xFFFFFF<<0).toString(16),
+        'D': '#'+(Math.random()*0xFFFFFF<<0).toString(16),
+        'E': '#'+(Math.random()*0xFFFFFF<<0).toString(16),
+        'F': '#'+(Math.random()*0xFFFFFF<<0).toString(16),
+        'G': '#'+(Math.random()*0xFFFFFF<<0).toString(16)
+    };
 
     $('div#sortable-trait > div').each(function(index) {
         $(this).css({ 'background-color': colors[$(this).attr('id')[0]]});
@@ -126,7 +128,7 @@ $(function() {
         //var ed = euclidean_distance(original_notes, adjusted_order);
         //$("#current_score").html('Current Score: <small id="cs">' + ed + '/100</small>');
 
-        playPattern(PATTERN);
+        playPattern(PATTERN, true);
     });
 
     $("#next-song").click(function() {

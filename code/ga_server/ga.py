@@ -1,9 +1,13 @@
-import model
-import web
 import json
 import math
-import music21
 import random
+
+import model
+from config import REST_SERVER
+
+import web
+import music21
+
 
 USER_SETTINGS = {'size': 0, 'nodes': 0, 'rate': 0.0, 'artist': '', 'song': ''}
 
@@ -12,7 +16,7 @@ def create_population(artist, song, num_indi, num_traits, size, nodes, mrate):
     USER_SETTINGS['mc_nodes'] = int(nodes)
     USER_SETTINGS['rate'] = float(mrate)
 
-    root = 'http://localhost:8000/q/spawn_pop/'
+    root = "{}/q/spawn_pop/".format(REST_SERVER)
     params = root +'/'.join([artist, song, str(num_indi), str(num_traits), str(size), str(nodes)])
     br = web.Browser()
     br.open(params)
@@ -21,16 +25,6 @@ def create_population(artist, song, num_indi, num_traits, size, nodes, mrate):
 
     return population
 
-def euclidean_distance(song1, song2):
-    """The songs are lists of notes converted to their midi value
-    @TODO clean this up. it's too messy"""
-    try:
-        score = 0
-        for i in range(len(song1)):
-            score += math.sqrt((music21.pitch.Pitch(song1[i]).midi - int(music21.pitch.Pitch(song2[i]).midi)) ** 2)
-        return score
-    except ValueError:
-        raise 'Songs must be the same length!'
 
 def fate(indi_id):
     """Use the individual that was just evaluated to determine
