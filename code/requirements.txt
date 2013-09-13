@@ -2,5 +2,4 @@ music21
 pymongo
 web.py
 BeautifulSoup
-pylint
-pep8
+redis

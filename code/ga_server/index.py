@@ -4,75 +4,62 @@ from itertools import chain
 
 import model
 import ga
+from core import GAInitialization
 
 import web
 
 urls = (
-        '/', 'Index',
-        '/fitness/(.+)', 'Fitness',
-        '/save_fitness/(.+)', 'SaveFitness',
-        '/terminate', 'Terminate',)
+    '/', 'Index',
+    '/fitness/(.+)', 'Fitness',
+    '/save_fitness/(.+)', 'SaveFitness',
+    '/terminate', 'Terminate',
+)
 
 render = web.template.render('templates/', base='layout')
 app = web.application(urls, globals())
 title = 'GA Server'
 USER_SETTINGS = {'mc_size': 0, 'mc_nodes': 0, 'rate': 0.0}
+SETTINGS = GAInitialization()
 
-class Index:
+
+class Index(object):
     def GET(self):
-        """Render the parameter initialization view"""
-        model.pop_clear_conn()
-        model.params_clear_conn()
-        # call REST server for a list of available songs
-        br = web.Browser()
-        br.open('http://localhost:8000/q/song') # make dynamic later
-        songs = json.loads(br.get_text())
-        print songs
+        title = "Welcome!"
 
-        return render.index(title, songs)
+        # clear stale settings
+        SETTINGS.reset_ga()
+
+        # get pairs of artist and song
+        listings = SETTINGS.music_collection('artist:*')
+
+        return render.index(title, listings)
 
     def POST(self):
-        pd = web.input()
-        num_gen = pd.num_gen
-        song = pd.influencer
+        artist, song = web.input()['influencer'].split(' - ')
+        params = {k: v for (k, v) in web.input().items() if k not in ['influencer']}
+        params.update({
+            'artist': artist,
+            'song': song
+        })
+        SETTINGS.save_properties(params)
+        population = ga.create_population(params)
 
-        # call REST server to get artist
-        br = web.Browser()
-        br.open('http://localhost:8000/q/songartist/' + song) # make dynamic later
-        artist = json.loads(br.get_text())[0]
-        print artist
-
-        num_indi = pd.pop_size
-        num_traits = pd.num_traits
-        size = pd.mc_size
-        nodes = pd.mc_nodes
-
-        USER_SETTINGS['max_gen'] = int(num_gen)
-        USER_SETTINGS['mc_size'] = int(size)
-        USER_SETTINGS['mc_nodes'] = int(nodes)
-        USER_SETTINGS['rate'] = float(pd.mrate)
-
-        model.params_save({"max_gen":int(num_gen)})
-        model.params_save({"num_indi": int(num_indi)})
-
-        population = ga.create_population(artist, song, num_indi, num_traits, size, nodes, USER_SETTINGS['rate'])
-
-        for indi in population:
-            for nt in range(int(num_traits)):
-                trait = {
-                    "artist": indi['artist'],
-                    "song": indi['song'],
-                    "indi_id": int(indi['indi_id']),
-                    "trait_id": nt,
-                    "generation": int(indi['generation']),
-                    "fitness": 0,
-                    "note": indi['note'][nt],
-                    "user_note": indi['note'][nt],
-                    "duration": 1,}
+        for individual in population:
+            notes = individual.pop('note')
+            for note in notes:
+                trait = individual
+                trait.update({
+                    'trait_id': notes.index(note),
+                    'fitness': 0,
+                    'note': note,
+                    'user_note': note,
+                    'duration': 1
+                })
                 model.pop_save_individual(trait)
 
         # call fitness on first individual
         raise web.seeother('/fitness/0')
+
 
 class Fitness:
     """This is an interactive fitness function, i.e. the individual is scored
@@ -89,15 +76,6 @@ class Fitness:
         artist = ''
         song = ''
         current_gen = ''
-
-        # note_colors = {
-        #     'A': 'red',
-        #     'B': 'yellow',
-        #     'C': 'orange',
-        #     'D': 'green',
-        #     'E': 'blue',
-        #     'F': 'purple',
-        #     'G': 'grey',}
 
         idx = 0
         for i in individual:
@@ -150,7 +128,6 @@ class SaveFitness:
         """Updates the user-note in a single trait in an individual. This is information
         is used to find out what notes the user didn't like from the computer
         presented melody"""
-        print "web input is ", web.input()
         t_id = web.input()['trait_id']
         _note = web.input()['name'].replace('b', '-')
         fitness_score = web.input()['fitness']

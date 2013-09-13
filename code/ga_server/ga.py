@@ -2,28 +2,31 @@ import json
 import math
 import random
 
-import model
-from config import REST_SERVER
-
 import web
 import music21
+import requests
+
+import model
+from config import REST_SERVER
 
 
 USER_SETTINGS = {'size': 0, 'nodes': 0, 'rate': 0.0, 'artist': '', 'song': ''}
 
-def create_population(artist, song, num_indi, num_traits, size, nodes, mrate):
-    USER_SETTINGS['mc_size'] = int(size)
-    USER_SETTINGS['mc_nodes'] = int(nodes)
-    USER_SETTINGS['rate'] = float(mrate)
-
-    root = "{}/q/spawn_pop/".format(REST_SERVER)
-    params = root +'/'.join([artist, song, str(num_indi), str(num_traits), str(size), str(nodes)])
-    br = web.Browser()
-    br.open(params)
-
-    population = json.loads(br.get_text())
-
-    return population
+def create_population(params):
+    print "params are ", params
+    # TODO: send a dictionary once the REST server is fixed
+    query = "/".join([
+        params['artist'],
+        params['song'],
+        params['pop_size'],
+        params['num_traits'],
+        params['mc_size'],
+        params['mc_nodes'],
+    ])
+    path = '/q/spawn_pop/'
+    url = REST_SERVER + path + query
+    req = requests.get(url)
+    return req.json()
 
 
 def fate(indi_id):

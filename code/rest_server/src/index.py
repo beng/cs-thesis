@@ -77,8 +77,8 @@ class SpawnPopulation():
             raise web.notfound()
 
         # shitty results otherwise
-        # if int(args[4]) < 50:
-        #     raise web.notfound()
+        if int(args[4]) < 50:
+            raise web.notfound()
 
         artist = args[0]
         song = args[1]
@@ -145,7 +145,7 @@ class Markov():
 
         notes = []
         trait = 'note'
-        
+
         for item in model.music_find_trait(artist, song, trait):
             notes.append(item[trait])
         notes = ' '.join(notes)
@@ -167,7 +167,7 @@ class ExportMarkov:
             '''
             converts the individuals pitch, accidental, octave, and rhythm to a music stream
             using the music21 library. the music stream is then used to create a midi file
-            '''                    
+            '''
 
             partupper = music21.stream.Part()
             m = music21.stream.Measure()
@@ -176,9 +176,9 @@ class ExportMarkov:
                 print n
                 #n.duration.type = "half"
                 m.append(n)
-            partupper.append(m)    
+            partupper.append(m)
             return partupper
-        
+
     def convert_midi(self, mfile, indi_id):
         '''
         mfile is a musicstream which is exported to as midi format
