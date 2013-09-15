@@ -8,10 +8,13 @@ import ga
 import web
 
 urls = (
-        '/', 'Index',
-        '/fitness/(.+)', 'Fitness',
-        '/save_fitness/(.+)', 'SaveFitness',
-        '/terminate', 'Terminate',)
+    '/', 'Index',
+    '/fitness/(.+)', 'Fitness',
+    '/save_fitness/(.+)', 'SaveFitness',
+    '/terminate', 'Terminate',
+    '/fitness_graph/(.+)', 'FitnessGraph',
+    '/current_best/(.+)/(.+)', 'CurrentBestIndividual',
+)
 
 render = web.template.render('templates/', base='layout')
 app = web.application(urls, globals())
@@ -143,6 +146,27 @@ class Fitness:
         #update fitness score for individual
         # model.pop_update_indi_fitness(int(indi_id), score)
         ga.fate(int(indi_id))
+
+
+class FitnessGraph(object):
+    def GET(self, indi_id):
+        all_indis = model.find_indis_less_than(int(indi_id))
+        scores = [indi['fitness'] for indi in all_indis]
+        resp = {k: v for (k, v) in enumerate(scores)}
+        return json.dumps(resp)
+
+
+class CurrentBestIndividual(object):
+    def GET(self, indi_id, generation):
+        best_indi = model.current_best_indi(int(indi_id), int(generation))
+        print best_indi
+        resp = {}
+        if best_indi:
+            resp.update({
+                'id': best_indi['indi_id'],
+                'score': best_indi['fitness']
+            })
+        return json.dumps(resp)
 
 
 class SaveFitness:

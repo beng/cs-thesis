@@ -117,3 +117,20 @@ def find_top_individuals():
                 [indi for indi in pop_find_individual(indi['indi_id'])]
             )
     return best_individuals
+
+
+def current_best_indi(indi_id, generation):
+    indi = POP_COLL.find({
+        'indi_id': {
+            '$lt': indi_id
+        },
+        'trait_id': 0,
+        'generation': generation
+    }, limit=1).sort("fitness", -1)
+    best = [i for i in indi]
+    return best[0] if best else []
+
+
+def find_indis_less_than(lookup_id):
+    """Return all indivduals with an id less than param"""
+    return POP_COLL.find({'indi_id': {'$lt': lookup_id}, 'trait_id': 0})

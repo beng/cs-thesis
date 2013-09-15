@@ -71,6 +71,61 @@ function playSingle(note, highlight) { // play a color/note
 }
 
 $(function() {
+    indi_ids = [];
+    scores = [];
+    var tmp_indi_id = $("#save-order").attr("href");
+    var current_gen = $("#current-gen").attr("class");
+
+    $.getJSON('/current_best/' + tmp_indi_id + '/' + current_gen, function(resp) {
+        console.log(resp);
+    });
+
+    $.getJSON('/fitness_graph/' + tmp_indi_id, function(data) {
+        console.log(data);
+        for(var idx in data) {
+            indi_ids.push(idx);
+            scores.push(data[idx]);
+        }
+        var chart = new Highcharts.Chart({
+        chart: {
+            type: 'line',
+            renderTo: 'container'
+        },
+        title: {
+                text: 'Fitness Score Over Time',
+                x: -20 //center
+            },
+        xAxis: {
+            categories: indi_ids,
+            title: {text: 'Individual ID'}
+        },
+        yAxis: {
+            title: {text: 'Score'},
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: ''
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            name: 'Fitness Score',
+            data: scores
+        }]
+    })
+    });
+    console.log("indi ids " + indi_ids);
+
+    // });
+
     $(".terminate-listen").each(function(i) {
         var pattern_order = []
         var generation = $(this).attr('id');
