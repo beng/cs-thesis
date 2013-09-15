@@ -76,11 +76,15 @@ $(function() {
     var tmp_indi_id = $("#save-order").attr("href");
     var current_gen = $("#current-gen").attr("class");
 
-    $.getJSON('/current_best/' + tmp_indi_id + '/' + current_gen, function(resp) {
-        console.log(resp);
-    });
-
-    $.getJSON('/fitness_graph/' + tmp_indi_id, function(data) {
+    // Not going to use right now, seems repetitive...
+    // $.getJSON('/current_best/' + tmp_indi_id + '/' + current_gen, function(resp) {
+    //     var score = resp.score || "N/A";
+    //     var indi_id = resp.id || "N/A";
+    //     $("#best_indi_score").html("Best Individual ID: <small id='bi'>" + indi_id + "</small>")
+    //     $("#best_indi_id").html("Best Individual Score: <small id='bs'>" + score + "</small>")
+    // });
+    if (tmp_indi_id >= 1){
+        $.getJSON('/fitness_graph/' + tmp_indi_id, function(data) {
         console.log(data);
         for(var idx in data) {
             indi_ids.push(idx);
@@ -122,6 +126,8 @@ $(function() {
         }]
     })
     });
+    }
+
     console.log("indi ids " + indi_ids);
 
     // });
@@ -164,7 +170,7 @@ $(function() {
     $( "#sortable-trait" ).sortable({
         stop: function(event) {
               // calculate fitness
-              console.log(get_ed());
+              get_ed();
         }
     });
     $( "#sortable-trait" ).disableSelection();
@@ -175,6 +181,7 @@ $(function() {
         var adjusted_order = [];
 
         $('div#sortable-trait > div').each(function(index) {
+
             adjusted_order.push([$(this).attr('id'), $(this).attr('class')])
             PATTERN.push($(this).attr('id'));
             // NOTES.push($(this).attr('id'));
@@ -214,12 +221,10 @@ $(function() {
         })
     });
 
-    $("#love").click(function() {
-        $("#qf").submit();
+    $("#previous-song").click(function() {
+        var indi_id = parseInt($(this).attr('href'), 10) - 1;
+        var previous_page = "/fitness/" + indi_id;
+        window.location.href = previous_page;
+        return false;
     });
-
-    $("#hate").click(function() {
-        $("#qf").submit();
-    });
-
 });

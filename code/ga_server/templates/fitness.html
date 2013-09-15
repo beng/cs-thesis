@@ -2,49 +2,49 @@ $def with(title, indi_id, individual, artist, song, max_gen, current_gen, user_s
 $var title:$title
 
 <div id="content">
-    <div class="container-fluid">
-    <div class="row-fluid">
-
-    <div class="span8 offset2">
-      <div class="pagination-centered page-header btn-group">
-        <form method="POST" id="ns" action="/fitness/$indi_id">
+    <!-- <div class="container-fluid"> -->
+    <div class="well span10 offset2">
+        <div class="pagination-centered page-header">
             <h1>$artist <small>$song</small></h1>
-            <a class="btn btn-inverse" id="previous-song" href="#"><i class="icon-arrow-left"></i> Prevous Song</a>
-            <a class="btn btn-inverse" id="listen" href="#">Listen</a>
-            <a class="btn btn-inverse" id="save-order" href="$indi_id">Save Order</a>
-            <a class="btn btn-inverse" id="next-song">Next Song <i class="icon-arrow-right"></i></a>
-            <!-- <button id="next-song" class="btn btn-inverse">Next</button>         -->
-        </form>
+            <form method="POST" id="ns" action="/fitness/$indi_id">
+                <div class="span2">
+                    <a id="previous-song" href="$indi_id">Previous Song</a>
+                </div>
+                <div class="span2 offset5">
+                    <a id="next-song">Next Song</a>
+                </div>
+            </form>
+        </div>
     </div>
 
-    <div id="current-gen" class="$current_gen"></div>
+    <div  class="well span10 offset2">
+        <div class="well span3">
+            <legend><h2>Stats</h2></legend>
+            <h4>Current Individual: <small>$indi_id</small></h4>
+            <h4>Current Generation: <small>$current_gen/$max_gen</small></h4>
+            <h4 id='current_score'>Current Score: <small>0/100</small></h4>
+        </div>
+        <div class="nav nav-pills span4">
+            <li>
+            <a id="listen" href="$indi_id">Listen</a></li>
+            <li><a id="save-order" href="$indi_id">Save Order</a></li>
+        </div>
 
-    <div id="stats" class="well span4" style="background: rgba(100, 100, 100, 0.3);color: #ddd;">
-        <legend style="color:rgba(236, 221, 200, 0.32);">Stats</legend>
-        <h4>Mutation Rate: <small>$user_settings['rate']</small></h4>
-        <h4>Markov Chain Size: <small>$user_settings['mc_size']</small></h4>
-        <h4>Markov Chain Node: <small>$user_settings['mc_nodes']</small></h4>
-        <hr>
-        <h4>Current Individual: <small>$indi_id</small></h4>
-        <h4>Current Generation: <small>$current_gen/$max_gen</small></h4>
-        <h4 id='current_score'>Current Score: <small>0/100</small></h4>
+        <div id="sortable-trait" class="span6">
+            $for note in individual:
+                <div id="$note[0]" class="$note[1]" style="border:2px solid black;">$note[0]</div>
+        </div>
+
     </div>
 
-    <div id="sortable-trait" class="well pagination-centered span4" style="background: rgba(100, 100, 100, 0.3);color: #ddd;">
+    <div id="container" class="well span10 offset2"></div>
 
-      $for note in individual:
-        <!-- <div id='n_start'> -->
-        <div id="$note[0]" class="$note[1]" style="border:2px solid black;">$note[0]</div>
-    </div>
-    <div id="container"></div>
-  </div>
 </div>
-</div>
 
+<!-- DONT DELETE BELOW!!! -->
+<div id="current-gen" class="$current_gen"></div>
 
 $for note in individual:
     <div id="orig_notes">
         <div id="$note[0]" class="$note[1]"></div>
     </div>
-
-
