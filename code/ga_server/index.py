@@ -171,16 +171,16 @@ class CurrentBestIndividual(object):
 
 class SaveFitness:
     def POST(self, indi_id):
-        """Updates the user-note in a single trait in an individual. This is information
-        is used to find out what notes the user didn't like from the computer
-        presented melody"""
-        print "web input is ", web.input()
-        t_id = web.input()['trait_id']
-        _note = web.input()['name'].replace('b', '-')
-        fitness_score = web.input()['fitness']
-        saved_traits = model.pop_find_trait(int(indi_id), int(t_id))
-        model.pop_update_user_trait(saved_traits, {"$set": {"user_note":_note}})
-        model.pop_update_indi_fitness(int(indi_id), int(fitness_score))
+        req = json.loads(web.data())
+        fitness = req['fitness']
+        for pairs in req['notes']:
+            trait_id = pairs['trait_id']
+            note = pairs['name']
+            saved_traits = model.pop_find_trait(int(indi_id), int(trait_id))
+            user_note = note.replace('b', '-')
+            model.pop_update_user_trait(saved_traits,
+                {"$set": {"user_note": user_note}})
+            model.pop_update_indi_fitness(int(indi_id), int(fitness))
 
 
 class Terminate(object):

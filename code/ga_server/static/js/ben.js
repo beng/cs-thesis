@@ -73,16 +73,9 @@ function playSingle(note, highlight) { // play a color/note
 $(function() {
     indi_ids = [];
     scores = [];
-    var tmp_indi_id = $("#save-order").attr("href");
+    var tmp_indi_id = $("#indi-id").attr("class");
     var current_gen = $("#current-gen").attr("class");
 
-    // Not going to use right now, seems repetitive...
-    // $.getJSON('/current_best/' + tmp_indi_id + '/' + current_gen, function(resp) {
-    //     var score = resp.score || "N/A";
-    //     var indi_id = resp.id || "N/A";
-    //     $("#best_indi_score").html("Best Individual ID: <small id='bi'>" + indi_id + "</small>")
-    //     $("#best_indi_id").html("Best Individual Score: <small id='bs'>" + score + "</small>")
-    // });
     if (tmp_indi_id >= 1){
         $.getJSON('/fitness_graph/' + tmp_indi_id, function(data) {
         console.log(data);
@@ -191,35 +184,39 @@ $(function() {
         //$("#current_score").html('Current Score: <small id="cs">' + ed + '/100</small>');
 
         playPattern(PATTERN, true);
+        var melody = new Array();
+        var indi_id = $("#indi-id").attr("class");
+        $("div#sortable-trait > div").each(function(index){
+            var note = $(this).attr('id');
+            items['fitness'] = get_ed();
+            trait_pairs.push({
+                trait_id: index,
+                name: note
+            });
+        })
+        items['notes'] = trait_pairs;
+        $.post('/save_fitness/'+indi_id, JSON.stringify(items));
     });
 
     $("#next-song").click(function() {
         $("#ns").submit();
     });
-
-    $("#save-order").click(function(){
-        var melody = new Array();
-        var indi_id = $(this).attr("href");
-        $("div#sortable-trait > div").each(function(index){
-            /*  If I don't do it like this, then web.py WILL NOT
-                receive duplicate objects (e.g. if the notes are
-                C3 C3 A4 then webpy will only get 1 C3 and 1 A4).
-                Ignore the multiple web requests -- doesn't matter.
-            */
-            var note = $(this).attr('id');
-            // console.log(FITNESS_SCORE);
-            $.ajax({
-                type: 'POST',
-                async: false,
-                url: '/save_fitness/' + indi_id,
-                data: {name: note, duration:1, trait_id: index, fitness: get_ed()}, // 1 is quarter I believe
-                success: function(){
-                    console.log("SUCCESSFUL!");
-                    console.log(indi_id);
-                }
-            });
-        })
-    });
+    items = {}
+    trait_pairs = [];
+    // $("#save-order").click(function(){
+    //     var melody = new Array();
+    //     var indi_id = $(this).attr("href");
+    //     $("div#sortable-trait > div").each(function(index){
+    //         var note = $(this).attr('id');
+    //         items['fitness'] = get_ed();
+    //         trait_pairs.push({
+    //             trait_id: index,
+    //             name: note
+    //         });
+    //     })
+    //     items['notes'] = trait_pairs;
+    //     $.post('/save_fitness/'+indi_id, JSON.stringify(items));
+    // });
 
     $("#previous-song").click(function() {
         var indi_id = parseInt($(this).attr('href'), 10) - 1;

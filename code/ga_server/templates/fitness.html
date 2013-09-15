@@ -24,17 +24,18 @@ $var title:$title
             <h4>Current Generation: <small>$current_gen/$max_gen</small></h4>
             <h4 id='current_score'>Current Score: <small>0/100</small></h4>
         </div>
-        <div class="nav nav-pills span4">
+        <!-- <div class="nav nav-pills span4">
             <li>
-            <a id="listen" href="$indi_id">Listen</a></li>
-            <li><a id="save-order" href="$indi_id">Save Order</a></li>
-        </div>
-
+            <a id="listen" href="#">Listen</a></li>
+            <li><a id="save-order" href="$indi_id"></a></li>
+        </div> -->
         <div id="sortable-trait" class="span6">
             $for note in individual:
                 <div id="$note[0]" class="$note[1]" style="border:2px solid black;">$note[0]</div>
+            <ul class="nav nav-tabs nav-stacked">
+                <li><a id="listen" href="#">Listen</a></li>
+            </ul>
         </div>
-
     </div>
 
     <div id="container" class="well span10 offset2"></div>
@@ -43,6 +44,7 @@ $var title:$title
 
 <!-- DONT DELETE BELOW!!! -->
 <div id="current-gen" class="$current_gen"></div>
+<div id="indi-id" class="$indi_id"></div>
 
 $for note in individual:
     <div id="orig_notes">
