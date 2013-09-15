@@ -71,6 +71,17 @@ function playSingle(note, highlight) { // play a color/note
 }
 
 $(function() {
+    console.log(1);
+    if($("body#fitness-fn").length > 0) {
+
+        var indi_id = $("#indi-id");
+        $.get('/individual/', {
+            id: indi_id,
+        }, function(resp) {
+            console.log(resp);
+        });
+    }
+
     indi_ids = [];
     scores = [];
     var tmp_indi_id = $("#indi-id").attr("class");

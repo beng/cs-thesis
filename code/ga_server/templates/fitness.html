@@ -1,6 +1,8 @@
 $def with(title, indi_id, individual, artist, song, max_gen, current_gen, user_settings)
 $var title:$title
 
+
+
 <div id="content">
     <!-- <div class="container-fluid"> -->
     <div class="well span10 offset2">
@@ -29,12 +31,13 @@ $var title:$title
             <a id="listen" href="#">Listen</a></li>
             <li><a id="save-order" href="$indi_id"></a></li>
         </div> -->
+        <div class="wel span4">
+            <i id="play" class="icon-play"></i>
+            <i id="stop" class="icon-stop"></i>
+        </div>
         <div id="sortable-trait" class="span6">
-            $for note in individual:
-                <div id="$note[0]" class="$note[1]" style="border:2px solid black;">$note[0]</div>
-            <ul class="nav nav-tabs nav-stacked">
-                <li><a id="listen" href="#">Listen</a></li>
-            </ul>
+            <!-- <ul class="nav nav-tabs nav-stacked">
+            </ul> -->
         </div>
     </div>
 
@@ -50,3 +53,4 @@ $for note in individual:
     <div id="orig_notes">
         <div id="$note[0]" class="$note[1]"></div>
     </div>
+<script type="text/javascript" src="/static/js/fitness.js"></script>

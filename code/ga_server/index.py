@@ -14,12 +14,39 @@ urls = (
     '/terminate', 'Terminate',
     '/fitness_graph/(.+)', 'FitnessGraph',
     '/current_best/(.+)/(.+)', 'CurrentBestIndividual',
+
+    '/individual', 'Individual',
 )
 
-render = web.template.render('templates/', base='layout')
+render_tmpl = web.template.render('templates/', base='layout')
 app = web.application(urls, globals())
 title = 'GA Server'
 USER_SETTINGS = {'mc_size': 0, 'mc_nodes': 0, 'rate': 0.0}
+
+
+def render_individual(individual):
+    resp = defaultdict(list)
+    for trait in individual:
+        resp['generation'] = trait['generation']
+        resp['notes'].append({
+            'id': trait['trait_id'],
+            'note': trait['user_note']
+        })
+        resp['fitness'] = trait['fitness']
+        resp['artist'] = trait['artist']
+        resp['song'] = trait['song']
+        resp['indi_id'] = trait['indi_id']
+    return resp
+
+
+class Individual(object):
+    def GET(self):
+        params = web.input()
+        indi_id = params['id']
+        individual = model.pop_find_individual(int(indi_id))
+        resp = render_individual(individual)
+        return json.dumps(resp)
+
 
 class Index:
     def GET(self):
@@ -32,7 +59,7 @@ class Index:
         songs = json.loads(br.get_text())
         print songs
 
-        return render.index(title, songs)
+        return render_tmpl.index(title, songs)
 
     def POST(self):
         pd = web.input()
@@ -118,7 +145,7 @@ class Fitness:
         # song_name = indi_id+"_song.mid" # don't cast indi_id to int because cant concat int and string
         max_gen = int(model.params_max_gen()['max_gen'])
 
-        return render.fitness(title, indi_id, fake_individual, artist, song, max_gen, current_gen, USER_SETTINGS)
+        return render_tmpl.fitness(title, indi_id, fake_individual, artist, song, max_gen, current_gen, USER_SETTINGS)
 
     def POST(self, indi_id):
         """
@@ -193,7 +220,7 @@ class Terminate(object):
                 for trait in indi:
                     trait = trait['user_note'].replace('-', 'b')
                     individuals[k].append(trait)
-        return render.terminate(title, individuals)
+        return render_tmpl.terminate(title, individuals)
 
 
 if __name__ == "__main__":
