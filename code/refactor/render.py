@@ -24,12 +24,13 @@ def random_sampling(min, max, nt):
 
 
 def render_individual(markov, tsize=None, isize=None, psize=None, **kwargs):
-    population = defaultdict(list)
+    population = []
     for idx, x in enumerate(range(psize)):
         start, stop = random_sampling(1, len(markov), isize)
-        population[0].append({
+        population.append({
             'id': idx,
-            'note': markov[start:stop]
+            'note': markov[start:stop],
+            'generation': 0
         })
     return population
 
@@ -53,9 +54,9 @@ def render_population(**kwargs):
     cache_set(name, 'markov', markov, serialize=True)
     population = render_individual(markov, **kwargs)
     print "caching population"
-    _name = name + ":population"
-    key = 'generation_{}'.format(0)
-    cache_set(_name, key, population, serialize=True)
+    _name = name + ":generation:{}".format(0)
+    for idx, individual in enumerate(population):
+        cache_set(_name, idx, individual, serialize=True)
     return population
 
 
