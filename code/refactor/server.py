@@ -20,8 +20,16 @@ def spawn_population():
     """Given a population size, individual size, artist, and song, return
     an initial population
     """
-    # params = pop size and indi size (num traits)
-    render_population(request.args)
+    params = {k: v for (k, v) in request.args.copy().items()}
+    if params.get('traits'):
+        params['traits'] = params['traits'].split(',')
+    for k, v in params.items():
+        try:
+            params[k] = int(v)
+        except:
+            print "not a number. leaving as is!"
+            params[k] = v
+    return jsonify(render_population(**params))
 
 if __name__ == "__main__":
     app.run(debug=True)

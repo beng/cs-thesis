@@ -1,5 +1,6 @@
 import pickle
 import random
+from collections import defaultdict
 
 import music21
 from redis import Redis
@@ -23,15 +24,15 @@ def random_sampling(min, max, nt):
 
 
 def render_individual(markov, tsize=None, isize=None, psize=None, **kwargs):
-    population = []
+    population = defaultdict(list)
     for idx, x in enumerate(range(psize)):
         start, stop = random_sampling(1, len(markov), isize)
-        population.append({
-            'generation': 0,
+        population[0].append({
             'id': idx,
             'note': markov[start:stop]
         })
     return population
+
 
 def render_population(**kwargs):
     """Kwargs contains size of initial population, size of individual,
@@ -50,7 +51,12 @@ def render_population(**kwargs):
     markov = generate_markov(notes, **kwargs)
     print "caching markov"
     cache_set(name, 'markov', markov, serialize=True)
-    return render_individual(markov, **kwargs)
+    population = render_individual(markov, **kwargs)
+    print "caching population"
+    _name = name + ":population"
+    key = 'generation_{}'.format(0)
+    cache_set(_name, key, population, serialize=True)
+    return population
 
 
 def music_obj(path):
@@ -73,6 +79,7 @@ def generate_markov(corpus, mc_size=None, mc_nodes=None, **kwargs):
     def markov_pitch():
         # we use `:` to denote grouping of pairs, ie chords, individual notes
         # we use `(empty space)` to denote separation between groupings
+        print "MC SIZE IS ", mc_size
         return ' '.join([next(walk_corpus()) for k in xrange(mc_size)]).split(':')
 
     def walk_corpus():
