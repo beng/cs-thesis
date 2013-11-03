@@ -24,14 +24,13 @@ def random_sampling(min, max, nt):
 
 def render_individual(markov, tsize=None, isize=None, psize=None, **kwargs):
     population = []
-    for x in range(psize):
-        for idx, y in enumerate(range(isize)):
-            start, stop = random_sampling(1, len(markov), tsize)
-            population.append({
-                'generation': 0,
-                'id': idx,
-                'note': markov[start:stop]
-            })
+    for idx, x in enumerate(range(psize)):
+        start, stop = random_sampling(1, len(markov), isize)
+        population.append({
+            'generation': 0,
+            'id': idx,
+            'note': markov[start:stop]
+        })
     return population
 
 def render_population(**kwargs):
