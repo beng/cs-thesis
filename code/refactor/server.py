@@ -15,12 +15,12 @@ def markov(key=None):
     return jsonify(cache_get(key))
 
 
-@app.route("/spawn", methods=['GET'])
+@app.route("/spawn", methods=['PUT'])
 def spawn_population():
     """Given a population size, individual size, artist, and song, return
     an initial population
     """
-    params = {k: v for (k, v) in request.args.copy().items()}
+    params = {k: v for (k, v) in request.form.copy().items()}
     if params.get('traits'):
         params['traits'] = params['traits'].split(',')
     for k, v in params.items():
