@@ -1,0 +1,42 @@
+<html>
+<head>
+</head>
+<body>
+
+    <div id="notes">
+    {% for notes in individual['notes'] %}
+        <div id="chords" class='{{ loop.index }}'>
+        {% for note in notes %}
+            <div class='{{ loop.index }}' id='{{ note }}'>{{ note }}</div>
+        {% endfor %}
+    {% endfor %}
+    </div>
+
+
+    <form id="ns" method='POST' action="/fitness/{{individual['generation']}}/{{individual['id']}}">
+        <!-- <input type="submit" id="next" value="next"> -->
+        <div class="span2 offset5">
+            <a id="next-song">Next Song</a>
+        </div>
+    </form>
+    <a id="listen">Listen</a>
+
+    <!-- dont delete below, used for js to send info! -->
+    <div id="current-gen" class="{{individual['generation']}}"></div>
+    <div id="indi-id" class="{{ individual['id'] }}"></div>
+
+    <script type="text/javascript" src="http://codeorigin.jquery.com/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src={{ url_for('static', filename='js/ga.js') }}></script>
+
+    <script type="text/javascript" src={{ url_for('static', filename="js/vendor/MIDI/AudioDetect.js") }}></script>
+    <script type="text/javascript" src={{ url_for('static', filename="js/vendor/MIDI/LoadPlugin.js") }}></script>
+    <script type="text/javascript" src={{ url_for('static', filename="js/vendor/MIDI/Plugin.js") }}></script>
+    <script type="text/javascript" src={{ url_for('static', filename="js/vendor/MIDI/Player.js") }}></script>
+    <script type="text/javascript" src={{ url_for('static', filename="js/vendor/Window/DOMLoader.XMLHttp.js") }}></script>
+    <script type="text/javascript" src={{ url_for('static', filename="js/vendor/Window/DOMLoader.script.js") }}></script>
+
+    <!-- extras -->
+    <script type="text/javascript" src={{ url_for('static', filename="js/vendor/inc/Base64.js") }}></script>
+    <script type="text/javascript" src={{ url_for('static', filename="js/vendor/inc/base64binary.js") }}></script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!doctype html>
+<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap-combined.min.css" rel="stylesheet">
+
+<style type="text/css">
+  /*#sortable-trait { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+  #sortablet li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
+  #sortable-trait li span { position: absolute; margin-left: -1.3em; }
+  body {padding-top: 60px; padding-bottom: 40px; font-size: 18px; background: #252424;color: #ccc;}
+      */
+      body {padding-top: 60px; padding-bottom: 40px; font-size: 18px; background-color: #D4D6DA;}
+</style>
+
+<div class=page>
+  {% block body %}
+  <!-- graph stuff -->
+  <script src="http://code.highcharts.com/highcharts.js"></script>
+  <script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+  <script type="text/javascript" src="http://codeorigin.jquery.com/jquery-2.0.3.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src={{ url_for('static', filename='js/ga.js') }}></script>
+
+  <script type="text/javascript" src={{ url_for('static', filename="js/vendor/MIDI/AudioDetect.js") }}></script>
+  <script type="text/javascript" src={{ url_for('static', filename="js/vendor/MIDI/LoadPlugin.js") }}></script>
+  <script type="text/javascript" src={{ url_for('static', filename="js/vendor/MIDI/Plugin.js") }}></script>
+  <script type="text/javascript" src={{ url_for('static', filename="js/vendor/MIDI/Player.js") }}></script>
+  <script type="text/javascript" src={{ url_for('static', filename="js/vendor/Window/DOMLoader.XMLHttp.js") }}></script>
+  <script type="text/javascript" src={{ url_for('static', filename="js/vendor/Window/DOMLoader.script.js") }}></script>
+
+  <!-- extras -->
+  <script type="text/javascript" src={{ url_for('static', filename="js/vendor/inc/Base64.js") }}></script>
+  <script type="text/javascript" src={{ url_for('static', filename="js/vendor/inc/base64binary.js") }}></script>
+  {% endblock %}
+</div>
