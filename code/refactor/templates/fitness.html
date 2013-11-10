@@ -1,7 +1,5 @@
-<html>
-<head>
-</head>
-<body>
+{% extends "layout.html" %}
+{% block body %}
 
     <div id="notes">
     {% for notes in individual['notes'] %}
@@ -13,30 +11,59 @@
     </div>
 
 
-    <form id="ns" method='POST' action="/fitness/{{individual['generation']}}/{{individual['id']}}">
-        <!-- <input type="submit" id="next" value="next"> -->
+    <!-- <form id="ns" method='POST' action="/fitness/{{individual['generation']}}/{{individual['id']}}">
+        <input type="submit" id="next" value="next">
         <div class="span2 offset5">
             <a id="next-song">Next Song</a>
         </div>
-    </form>
-    <a id="listen">Listen</a>
+    </form> -->
+    <a id="previous-song" href="{{ individual['id'] }}">Previous Song</a>
+    <div id="content">
+        <!-- <div class="container-fluid"> -->
+        <div class="well span10 offset2">
+            <div class="pagination-centered page-header">
+                <h1>{{ artist }} <small>{{ song }}</small></h1>
+                <form id="ns" method='POST' action="/fitness/{{individual['generation']}}/{{individual['id']}}">
+                    <div class="span2">
+                        <a id="previous-song" href="{{ individual['id'] }}">Previous Song</a>
+                    </div>
+                    <div class="span2 offset5">
+                        <a id="next-song">Next Song</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div  class="well span10 offset2">
+            <div class="well span3">
+                <legend><h2>Stats</h2></legend>
+                <h4>Current Individual: <small>{{ individual['id'] }}</small></h4>
+                <h4>Current Generation: <small>{{ individual['generation'] }}/ {{ tgen }}</small></h4>
+                <h4 id='current_score'>Current Score: <small>100/100</small></h4>
+            </div>
+            <!-- <div class="nav nav-pills span4">
+                <li>
+                <a id="listen" href="#">Listen</a></li>
+                <li><a id="save-order" href="$indi_id"></a></li>
+            </div> -->
+            <div class="wel span4">
+                <i id="play" class="icon-play"></i>
+                <i id="stop" class="icon-stop"></i>
+            </div>
+            <div id="sortable-trait" class="span6">
+                <!-- <ul class="nav nav-tabs nav-stacked">
+                </ul> -->
+            </div>
+        </div>
+
+        <div id="container" class="well span10 offset2"></div>
+
+    </div>
+
 
     <!-- dont delete below, used for js to send info! -->
     <div id="current-gen" class="{{individual['generation']}}"></div>
     <div id="indi-id" class="{{ individual['id'] }}"></div>
 
-    <script type="text/javascript" src="http://codeorigin.jquery.com/jquery-2.0.3.min.js"></script>
-    <script type="text/javascript" src={{ url_for('static', filename='js/ga.js') }}></script>
+{% endblock %}
 
-    <script type="text/javascript" src={{ url_for('static', filename="js/vendor/MIDI/AudioDetect.js") }}></script>
-    <script type="text/javascript" src={{ url_for('static', filename="js/vendor/MIDI/LoadPlugin.js") }}></script>
-    <script type="text/javascript" src={{ url_for('static', filename="js/vendor/MIDI/Plugin.js") }}></script>
-    <script type="text/javascript" src={{ url_for('static', filename="js/vendor/MIDI/Player.js") }}></script>
-    <script type="text/javascript" src={{ url_for('static', filename="js/vendor/Window/DOMLoader.XMLHttp.js") }}></script>
-    <script type="text/javascript" src={{ url_for('static', filename="js/vendor/Window/DOMLoader.script.js") }}></script>
-
-    <!-- extras -->
-    <script type="text/javascript" src={{ url_for('static', filename="js/vendor/inc/Base64.js") }}></script>
-    <script type="text/javascript" src={{ url_for('static', filename="js/vendor/inc/base64binary.js") }}></script>
-</body>
-</html>
