@@ -1,6 +1,5 @@
 import pickle
 import random
-from collections import defaultdict
 
 import music21
 from redis import Redis
@@ -23,7 +22,6 @@ def random_sampling(min, max, nt):
 
 
 def render_individual(notes=None, _id=None, generation=None):
-
     return {
         'id': _id,
         'notes': notes,
@@ -113,6 +111,5 @@ def cache_get(name):
         try:
             mapping[k] = pickle.loads(v)
         except Exception:
-            print "can de-pickle, loading as is"
             mapping[k] = v
     return mapping
