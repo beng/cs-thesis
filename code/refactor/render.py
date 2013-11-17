@@ -2,12 +2,10 @@ import pickle
 import random
 
 import music21
-from redis import Redis
 
 from markov import MarkovChain
+from model import cache_get, cache_set, cache_hmset
 
-
-r = Redis(db=2)
 MIDI_PATH = './midi_files'
 
 
@@ -94,23 +92,3 @@ def generate_markov(corpus, mc_size=None, mc_nodes=None, **kwargs):
 
     return map(lambda x: x.split(' '), markov_pitch())
 
-
-def cache_set(name, key, value, serialize=None):
-    if serialize:
-        value = pickle.dumps(value)
-    return r.hset(name, key, value)
-
-
-def cache_hmset(name, mapping, serialize=None):
-    return r.hmset(name, mapping)
-
-
-def cache_get(name):
-    cache = r.hgetall(name)
-    mapping = {}
-    for k, v in cache.items():
-        try:
-            mapping[k] = pickle.loads(v)
-        except Exception:
-            mapping[k] = v
-    return mapping

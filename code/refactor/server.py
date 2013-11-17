@@ -2,8 +2,9 @@ import json
 
 from flask import Flask, request, jsonify, render_template, redirect, url_for
 
-from render import cache_get, cache_set, render_population, cache_hmset
+from render import render_population
 from ga import begin_ga
+from model import cache_get, cache_set, cache_hmset, clear_cache
 
 app = Flask(__name__)
 
@@ -30,6 +31,7 @@ def validate_params(required=None, supplied=None):
 
 @app.route('/', methods=['GET', 'POST'])
 def initialize():
+    clear_cache()
     if request.method == 'POST':
         params = parse_params(request.form.copy())
         params['artist'] = 'vivaldi'

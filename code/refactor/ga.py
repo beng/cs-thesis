@@ -1,10 +1,8 @@
 import random
 from operator import itemgetter
 
-# tuple required for multi-line imports
-from render import (
-    random_sampling, cache_get, cache_set, render_individual, generate_markov
-)
+from model import cache_get, cache_set
+from render import random_sampling, render_individual
 
 
 def m_pipe(val, *fns, **kwargs):
