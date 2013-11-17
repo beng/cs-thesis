@@ -2,3 +2,4 @@ virtual/
 build/
 rest_server/data/
 *.pyc
+refactor/midi_files
