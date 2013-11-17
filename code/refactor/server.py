@@ -31,19 +31,16 @@ def validate_params(required=None, supplied=None):
 @app.route('/', methods=['GET', 'POST'])
 def initialize():
     if request.method == 'POST':
-        # params = parse_params(request.form.copy())
-        params = {'artist': 'vivaldi', 'song': 'winter_allegro', 'isize': 4, 'psize': 2, 'mc_size': 10, 'mc_nodes': 2, 'tgen': 2}
+        params = parse_params(request.form.copy())
+        params['artist'] = 'vivaldi'
+        params['song'] = 'winter_allegro'
+        # params = {'artist': 'vivaldi', 'song': 'winter_allegro', 'isize': 10, 'psize': 10, 'mc_size': 1500, 'mc_nodes': 2, 'tgen': 4}
         params['base_key'] = '{}:{}:generation'.format(params['artist'], params['song'])
-        print "base key is ", params['base_key']
         if params['mc_nodes'] > params['mc_size']:
             return jsonify({'msg': "mc nodes MUST be smaller than mc size!"})
-
         cache_hmset('settings', params)
         population = render_population(**params)
-        print "population is ", population
         return redirect(url_for('fitness', generation=population[0]['generation'], id=population[0]['id']))
-        # return render_template('fitness.html', individual=population[0])
-
     return render_template('index.html')
 
 
@@ -64,7 +61,8 @@ def spawn_population():
     """Given a population size, individual size, artist, and song, return
     an initial population
     """
-    params = {k: v for (k, v) in request.form.copy().items()}
+    # params = {k: v for (k, v) in request.form.copy().items()}
+    params = parse_params(request.form.copy())
     if params['mc_nodes'] > params['mc_size']:
         return jsonify({'msg': "mc nodes MUST be smaller than mc size!"})
     cache_hmset('settings', params)
@@ -120,28 +118,23 @@ def fitness(generation, id, individual=None):
     return render_template('fitness.html', **kwargs)
 
 
-@app.route('/individual/<generation>/<id>', methods=['GET', 'POST'])
-def individual(generation, id):
-    """Return the notes for the requested individual"""
-    if request.method == 'POST':
-        # form data coming in, set the fitness score
-        params = {k: v for (k, v) in request.form.copy().items()}
-        settings = cache_get('settings')
-        key = "{}:{}".format(settings['base_key'], generation)
-        individual = cache_get(key).get(id)
-        individual['fitness'] = int(params['fitness'])
-        cache_set(key, id, individual, serialize=True)
-        return jsonify({"msg": "in cache"})
-
-    # only used if we decide to make this an endpoint for JS
+@app.route('/population/<generation>', methods=['GET'])
+@app.route('/population/<generation>/<id>', methods=['GET', 'POST'])
+def population(generation, id=None):
     settings = cache_get('settings')
     name = "{}:{}".format(settings['base_key'], generation)
-    individual = cache_get(name).get(id)
-    notes = []
-    for idx, chords in enumerate(individual['notes']):
-        notes.append([idx, chords])
-    individual['notes'] = notes
-    return jsonify(individual)
+    population = cache_get(name)
+
+    if request.method == 'POST':
+        # POST will always be referencing an individual
+        params = parse_params(request.form.copy())
+        print "Params are ", params
+        individual = cache_get(name).get(id)
+        individual['fitness'] = params['fitness']
+        cache_set(name, id, individual, serialize=True)
+        return jsonify(individual)
+
+    return jsonify(population.get(id) or population)
 
 
 @app.route('/settings/<option>', methods=['GET'])
@@ -150,8 +143,8 @@ def settings(option):
 
 
 @app.route('/terminate/<generation>/<id>', methods=['GET'])
-def terminate(id):
-    print "in terminate!"
+def terminate(generation, id, **kwargs):
+    return render_template('terminate.html', **kwargs)
 
 
 if __name__ == "__main__":
