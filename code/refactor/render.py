@@ -1,10 +1,9 @@
-import pickle
 import random
 
 import music21
 
 from markov import MarkovChain
-from model import cache_get, cache_set, cache_hmset
+from model import cache_get, cache_set
 
 MIDI_PATH = './midi_files'
 
