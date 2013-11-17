@@ -17,6 +17,7 @@ Individual = function(r) {
     this.generation = r.generation;
     this.score = r.fitness || 0;
     this.notes = r.notes;
+    this.score = 100;
 };
 
 Individual.prototype.color = function(pitch) {
@@ -44,36 +45,97 @@ Individual.prototype.render_notes = function() {
 };
 
 Individual.prototype.fitness = function() {
+    var that = this;
+    var _normalize = function(score, min, range) {
+        /*
+            we need to normalize the score so we can operatore on a scale between
+            0 and 100.
+
+            additionally, if you dont move the notes around then your score is 0,
+            but it should be displayed as 100.
+        */
+        console.log("euclidan score is " + score);
+        console.log("min score is " + min);
+        console.log("range is " + range);
+        console.log("normalized score is " + (100 - (((score - min) / range) * 100)));
+        return (100 - (((score - min) / range) * 100));
+    };
+
+    var _distance_fn = function(x, y) {
+        /*
+            euclidean distance
+        */
+
+        console.log("old score" + that.score);
+        x.forEach(function(el) {
+            that.score += Math.sqrt(Math.pow((el.index - y[el.index].index), 2));
+        });
+        console.log("new score" + that.score);
+        return that.score;
+    };
+
+
     if(adjusted_order.length < 1) {
         console.log("fitness is 100");
     }
 
-    var _score = euclidean_distance(original_notes, adjusted_order);
-    var _max_score = euclidean_distance(original_notes, reversed);
-    var _normalized = normalize(_score, 0, _max_score);
-    $('#current_score').html("Current Score: <small>" + _normalized + "/100</small>");
+    var _score = _distance_fn(original_notes, adjusted_order);
+    var _max_score = _distance_fn(original_notes, reversed);
+    var _normalized = _normalize(_score, 0, _max_score);
     return _normalized;
 };
 
-function normalize(score, min, range) {
-    /*
-        we need to normalize the score so we can operatore on a scale between
-        0 and 100.
+Individual.prototype.fitness_graph = function() {
+    var previous_indis = [];
+    var previous_indis_scores = [];
 
-        additionally, if you dont move the notes around then your score is 0,
-        but it should be displayed as 100.
-    */
-    return (100 - (((score - min) / range) * 100));
-}
-
-function euclidean_distance(x, y) {
-    var _score = 0;
-    x.forEach(function(el) {
-        _score += Math.sqrt(Math.pow((el.index - y[el.index].index), 2));
+    $.getJSON('/population/' + this.generation, function(obj) {
+        console.log(obj);
+        for(var idx in obj) {
+            if(obj[idx].hasOwnProperty('fitness')) {
+                previous_indis.push(obj[idx].id);
+                previous_indis_scores.push(Math.ceil(obj[idx].fitness));
+            }
+        }
+        console.log(previous_indis);
+        console.log(previous_indis_scores);
+        var chart = new Highcharts.Chart({
+            chart: {
+                type: 'line',
+                renderTo: 'fitness-container'
+            },
+            title: {
+                    text: 'Fitness Score Over Time',
+                    x: -20 //center
+                },
+            xAxis: {
+                categories: previous_indis,
+                title: {text: 'Individual ID'}
+            },
+            yAxis: {
+                title: {text: 'Score'},
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            tooltip: {
+                valueSuffix: ''
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0
+            },
+            series: [{
+                name: 'Fitness Score',
+                data: previous_indis_scores
+            }]
+        });
     });
-
-    return _score;
-}
+};
 
 function initializeMusic() {
     MIDI.loadPlugin({
@@ -84,6 +146,24 @@ function initializeMusic() {
 }
 
 function playMusic() {
+    var playSong = function(_c) {
+        for (var i = 0; i < _c.length; i++) {
+            var chord = _c[i];
+            var delay = i / 4;
+            playChord(chord, delay);
+        }
+    };
+
+    var playChord = function(chord, delay) {
+        var midiNotes = [];
+
+        for (var i = 0; i < chord.notes.length; i++) {
+            midiNotes.push(MIDI.keyToNote[chord.notes[i]]);
+        }
+        console.log(chord.notes + ' (' + JSON.stringify(midiNotes) + ') ' + delay);
+        MIDI.chordOn(0, midiNotes, 127, delay);
+    };
+
     var _chords = adjusted_order.length > 0 ? adjusted_order : original_notes;
     playSong(_chords);
 }
@@ -104,35 +184,44 @@ function playChord(chord, delay) {
         midiNotes.push(MIDI.keyToNote[chord.notes[i]]);
     }
     console.log(chord.notes + ' (' + JSON.stringify(midiNotes) + ') ' + delay);
-    MIDI.chordOn(1, midiNotes, 127, delay);
+    MIDI.chordOn(0, midiNotes, 127, delay);
 }
 
 $(function() {
     var indi_id = $("#indi-id").attr("class");
     var generation = $("#current-gen").attr("class");
-    var indi_uri = '/individual/' + generation + '/' + indi_id;
+    var indi_uri = '/population/' + generation + '/' + indi_id;
     var individual;
+
+    $("#next-song").click(function() {
+        // being lazy. this is to ensure that if the user doesnt move any of
+        // the traits around, the fitness score of 100 is still sent!
+        $.post(indi_uri, {fitness: individual.score}, function(resp) {
+            console.log("resp is ", resp);
+        });
+        $("#ns").submit();
+    });
+
     $.getJSON(indi_uri, function(resp) {
-        resp.notes.forEach(function(el) {
-            var idx = el[0];
-            var _notes = el[1];
+        resp.notes.forEach(function(el, idx) {
             original_notes.push({
                 'index': idx,
-                'notes': _notes
+                'notes': el.map(function(n){
+                    // midi.js requires flats to be denoted as `b`
+                    return n.replace("-", "b");
+                })
             });
         });
         resp.notes = original_notes;
         reversed = original_notes.reverse();
         individual = new Individual(resp);
         individual.render_notes();
+        individual.fitness_graph();
     });
+
 
     $('#play').click(function(){
         initializeMusic();
-    });
-
-    $("#next-song").click(function() {
-        $("#ns").submit();
     });
 
     $( "#sortable-trait" ).sortable({
@@ -149,7 +238,8 @@ $(function() {
                   });
               });
               var _score = individual.fitness();
-              console.log("normalized score is " + _score);
+              individual.score = _score;
+              $('#current_score').html("Current Score: <small>" + _score.toFixed(2) + "/100</small>");
               initializeMusic();
               $.post(indi_uri, {fitness: _score}, function(resp) {
                   console.log("resp is ", resp);
