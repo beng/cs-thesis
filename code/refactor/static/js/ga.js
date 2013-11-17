@@ -17,7 +17,7 @@ Individual = function(r) {
     this.generation = r.generation;
     this.score = r.fitness || 0;
     this.notes = r.notes;
-    this.score = 100;
+    this.score = 0;
 };
 
 Individual.prototype.color = function(pitch) {
@@ -48,7 +48,7 @@ Individual.prototype.fitness = function() {
     var that = this;
     var _normalize = function(score, min, range) {
         /*
-            we need to normalize the score so we can operatore on a scale between
+            we need to normalize the score so we can operate on a scale between
             0 and 100.
 
             additionally, if you dont move the notes around then your score is 0,
