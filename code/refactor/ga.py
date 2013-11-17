@@ -1,7 +1,10 @@
 import random
 from operator import itemgetter
 
-from render import random_sampling, cache_get, cache_set, cache_hmset, render_individual
+# tuple required for multi-line imports
+from render import (
+    random_sampling, cache_get, cache_set, render_individual, generate_markov
+)
 
 
 def m_pipe(val, *fns, **kwargs):
@@ -26,11 +29,16 @@ def begin_ga(key):
     for individual in population:
         individual['notes'] = tuple(tuple(x) for x in individual['notes'])
 
-    _future_population = m_pipe(population, tournament, crossover)
+    _future_population = m_pipe(population, tournament, crossover, mutation)
+    print "future population is", _future_population
     for idx, notes in enumerate(_future_population, start=1):
+        print "idx, notes in future pop are ", idx, notes
         individual = render_individual(notes=notes, _id=idx, generation=next_generation)
+        print "newly rendered indivual is ", individual
         cache_set(name, idx, individual, serialize=True)
         future_population.append(individual)
+    print "future poplation is ", future_population
+    print "next generation is ", next_generation
     return next_generation
 
 
@@ -67,16 +75,24 @@ def tournament(population, k=3, elitism=2, kw=None, **kwargs):
     return sorted(pool, key=lambda x: x['fitness'], reverse=True)
 
 
-def mutation(individual, m_rate=.3):
+def mutation(population, m_rate=.3):
     """This mutation mutates random subsets of an individuals genotype"""
-    rnd_rate = random.uniform(0, 1)
-    if rnd_rate > m_rate:
-        print "Mutating Individual!\nRandom rate is: {}\nM Rate is: {}".format(rnd_rate, m_rate)
-        split_point = random.randint(1, len(individual)-1)
-        start, stop = random_sampling(0, len(individual), split_point)
-        # generate a new corpus and markov chain
-        new_corpus = [['C#4', 'A5'], ['B5', 'C#', 'F#3']]
-        individual[start:stop] = new_corpus[start:stop]
-        return individual
-    print "Not mutating\nRandom rate is: {}\nM Rate is: {}".format(rnd_rate, m_rate)
-    return individual
+    _population = []
+    for individual in population:
+        rnd_rate = random.uniform(0, 1)
+        if rnd_rate > m_rate:
+            print "Mutating Individual!\nRandom rate is: {}\nM Rate is: {}".format(rnd_rate, m_rate)
+            print "len of indi notes are ", len(individual['notes'])
+            split_point = random.randint(1, len(individual['notes'])-1)
+            print "split point is ", split_point
+            start, stop = random_sampling(0, len(individual['notes']), split_point)
+
+            # generate a new corpus by using the cached markov chain
+            settings = cache_get('settings')
+            key = "{}:{}".format(settings['artist'], settings['song'])
+            new_corpus = cache_get(key)['markov'][start:stop]
+            _population.append(new_corpus)
+        else:
+            print "Not mutating\nRandom rate is: {}\nM Rate is: {}".format(rnd_rate, m_rate)
+            _population.append(individual['notes'])
+    return _population

@@ -37,7 +37,7 @@ def render_population(**kwargs):
     mpath = map(kwargs.pop, ['artist', 'song'])
     path = "{}/{}/{}.mid".format(MIDI_PATH, *mpath)
     name = '{}:{}'.format(*mpath)
-    _name = name + ":generation:{}".format(0)
+    _name = name + ":generation:{}".format(1)
     psize = kwargs['psize']
     notes = cache_get(name).get('original_notes')
 
@@ -58,7 +58,8 @@ def render_population(**kwargs):
         _kwargs['_id'] = idx
         start, stop = random_sampling(1, len(markov), kwargs['isize'])
         notes = markov[start: stop]
-        individual = render_individual(notes=notes, generation=0, _id=idx)
+        individual = render_individual(notes=notes, generation=1, _id=idx)
+        print "indivudal is in RENDER POP  ", individual
         cache_set(_name, idx, individual, serialize=True)
         population.append(individual)
     return population

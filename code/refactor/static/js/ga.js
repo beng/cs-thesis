@@ -17,7 +17,6 @@ Individual = function(r) {
     this.generation = r.generation;
     this.score = r.fitness || 0;
     this.notes = r.notes;
-    this.score = 0;
 };
 
 Individual.prototype.color = function(pitch) {

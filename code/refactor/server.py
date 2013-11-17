@@ -70,7 +70,7 @@ def spawn_population():
         params['traits'] = params['traits'].split(',')
     for k, v in params.items():
         try:
-            params[k] = int(v)
+            params[k] = float(v)
         except:
             print "not a number. converting unicode to string"
             params[k] = str(v)
@@ -82,6 +82,7 @@ def spawn_population():
 @app.route('/fitness/<generation>/<id>', methods=['GET', 'POST'])
 def fitness(generation, id, individual=None):
     # id, generation = map(int, [id, generation])
+    cache_set('settings', 'current_generation', generation)
     settings = cache_get('settings')
     key = "{}:{}".format(settings['base_key'], generation)
     artist = settings['artist']
@@ -118,12 +119,20 @@ def fitness(generation, id, individual=None):
     return render_template('fitness.html', **kwargs)
 
 
+@app.route('/population', methods=['GET'])
 @app.route('/population/<generation>', methods=['GET'])
 @app.route('/population/<generation>/<id>', methods=['GET', 'POST'])
-def population(generation, id=None):
+def population(generation=None, id=None):
     settings = cache_get('settings')
-    name = "{}:{}".format(settings['base_key'], generation)
-    population = cache_get(name)
+    entire_population = []
+    if not generation:
+        all_generations = settings['current_generation']
+        for gen in xrange(1, int(all_generations) + 1):
+            name = "{}:{}".format(settings['base_key'], gen)
+            entire_population.append(cache_get(name))
+    else:
+        name = "{}:{}".format(settings['base_key'], generation)
+        population = cache_get(name)
 
     if request.method == 'POST':
         # POST will always be referencing an individual
@@ -134,6 +143,9 @@ def population(generation, id=None):
         cache_set(name, id, individual, serialize=True)
         return jsonify(individual)
 
+    if entire_population:
+        # TODO: turn entire_population into dictioanry
+        return jsonify(entire_population[0])
     return jsonify(population.get(id) or population)
 
 
