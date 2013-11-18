@@ -2,6 +2,12 @@
 {% block body %}
 
     <form action='/' method='POST'>
+      <label>Artist Song Pairs</label>
+      <select name='artist_song_pairs'>
+      {% for artist, song in artist_pairs %}
+          <option>{{artist}} - {{song}}</option>
+      {% endfor %}
+      </select>
       <label>Population Size</label>
       <input type="text" name="psize" id="psize" />
 

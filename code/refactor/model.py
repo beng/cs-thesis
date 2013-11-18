@@ -5,6 +5,11 @@ from redis import Redis
 r = Redis(db=2)
 
 
+def artist_song_pair():
+    """Return every artist and song in the redis list `artist_pairs`"""
+    return r.lrange('artist_pairs', 0, -1)
+
+
 def clear_cache():
     """Deletes everything in cache except the music 21 object"""
     map(r.delete, filter(lambda key: ':generation' in key or 'settings' in key, r.keys()))

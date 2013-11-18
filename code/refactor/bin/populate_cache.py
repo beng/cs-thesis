@@ -63,6 +63,7 @@ def cache_midi_folder():
                     mobj = music_obj(tmp_path)
                     notes = parse(mobj)
                     cache_set(name, 'original_notes', notes, serialize=True)
+                    r.lpush('artist_pairs', name)
                 except Exception, e:
                     print "ISSUE PARSING SONG! Exception is ", e
                     continue

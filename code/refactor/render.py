@@ -3,9 +3,19 @@ import random
 import music21
 
 from markov import MarkovChain
-from model import cache_get, cache_set
+from model import artist_song_pair, cache_get, cache_set
 
 MIDI_PATH = './midi_files'
+
+
+def render_artist_pairs():
+    """Return a mapping of artist to song for every artist/song pair in
+    the redis list of artist pairs"""
+    pairs = []
+    for key in artist_song_pair():
+        artist, song = key.split(':')
+        pairs.append([artist, song])
+    return pairs
 
 
 def random_sampling(min, max, nt):

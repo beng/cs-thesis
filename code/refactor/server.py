@@ -2,7 +2,7 @@ import json
 
 from flask import Flask, request, jsonify, render_template, redirect, url_for
 
-from render import render_population
+from render import render_population, render_artist_pairs
 from ga import begin_ga
 from model import cache_get, cache_set, cache_hmset, clear_cache
 
@@ -32,18 +32,19 @@ def validate_params(required=None, supplied=None):
 @app.route('/', methods=['GET', 'POST'])
 def initialize():
     clear_cache()
+
     if request.method == 'POST':
         params = parse_params(request.form.copy())
-        params['artist'] = 'vivaldi'
-        params['song'] = 'winter_allegro'
-        # params = {'artist': 'vivaldi', 'song': 'winter_allegro', 'isize': 10, 'psize': 10, 'mc_size': 1500, 'mc_nodes': 2, 'tgen': 4}
+        artist, song = params['artist_song_pairs'].split(' - ')
+        params['artist'] = artist
+        params['song'] = song
         params['base_key'] = '{}:{}:generation'.format(params['artist'], params['song'])
         if params['mc_nodes'] > params['mc_size']:
             return jsonify({'msg': "mc nodes MUST be smaller than mc size!"})
         cache_hmset('settings', params)
         population = render_population(**params)
         return redirect(url_for('fitness', generation=population[0]['generation'], id=population[0]['id']))
-    return render_template('index.html')
+    return render_template('index.html', artist_pairs=render_artist_pairs())
 
 
 @app.route('/markov', methods=['POST'])
