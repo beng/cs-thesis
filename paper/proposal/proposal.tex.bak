@@ -1,0 +1,268 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Simple Sectioned Essay Template
+% LaTeX Template
+%
+% This template has been downloaded from:
+% http://www.latextemplates.com
+%
+% Note:
+% The \lipsum[#] commands throughout this template generate dummy text
+% to fill the template out. These commands should all be removed when 
+% writing essay content.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+\documentclass[12pt]{article} % Default font size is 12pt, it can be changed here
+
+\usepackage{geometry} % Required to change the page size to A4
+\geometry{a4paper} % Set the page size to be A4 as opposed to the default US Letter
+
+\usepackage{graphicx} % Required for including pictures
+
+\usepackage{float} % Allows putting an [H] in \begin{figure} to specify the exact location of the figure
+\usepackage{wrapfig} % Allows in-line images such as the example fish picture
+
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+\usepackage{verbatim} % Multi-line comments
+
+\linespread{1.2} % Line spacing
+
+\setlength\parindent{0pt} % Uncomment to remove all indentation from paragraphs
+
+\graphicspath{{./Pictures/}} % Specifies the directory where pictures are stored
+
+\usepackage{color}   %May be necessary if you want to color links
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true, %set true if you want colored links
+    linktoc=all,     %set to all if you want both sections and subsections linked
+    linkcolor=blue,  %choose some color if you want links to stand out
+}
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\begin{titlepage}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+
+\center % Center everything on the page
+
+\textsc{\LARGE University Name}\\[1.5cm] % Name of your university/college
+\textsc{\Large Major Heading}\\[0.5cm] % Major heading such as course name
+\textsc{\large Minor Heading}\\[0.5cm] % Minor heading such as course title
+
+\HRule \\[0.4cm]
+{ \huge \bfseries Evolutionary Melody Composition}\\[0.4cm] % Title of your document
+\HRule \\[1.5cm]
+
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Author:}\\
+Ben \textsc{Gelb} % Your name
+\end{flushleft}
+\end{minipage}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Supervisor:} \\
+Dr. James \textsc{Smith} % Supervisor's Name
+\end{flushright}
+\end{minipage}\\[4cm]
+
+{\large \today}\\[3cm] % Date, change the \today to a set date if you want to be precise
+
+%\includegraphics{Logo}\\[1cm] % Include a department/university logo - this will require the graphicx package
+
+\vfill % Fill the rest of the page with whitespace
+
+\end{titlepage}
+
+%----------------------------------------------------------------------------------------
+%	TABLE OF CONTENTS
+%----------------------------------------------------------------------------------------
+
+\tableofcontents % Include a table of contents
+\addcontentsline{toc}{subsection}{Abstract}
+\newpage % Begins the essay on a new page instead of on the same page as the table of contents 
+
+%------------------------------------------------------------------------------------------
+%	ABSTRACT
+%------------------------------------------------------------------------------------------
+\begin{abstract}
+Music can be created by anything. It is not the pitches, but the melody, which gives the lasting impression. By simulating evolution on a computer, one is capable of witnessing and impacting the creation of melodies. I propose a technique to have the computer compose simple, but euphonic melodies by using a Genetic Algorithm (GA). 
+\end{abstract}
+
+%------------------------------------------------------------------------------------------
+%	INTRODUCTION
+%------------------------------------------------------------------------------------------
+\section{Introduction}
+The use of natural selection in the physical realm has proven to be a beneficial way in weeding out the lesser individuals to ensure that one can withstand the current environment. In turn, species slowly evolve to adapt to the new requirements needed to survive. Computers can mimic this approach and use it as a search heuristic. In other words, computers can simulate evolution to help solve problems. This notion is not only interesting, but tends to yield-fascinating results when the given domain is inherently creative. \\
+
+Evolutionary computation has been used as a method for melody composition for many years. This approach is often used for solving problems in complex domains with infinite possibilities. A common goal in melody composition is to produce something that is both compelling and relevant to the user's musical taste. Much of the past research, though, has focused on creating complex melodies, which end up resembling "intellectually stimulating chaos" Cite RBeckerThesis. Although melody composition is possible with mathematics, the addition of a human component, "brings emotions and aesthetics, which are domains not fully understood and also difficult to describe mathematically" Cite 1. Teaching the computer to compose something compelling and relevant is a challenging problem because it relies heavily on meaningful human feedback.
+
+The very nature of music relies on ones emotion, whether it is the composer or the listener. The composer’s emotions are what guide him through the otherwise infinite musical space. 
+
+The very nature of music requires an emotional state. Whether it be the composer relying on instinct and feeling to know where to place a note, or the listener using music to elicit a memory. 
+
+Composing music is not just about placing characteristics in their theoretically correct positions. It involves emotion, a way to guide the composer through the complex domain that is music. 
+
+%------------------------------------------------------------------------------------------
+%	PROBLEM
+%------------------------------------------------------------------------------------------
+\section{Problem}
+Interactive genetic algorithms (IGA) for melody composition are prone to a fitness bottleneck making it difficult to compose a compelling solution. Users experience fatigue when required to evaluate individuals over an extended period of time. \\
+
+Fatigue affects many stages of evolution resulting in under-evolved populations. Additionally, users are often inconsistent with their evaluations during the early and later generations [Cite Biles]. It is certainly possible to create a compelling solution under these circumstances, but requires a certain amount of finesse due to the amount of influence the bottleneck has on the design and quality of the system. \\
+
+Typically, IGAs run for a limited number of generations because users are not able to sit and evaluate millions of individuals in a reasonable amount of time. Placing these constraints on an IGA limits how quickly a population evolves from generation to generation, often resulting in under-evolved individuals. Additionally, a large portion of the user's time is spent evaluating noisy populations dominated by poor individuals. This is largely influenced by the quality of the initial population and consistency in user evaluations. \\
+
+Inconsistent evaluations from the user slows down the evolution process. The amount of random noise found in early generations results in the user losing focus and assigning random scores [Cite Biles]. This confuses the IGA and causes bad individuals to influence the next generation instead of being filtered out. \\
+
+%IGAs have trouble composing compelling melodies due to a fitness bottleneck. User fatigue impacts each stage of the evolution process, in turn influencing the overall progression, design, and quality of the system. While it is not unheard of for an IGA to create “good” sounding solutions under these circumstances, it is still a problem that requires a significant amount of finesse. \\
+
+%Humans often experience fatigue when required to evaluate individuals for an extended period of time. In attempts to reduce the burden on the user, IGAs run for a reduced number of generations and population size. Standard GAs don't need to worry about user burnout being a fitness bottleneck, and as a result can run for millions of generations with extremely large population sizes. However, placing these constraints on an IGA limits how quickly a population evolves from generation to generation, often resulting in under-evolved individuals. Evolution is inherently a slow process due to the "forces of selection [being] very noisy and temporarily ineffectual" [http://www-abc.mpib-berlin.mpg.de/users/ptodd/publications/99evmus/99evmus.pdf]. It takes a while for consistently decent populations to arrive because early generations tend to contain a lot of noisy data. \\
+ 
+%IGAs are also susceptible to the user giving inconsistent evaluations on similar individuals due to the lack of decent sounding individuals in early generations in conjunction with the onset of user fatigue in later generations. While musical preference is subject to change over time due to a number of factors, including emotion or the way a sound was interpreted, it often confuses the IGA and further delays the onset of good populations. 
+
+%------------------------------------------------------------------------------------------
+%	PREVIOUS RESEARCH
+%------------------------------------------------------------------------------------------
+\section{Previous Research}
+%User burnout creates a fitness bottleneck making it difficult to find an optimal solution in a reasonable amount of time. This is because the IGA usually terminates before an optimal solution is found due to the limited population size and number of generations. Evolution is inherently a slow process due to the "forces of selection [being] very noisy and temporarily ineffectual" [http://www-abc.mpib-berlin.mpg.de/users/ptodd/publications/99evmus/99evmus.pdf]. In IGAs, decent solutions don't start appearing until generation X [CITE Biles]. Standard GAs don't need to worry about user burnout being , and as a result can run for millions of generations with extremely large population sizes. \\ 
+
+%A lot of the past research has come up with ways to work around the fitness bottleneck by working it into the design of the system. The IGA needs to decrease the amount of time it takes to find an optimal solution given the strict termination requirements. This can be done by decreasing the number of generations it takes to start getting decent individuals. \\
+
+%An auto-rater allows the GA to run for longer periods of time. It is a neural network that attempts to learn the user’s picking strategy in order to mimic it and replace the user. In doing so, the IGA is not confined to strict conditions and can run for longer periods of time. \\
+
+%While the auto-rater is able to keep a consistency when evaluating, it isn’t able to actually mimic the user’s preferences. Due to the inherit time constraint in IGAs, the NN usually only has a small pool to draw from and ends up making poor evaluations due to minimal training time. One’s taste fluctuates with emotion [Find Citation].  The NN doesn’t truly understand the user’s preferences because we are unable to map emotions to equations at this time [Cite]. In the end, the autorater tends have a sub-optimal performance, while maybe mimicing the user's evaluation preferences X percent of the time [CITE]. \\
+
+%IGA user interface (UI) optimizations have been made to speed up the evolution process. The UI is often implemented under the assumption that the user is ranking the individual on a scale. The user listens to a melody and assigns it a score, e.g. a number 1-100.  This type of feedback supplies minimal knowledge to the IGA. It tells the system what the user thought of the melody as a whole compared to the others in the population. If a user liked certain segments of the song, but as a whole, hated it, then odds are those segments the user did like are going to be trashed. It also takes more time in the beginning to get a better generation going. \\
+
+%Al Biles improved upon this by allowing the user to evaluate the population in real-time. Instead of his populations containing a number of melodies, his contains a single continuous melody, which is evaluated in real-time. The user ranks the melody by with either “g” for good or “b” for bad. This approach has reduced the number of generations needed for the populations to start becoming decent sounding [Find source verifying this]. According to Biles, good solutions don’t  start appearing until generation X. \\
+
+%The fitness function is not the only main contributor in an IGA’s success. Better initial populations tend to lead to future better populations [http://www.cameron.edu/~pdiaz-go/GAsPopMetric.pdf ]. An IGA terminates once it hits a specific number of generations. The more structure and starting knowledge the initial population has the less time that needs to be spent teaching it that. You want to limit the number so it can evolve more quickly.  Better individuals produce better solutions and also reduce time spent in earlier generations weeding out large amounts of poor individuals. An IGA doesn’t have the luxury to run for thousands of generations like a GA can. With such a limiting factor, it is important to have to give it a jumpstart. \\
+
+%Markov chains have been used to spawn the initial population and reduce the amount of randomness in the search space, which increases the probability that the selected traits will be closer to the user's taste, while simultaneously reducing the probability of bad individuals. \\
+
+%The GA doesn’t need to use complex rules to determine the placement of notes and rhythm when creating a melody. Previous approaches had the user enter boundaries for the note for the Markov chain to create. But this doesn't speed up the rate to find an optimal solution. By building a Markov chain off of existing songs, many rules will already be intact since the songs already have their own rules embedded in them. \\
+
+%It is important to determine the search space. Consider a song; it contains many parts, each building off the other. With each part containing a number of variables, the amount of time needed to find an appealing melody drastically increases. If a system is responsible for only creating 1 part of a song, the complexity decreases, thus increasing the likelihood of an appealing result. However, if the search space becomes too small, the chance of generating similar solutions drastically increases. It is important to determine the search space.
+
+%------------------------------------------------------------------------------------------
+%	OVERVIEW
+%------------------------------------------------------------------------------------------
+\section{Overview}
+\subsection{Genetic Algorithm}
+A GA is a search heuristic used to simulate the process of natural evolution [cite wiki, ga]. The process begins by creating a pool of individuals to use as the starting point. Each individual, known as a genome, represents a chromosome. Genomes can be represented in many formats, but the most common one is a set of binary integers such as “1001011” [http://www-math.mit.edu/phase2/UJM/vol1/PREBYS-F.PDF]. Each member of the population is ranked using a function to determine how fit it is and then passed to another function, which “selects individuals from the population to reproduce” [http://www-math.mit.edu/phase2/UJM/vol1/PREBYS-F.PDF]. The selected chromosomes then crossover where they split again and can undergo mutation. Mutation is useful because it is used to randomly alter chromosomes. This process is repeated until the termination requirements are met.
+
+\subsection{Markov Chain}
+A Markov chain is a Markov process, which has a discrete state-space, and is used to represent a system that changes over time. It models transitions from one state to another for random, dependent events, i.e., "the next state depends only on the current state and not on the sequence of events that preceded it" [wiki markov chain, find better source!]. It works by creating a model from a collection of random variables. The model is a set, $S$, of states, $S=s_1,\ldots\,s_r$, and the transitional probabilities $p_{i,j}$ between the states. $p_{i,j}$ "is the probability thatthe Markov chain is at the next point in state j given that it is at the present time point at state i" [cite paper!]. Thus, the Markov chain can be represented as $\Pr\left(X_{n+1}=x | X_n=x_n\right)$. The word "chain" is used to describethe output of this process because the results are often "chained" together. \\
+
+This is similar to using a Markov chain to write sentences where the sentence may not make complete sense, but grammar, sentence structure, and dialogue from the original text will be followed to a degree [http://www.rose-hulman.edu/class/csse/csse220/201130/Programs/Markov/markov.html]. By setting a prefix size, a model can be built by gathering statistics about the frequency of which “words follow certain prefix groups of other words” [http://www.rose-hulman.edu/class/csse/csse220/201130/Programs/Markov/markov.html]. For example, if $N$=2, the next generated words are based on the previous two words.
+
+%------------------------------------------------------------------------------------------
+%	HYPOTHESIS
+%------------------------------------------------------------------------------------------
+\section{Hypothesis}
+This research will focus on creating a system that can compose a compelling melody. In doing so, I will not only gain an understanding of how IGAs can be applied to subjective domains, but also a deeper understanding of music structure. While IGAs are often popular choices for subjective domains, most tend to require minimal human feedback due to user fatigue. I plan to show that by altering the type of human feedback the system requires, user fatigue becomes less of an issue and allows the IGA to arrive at an optimal solution more quickly than implementations that ask the user to enter in a score. Minimizing the fitness bottleneck, and thus speeding up the rate an IGA converges, requires a system designed to exploit the most influential components in the evolution process, the fitness function and the initial population. \\
+
+Modify the way the user interacts with the fitness function by allowing the user to become the composer and make a limited number of modifcations to the melody increasing an IGA's rate of evolution, while decreasing the amount of time it takes for bad individuals to die out. The IGA learns what the user liked, didn't like, and ultimately, the preferred structure of the melody. Selection, even in natural evolution is a slow process. Bad individuals are able to slip through the cracks and infect future generations [http://www-abc.mpib-berlin.mpg.de/users/ptodd/publications/99evmus/99evmus.pdf]. \\
+
+A Markov chain built off of user selected melodies should reduce the occurence of bad individuals found in early populations because the individuals will have some structure embedded in them and contain a musical style the user is already familiar with and likes.
+
+%I believe that there is a correlation between the rate at which an IGA arrives at an optimal solution (compelling melody) and the type of feedback supplied through the fitness function. By removing the earlier, more random generations, the IGA will have a better chance of creating an optimal solution. \\
+
+%The fitness bottleneck isn’t going away; it must be considered in the design of the IGA and built around. One approach is to speed up the process of generating decent populations by using a catalyst. This can be done by implementing a new type of evaluation/rating/feedback system. One way to minimize the fitness bottleneck is to build the IGA around it. Since we don’t have enough time to run for the required number of generations, it is important to focus on reducing the amount of poor, random populations with inconsistent qualities among individuals in the earlier generations. No matter how intriguing a UI is, after an extended period of time most users will want to move onto doing something new [Find citation about interest levels!]. 
+
+%In allowing the user to make a limited number of changes to the melody, the IGA can see what the user liked, didn’t like, and the ultimately, the ideal structure of the melody. This will lessen the amount of time it takes for bad individuals from each population to die out. Selection, even in natural evolution is a slow process. Bad individuals are able to slip through the cracks and infect future generations [Cite]. However, bad individuals should be given a fair chance. If they can be fixed with re-ordering then they should be able to. 
+
+%The IGA needs to generate better populations quicker. Can do this by intelligently creating the solution space so it has more structure. Use a Markov chain where the chain is built off of sounds the user is already familiar with and likes. Markov chain with user selected melodies.
+
+%Modify UI to allow the user to evaluate the individual in a different way. Let user make modifications to the melody to inflict their preference. This should speed up the process of generating better populations because the IGA can now see what the user liked, didn’t like, and ultimately how the user would’ve preferred the melody to sound.  Additionally, it puts the user in control of mutation. 
+
+%IGAs do a much better job at composing compelling melodies than GAs, but still have areas that can be improved. It is known that using an influencer when spawning the initial population provides better individuals than relying on a random initial population. By modifying the UI and type of feedback, there will be a reduction in the number of generations it takes for IGAs to start producing decent individuals 
+
+\subsection{Questions}
+Will this keep the user engaged and reduce user burnout? How many potential solutions should be displayed at once? How many solutions from the generation should the user be required to lisen to? Is it possible to bypass ones that are very similar? What characteristics should the user be able to modify? How many modifications should the user be allowed to make per solution? How many influencers should be used?
+
+%----------------------------------------------------------------------------------------
+%	SYNTHESIS
+%----------------------------------------------------------------------------------------
+\section{Synthesis}  
+This goal of this system is to generate a compelling melody. Since the system revolves around user subjectivity, an interactive fitness function will be used for evaluation. The user will be presented with a list of MIDI files containing different music genres' and artists', which will act as an influencer for the initial population. Additionally, the user will be able to enter in the number of traits for each individual, the number of individuals, and the number of generations – the termination requirements. \\
+
+Figure $N$ shows each component of the system. Since existing songs are used to spawn the initial population, there is a chance that certain music rules will be automatically incorporated into the individuals, and so I have decided to not incorporate any rules into the program.
+
+\subsection{Knowledge Base}
+The knowledge base is responsible for storing MIDI metadata and a copy of a song's corpus for feature extraction. This knowledge base allows for easy comparison among different MIDI files or comparing the difference between a solution and the influencer.
+
+\subsubsection{REST Service}
+Responsible for storing all the MIDI metadata and returns it in JSON format. It keeps the corpuses organized and easily accessible. The user can specify what music characteristics they want, e.g. notes, chords, durations, etc. This allows for easy experimentation and the ability to enhance the general song structure.
+
+\subsection{GA System}
+
+\subsubsection{Influencer}
+The influencer will be a maximum of two songs, which the user can select from the knowledge base. \\
+
+The user will be in control of the Markov chain constraints, $total\_size$ and $history\_size$.
+
+\subsubsection{Representation}
+The genome will be a string, e.g. C$\#$4, containing:
+\begin{itemize}
+    \item Pitch: A-G or a Rest.
+    \item Accidental: $\#$, $\flat$, or null.
+    \item Octave: 0-10.
+    \item Duration: Whole, Half, Quarter, Eighth.
+\end{itemize}
+
+Mapping the genotype to the phenotype will result in a melody. Each note will map to its corresponding MIDI number. The MIDI number will then be mapped to its frequency in order to be able to play it in a web-browser.\\
+
+%Genetic mapping converts the genotype into a phenotype, which when applied to this project, means taking specific traits of an individual and combining them to create a melody. One way to do this is to read the pitches and rhythm for an individual into a list and then using the music21 framework to convert the list into a music stream. The music stream is then exported as a MIDI file. Another approach is to use a frequency lookup table, which returns a notes frequency. The pitch and rhythm are then rendered using Mozilla's HTML5 audio library and streamed in real-time.
+
+\subsubsection{Evaluation}
+Each note in a melody is represented as an individual block. The color of the block depicts the note's duration. The user is able to reorder a limited number of blocks and can hear how the new melody sounds. The number of allowed moves will be a percent of the total number of notes in the current individual, e.g. if there are $X$ notes then the user can only make $Y$ modifications. However, the user can modify the melody as many times as needed. \\
+
+This type of feedback system allows for deeper analysis of what musical characteristics the user is looking for in a melody. Once the user is satisfied with the melody, the fitness score will be determined by taking the Euclidean distance, a technique used to determine the distance between 2 vectors, $u$ and $v$, to determine the amount of change between the original melody and the re-ordered one in an $N$ dimensional space.  It can be modeled as: \\
+
+$$\textrm{d(\textbf{p,q})} = \sqrt{\sum_{i=1}^n (q_i - p_i)^2}$$ \\
+
+Small changes, e.g. moving a note 1 spot from the original location, will not largely impact the fitness score. If $u=[a,b,c,d]$ and $v=[b,a,d,c]$, then the score = 2. If $u=[a,b,c,d]$ and $v=[d,b,c,a]$, then the score = $\sqrt[3]{2}$ = 4.24264
+
+%A Euclidean distance of 0, meaning the user didn't make any changes, results in a fitness score of 100. However, if the Euclidean distance is large, meaning the user made the maximum number of changes, then the user's melody will be passed to the next generation as is. The benefit to this approach is that the IGA is always getting useful user feedback and rarely needs to scrap an individual. The only time a melody will be scraped is if it contains a single type of note, e.g. (B B B B B B B B B). \\
+
+%----------------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%----------------------------------------------------------------------------------------
+
+\begin{thebibliography}{99} % Bibliography - this is intentionally simple in this template
+
+\bibitem[Figueredo and Wolf, 2009]{Figueredo:2009dg}
+Figueredo, A.~J. and Wolf, P. S.~A. (2009).
+\newblock Assortative pairing and life history strategy - a cross-cultural
+  study.
+\newblock {\em Human Nature}, 20:317--330.
+ 
+\bibitem[Becker, 2005]{Becker:2005}
+Ryan Becker
+\newblock Assortative pairing and life history strategy - a cross-cultural
+  study.
+\newblock {\em Human Nature}, 20:317--330.
+
+\bibitem[Biles, 2007]{Biles:2007}
+Ryan Becker
+\newblock Assortative pairing and life history strategy - a cross-cultural
+  study.
+\newblock {\em Human Nature}, 20:317--330.
+\end{thebibliography}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}

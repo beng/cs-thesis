@@ -1,0 +1,36 @@
+\documentclass[english]{article}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage{geometry}
+\geometry{verbose,letterpaper,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+\setlength\parskip{\medskipamount}
+\setlength\parindent{0pt}
+
+\makeatletter
+
+\usepackage{babel}
+\makeatother
+\begin{document}
+
+\title{Master's Project Proposal: \\ Evolutionary Music: Melody Composer}
+
+
+
+\author{Ben Gelb}
+
+
+\date{February 10, 2012}
+
+\maketitle
+
+\section{Problem}
+Melody is one of the elements used to create a song. It is made up of pitches and pitch durations, which in turn create a rhythm. A Genetic Algorithm (GA) is capable of producing melodies in a real-time environment, either unassisted or with the help of a listener. The former requires a way to automatically evaluate each melody, while the latter requires manual evaluation. The main problem associated with this project will be generating a melody suited to the user's taste by using a manual fitness function. In order to do this, an influencer must be introduced so that the starting population isnt random, but displays characteristics that the user likes. 
+\section{Goal}
+The main goal of this project is to have the computer compose melodies. Additionally, I would like to compare the user's opinion of the final output when the starting population is initialized using a Markov chain opposed to using a random starting population.
+\section{How to Solve}
+This project will follow the fundamental structure of a GA; meaning, it will have initialization, fitness, selection, crossover, and mutation functions. The initialization function will either be randomly selected from a list of pitches and durations to create the initial population or use a Markov chain allowing the user to select various songs and artists to spawn the initial population. The fitness function will be a GUI allowing the user to rate each song. The rating system will allow the user to rank subsets of each song so more complex analysis can be used during selection. Multiple ratings for a single song are important because the user may like certain aspects of a song, but not the overall piece. The GUI will give the user control over selection, crossover, and mutation values so that the user can experiment. User happiness is what will be used to determine how successful the project is. The user is encouraged to run the program an even number of times alternating how the population is initialized in order to get a fair reading on which type of initialization function works better. The comparing results will be graphed. 
+
+\section{References}
+[1] Bell, Chipper. Algorithmic Music Composition Using Dynamic Markov Chains and Genetic Algorithms.
+[2] Alfonseca, Manuel et al. Simple GA for Music Generation by means of Algorithmic Information Theory.
+\end{document}
