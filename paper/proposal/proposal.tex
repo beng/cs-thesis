@@ -673,7 +673,7 @@ In addition to tracking how consistent an IGA is across multiple runs with the s
 
 
 \section{Deliverables}
-The deliverables for this project include: a Markov chain, an IGA, and an API. The Markov chain is used to generate the initial population of the IGA where each individual is a melody containing sequences of notes that the user likes. The IGA uses binary tournament selection, $N$ point crossover, and mutation. The Markov chain and IGA are both generated via the API, which is a RESTful web-service. All of the source code for this project, including experiments, are publicly available.
+The deliverables for this project include: a Markov chain, an IGA, and web service. The Markov chain is used to generate the initial population of the IGA where each individual is a melody containing sequences of notes that the user likes. The IGA uses binary tournament selection, single-point crossover, and mutation. All of the source code for this project, including experiments, are publicly available.
 
 \subsection{Technology Stack}
 \begin{itemize}
@@ -683,11 +683,11 @@ The deliverables for this project include: a Markov chain, an IGA, and an API. T
 %			\item jQuery
 %			\item MIDI.js
 %		\end{itemize}
-	\item MongoDB
+	\item Redis
 	\item Python
 %		\begin{itemize}
 %			\item Music21
-%			\item Web.py
+%			\item Flask
 %		\end{itemize}
 \end{itemize}
 
