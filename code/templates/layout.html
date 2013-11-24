@@ -1,0 +1,33 @@
+<!doctype html>
+<!--jQuery UI -->
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" rel="stylesheet" type="text/css"/>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js" type="text/javascript"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+
+<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/css/bootstrap-combined.min.css" rel="stylesheet">
+
+<style type="text/css">
+  body {padding-top: 60px; padding-bottom: 40px; font-size: 18px; background-color: #D4D6DA;}
+</style>
+
+<div class=page>
+  {% block body %}
+  {% endblock %}
+  <!-- graph stuff -->
+  <script src="http://code.highcharts.com/highcharts.js"></script>
+  <script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+  <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.1.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src={{ url_for('static', filename='js/ga.js') }}></script>
+
+  <script type="text/javascript" src={{ url_for('static', filename="js/vendor/MIDI/AudioDetect.js") }}></script>
+  <script type="text/javascript" src={{ url_for('static', filename="js/vendor/MIDI/LoadPlugin.js") }}></script>
+  <script type="text/javascript" src={{ url_for('static', filename="js/vendor/MIDI/Plugin.js") }}></script>
+  <script type="text/javascript" src={{ url_for('static', filename="js/vendor/MIDI/Player.js") }}></script>
+  <script type="text/javascript" src={{ url_for('static', filename="js/vendor/Window/DOMLoader.XMLHttp.js") }}></script>
+  <script type="text/javascript" src={{ url_for('static', filename="js/vendor/Window/DOMLoader.script.js") }}></script>
+
+  <!-- extras -->
+  <script type="text/javascript" src={{ url_for('static', filename="js/vendor/inc/Base64.js") }}></script>
+  <script type="text/javascript" src={{ url_for('static', filename="js/vendor/inc/base64binary.js") }}></script>
+</div>
