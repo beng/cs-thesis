@@ -1,0 +1,70 @@
+\begin{thebibliography}{10}
+
+\bibitem{Ivo}
+Ivo Adan.
+\newblock 3 markov chains and markov processes, 2008.
+
+\bibitem{RBecker}
+Ryan Becker.
+\newblock Genetic music.
+\newblock Master's thesis, Rochester Institute of Technology, 2005.
+
+\bibitem{Biles94}
+John~A. Biles.
+\newblock Genjam: A genetic algorithm for generating jazz solos.
+\newblock In {\em International Computer Music Conference}, 1994.
+
+\bibitem{Biles01}
+John~A. Biles.
+\newblock Autonomous genjam: Eliminating the fitness bottleneck by eliminating
+  fitness, 2001.
+
+\bibitem{Biles96}
+John~A. Biles, Peter~G. Anderson, and Laura~W. Loggi.
+\newblock Neural network fitness functions for a musical iga.
+\newblock In {\em Soft Computing Conference}, 1996.
+
+\bibitem{website:rose}
+Curt Clifton.
+\newblock Markov chain algorithm, November 2011.
+
+\bibitem{website:music21}
+Michael~Scott Cuthbert and Ben Houge.
+\newblock Music21 documentation, November 2012.
+
+\bibitem{Jensen}
+Johannes~Hoydahl Jensen.
+\newblock Evolutionary music composition: A quantitative approach.
+\newblock Master's thesis, Norwegian University of Science and Technology,
+  2011.
+
+\bibitem{MIT}
+Eric~Krevice Prebys.
+\newblock The genetic algorithm in computer science.
+\newblock {\em MIT Undergraduate Journal of Mathematics}, 2007.
+
+\bibitem{Shabda}
+Shabda.
+\newblock Generating pseudo random text with markov chains using python, 2009.
+
+\bibitem{ToddWerner}
+Peter~M. Todd and Gregory~M. Werner.
+\newblock Frankensteinian methods for evolutionary music composition, 2001.
+
+\bibitem{Nao}
+Nao Tokui and Hitoshi Iba.
+\newblock Music composition with interactive evolutionary computation, 2000.
+
+\bibitem{website:mc}
+Wikipedia.
+\newblock Markov chain, October 2012.
+
+\bibitem{website:wiki_note}
+Wikipedia.
+\newblock Note, November 2012.
+
+\bibitem{website:wiki_octave}
+Wikipedia.
+\newblock Octave, November 2012.
+
+\end{thebibliography}

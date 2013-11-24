@@ -1,0 +1,375 @@
+%%
+%% This is file `soul.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% soul.dtx  (with options: `package')
+%% 
+%% IMPORTANT NOTICE:
+%% 
+%% For the copyright see the source file.
+%% 
+%% Any modified versions of this file must be renamed
+%% with new filenames distinct from soul.sty.
+%% 
+%% For distribution of the original source see the terms
+%% for copying and modification in the file soul.dtx.
+%% 
+%% This generated file may be distributed as long as the
+%% original source files, as listed above, are part of the
+%% same distribution. (The sources need not necessarily be
+%% in the same archive or directory.)
+%% File: soul.dtx   Copyright (C) 1998, 1999   Melchior FRANZ
+\expandafter\ifx\csname SOUL@\endcsname\relax\else
+  \expandafter\endinput
+\fi
+\expandafter\ifx\csname documentclass\endcsname\relax
+  \chardef\atcode=\catcode`@
+  \catcode`\@=11
+  \def\DeclareRobustCommand*{\def}
+  \def\providecommand*{\def}
+  \def\DeclareOption#1#2{\expandafter\def\csname#1\endcsname{#2}}
+  \def\PackageError#1#2#3{{\newlinechar`^^J\errorcontextlines\z@
+    \edef\\{\errhelp{#3}}\\\errmessage{Package #1 error: #2}}}
+  \def\@height{height}
+  \def\@depth{depth}
+  \def\@width{width}
+  \def\@plus{plus}
+  \def\@minus{minus}
+\else
+  \NeedsTeXFormat{LaTeX2e}
+  \ProvidesPackage{soul}
+    [1999/05/15 v1.3 letterspacing/underlining  (mf)]
+\fi
+\def\SOUL@#1{\bgroup
+  \def\~{\gdef\SOUL@penalty{\penalty\@M}}%
+  \def\break{\gdef\SOUL@penalty{\penalty-\@M}}%
+  \def\\{\gdef\SOUL@penalty{\hfill\penalty-\@M}}%
+  \def\|{\kern-\lastkern}%
+  \let\>\null\let\<\relax
+  \let\hyphen\SOUL@hyphen
+  \let\endash\SOUL@endash
+  \let\emdash\SOUL@emdash
+  \let\slash\SOUL@slash
+  \edef\SOUL@hyph{%
+    \ifnum\hyphenchar\font>\m@ne
+      \ifnum\hyphenchar\font<\@cclvi
+        \char\hyphenchar\font\fi\fi}%
+  \def\SOUL@material{#1 }%
+  \SOUL@preamble
+  \SOUL@donext
+  \expandafter\SOUL@postamble\egroup}
+\def\SOUL@donext{%
+  \expandafter\SOUL@handleword\SOUL@material\@@
+  \ifx\SOUL@material\empty
+    \let\SOUL@\relax
+  \else
+    \let\SOUL@\SOUL@donext
+  \fi\SOUL@}
+\def\SOUL@handleword#1 #2\@@{%
+  \def\SOUL@material{#2}%
+  \let\SOUL@penalty\allowbreak
+  \if$#1$\else
+    \expandafter\SOUL@word{#1}%
+    \if$#2$\else
+      \unskip\SOUL@penalty
+      \SOUL@interword
+    \fi
+  \fi}
+\def\SOUL@word#1{\bgroup
+  \def\SOUL@toks{#1{\kern.5\maxdimen}\relax\relax}%
+  \setbox\tw@\hbox{\SOUL@hyph}%
+  \dimen@ii=\wd\tw@
+  \setbox\z@=\vbox{\let\\\empty
+    \hfuzz\maxdimen\hbadness\@M
+    \pretolerance\m@ne\tolerance\@M\leftskip\z@\rightskip\z@
+    \def\SOUL@exhyphen{\kern\dimen@ii\penalty\z@}%
+    \everypar{}\parfillskip\z@\@plus1fil
+    \hsize1sp\noindent\hskip\z@skip#1}%
+  \let\-\relax
+  \let\SOUL@syllablelens\empty
+  \count@=\z@
+  \SOUL@analyzesyllables
+  \SOUL@gettoken
+  \let\SOUL@prefetch\SOUL@pprefetch
+  \SOUL@gettoken
+  \def\SOUL@exhyphen{\global\let\SOUL@hflag=n%
+    \penalty\exhyphenpenalty}%
+  \SOUL@donextsyllable
+  \unskip\unpenalty
+  \egroup}
+\def\SOUL@analyzesyllables{%
+  \setbox\z@=\vbox{\unvcopy\z@\unskip\unpenalty
+    \global\setbox\@ne=\lastbox}%
+  \ifvoid\@ne
+    \let\SOUL@\relax
+  \else
+    \setbox4=\hbox{\unhbox\@ne}%
+    \dimen@=\wd4
+    \ifnum\count@>\z@\advance\dimen@-\dimen@ii\fi
+    \edef\SOUL@syllablelens{\the\dimen@/\SOUL@syllablelens}%
+    \advance\count@\@ne
+    \let\SOUL@\SOUL@analyzesyllables
+  \fi\SOUL@}
+\def\SOUL@donextsyllable{%
+  \ifnum\count@>\z@\advance\count@\m@ne
+    \dimen5\z@
+    \SOUL@getsyllablelength
+    \let\SOUL@hflag=y%
+    \SOUL@donexttoken
+    \SOUL@everysyllable
+    \ifnum\count@>\z@
+      \ifx y\SOUL@hflag
+        \SOUL@everyhyphen
+      \fi
+    \fi
+    \let\SOUL@\SOUL@donextsyllable
+  \else
+    \let\SOUL@\relax
+  \fi\SOUL@}
+\def\SOUL@getkern#1#2#3{%
+  \setbox4\hbox{#1#3}#2\wd4
+  \setbox4\hbox{#1\null#3}\advance#2-\wd4}
+\def\SOUL@donexttoken{%
+  \let\SOUL@actual\SOUL@prefetch
+  \let\SOUL@prefetch\SOUL@pprefetch
+  \SOUL@gettoken
+  \expandafter\ifx\SOUL@prefetch\empty
+    \let\SOUL@next\SOUL@pprefetch
+  \else
+    \let\SOUL@next\SOUL@prefetch
+  \fi
+  \SOUL@getkern\SOUL@actual\dimen@\SOUL@next
+  \setbox\z@\hbox{\SOUL@actual}%
+  \advance\dimen5\wd\z@
+  \SOUL@getkern\SOUL@actual{\dimen3}\SOUL@hyph
+  \let\SOUL@\relax
+  \ifdim\dimen5=\dimen4
+    \SOUL@everytoken
+  \else
+    \dimen7\dimen3
+    \advance\dimen7\dimen5
+    \ifdim\dimen7=\dimen4
+      \SOUL@everytoken
+    \else\ifdim\dimen5>\dimen4
+      \SOUL@error
+      \count@\z@
+    \else
+      \advance\dimen5\dimen@
+      \SOUL@everytoken
+      \let\SOUL@\SOUL@donexttoken
+  \fi\fi\fi\SOUL@}
+\def\SOUL@error{\vrule\@height.8em\@depth.2em\@width1em%
+  \PackageError{soul}{Reconstruction failed}%
+  {Possible reasons are: you've protected some tokens^^J%
+   containing a hyphen point with a pair of braces instead of^^J%
+   with a \string\mbox\space; you haven't resolved an ambigous^^J%
+   ligature; you forgot to insert the \string\| command, or^^J%
+   you used `-' instead of \string\hyphen\space etc.^^J%
+   I'm leaving a black square at my current position.^^J%
+   (See section 6.5 in the documentation for further explanation.)}}
+\def\SOUL@getsyllablelength{%
+  \expandafter\SOUL@splitlen\SOUL@syllablelens\@@}
+\def\SOUL@splitlen#1/#2\@@{%
+  \dimen4=#1\def\SOUL@syllablelens{#2}}
+\def\SOUL@gettoken{%
+  \expandafter\SOUL@splittok\SOUL@toks\@@}
+\def\SOUL@splittok#1#2\@@{%
+  \def\SOUL@pprefetch{#1}\def\SOUL@toks{#2}}
+\def\SOUL@imhyphen{\-}
+\def\SOUL@exhyphen{\penalty\exhyphenpenalty}
+\def\SOUL@allowhyph{\penalty\@M \hskip\z@skip}
+\def\SOUL@hyphen{\SOUL@allowhyph\hbox{-}\SOUL@exhyphen\SOUL@allowhyph}
+\def\SOUL@endash{\SOUL@allowhyph\hbox{--}\SOUL@exhyphen\SOUL@allowhyph}
+\def\SOUL@emdash{\SOUL@allowhyph\hbox{---}\SOUL@exhyphen\SOUL@allowhyph}
+\def\SOUL@slash{\SOUL@allowhyph/\SOUL@exhyphen\SOUL@allowhyph}
+\def\SOUL@sobody{%
+  \let\SOUL@preamble\SOUL@sopreamble
+  \let\SOUL@interword\space
+  \let\SOUL@postamble\SOUL@sopostamble
+  \let\SOUL@everyhyphen\SOUL@soeveryhyphen
+  \let\SOUL@everysyllable\relax
+  \let\SOUL@everytoken\SOUL@soeverytoken}
+\def\SOUL@sopreamble{%
+  \spaceskip\SOUL@soinner
+  \skip@=\SOUL@soskip
+  \let\<\empty
+  \leavevmode
+  \ifdim\lastskip>.25em
+    \unskip\hskip\SOUL@soouter
+  \fi}
+\def\SOUL@sopostamble{%
+  \global\skip@\SOUL@soouter
+  \aftergroup\SOUL@socheck}
+\def\SOUL@socheck{\futurelet\SOUL@next\SOUL@sodospace}
+\def\SOUL@sodospace{\bgroup
+  \def\\{\let\\= }\\ %
+  \def\~##1{\hskip\skip@\egroup}%
+  \ifx\SOUL@next\\%
+    \def\~ {\hskip\skip@\egroup}%
+  \else\ifx\SOUL@next~%
+    \def\~~{\nobreak\hskip\skip@\egroup}%
+  \else\ifx\SOUL@next\ %
+  \else\ifx\SOUL@next\space
+  \else\ifx\SOUL@next\@xobeysp
+  \else
+    \let\~\egroup
+  \fi\fi\fi\fi\fi\~}
+\def\SOUL@soeveryhyphen{%
+  \ifx\SOUL@prefetch\SOUL@noskip\else
+    \discretionary{\advance\dimen3-\dimen@
+      \ifdim\dimen3=\z@\else\kern\dimen3\fi
+      \unhcopy\tw@}{}{}%
+  \fi}
+\def\SOUL@soeverytoken{%
+  \ifx\SOUL@actual\SOUL@imhyphen\else
+    \ifx\SOUL@actual\SOUL@sep\else
+      \ifx\SOUL@actual\SOUL@noskip
+        \unskip\unpenalty
+      \else
+        \SOUL@actual
+        \ifdim\dimen@=\z@\else\kern\dimen@\fi
+        \nobreak\hskip\skip@
+      \fi
+    \fi
+  \fi}
+\def\SOUL@noskip{\<}
+\def\SOUL@sep{\>}
+\def\SOUL@setso#1#2#3{%
+  \def\SOUL@soskip{#1}%
+  \def\SOUL@soinner{#2}%
+  \def\SOUL@soouter{#3}}
+\def\sodef#1#2#3#4#5{%
+  \DeclareRobustCommand*#1{\SOUL@sobody
+    \def\SOUL@preamble{\SOUL@setso{#3}{#4}{#5}#2\SOUL@sopreamble}%
+    \SOUL@}}
+\def\resetso{%
+  \sodef\so{}{.25em}{.65em\@plus.06em\@minus.08em}%
+    {.55em\@plus.12em\@minus.2em}}
+\expandafter\ifx\csname documentclass\endcsname\relax
+\let\@xobeysp\space
+\let\capsfont\relax
+\sodef\caps{\capsfont}{.028em\@plus.005em\@minus.01em}%
+  {.37em\@plus.1667em\@minus.111em}{.37em\@plus.1em\@minus.14em}
+\else
+\DeclareRobustCommand\capsreset{%
+  \let\SOUL@capsbase\empty
+  \SOUL@capsdefault}
+\def\capsdef#1#2#3#4#5{{%
+  \toks\z@{\\{#1/#2/#3/#4/#5}}%
+  \toks\tw@=\expandafter{\SOUL@capsbase}%
+  \xdef\SOUL@capsbase{\the\toks\z@\the\toks\tw@}}}
+\DeclareRobustCommand*\capssave[1]{%
+  \expandafter\global\expandafter\let
+    \csname SOUL@@\string#1\endcsname\SOUL@capsbase
+  \def\SOUL@next##1{\DeclareRobustCommand*#1{\let\SOUL@capsbase##1}}%
+  \expandafter\SOUL@next\expandafter{\csname SOUL@@\string#1\endcsname}}
+\def\SOUL@capsfind#1/#2/#3/#4/#5/#6/#7/#8/#9/{%
+  \let\SOUL@match=1\SOUL@chk{#1}\f@encoding
+  \SOUL@chk{#2}\f@family\SOUL@chk{#3}\f@series
+  \SOUL@chk{#4}\f@shape\SOUL@dimchk{#5}\f@size
+  \if\SOUL@match1\let\\\@gobble
+    \gdef\SOUL@caps{\SOUL@sobody
+      \def\SOUL@preamble{\SOUL@setso{#7}{#8}{#9}#6\SOUL@sopreamble}%
+      \SOUL@}%
+  \fi}
+\def\SOUL@chk#1#2{%
+  \if$#1$\else\def\~{#1}%
+    \ifx#2\~\else\let\SOUL@match=0\fi
+  \fi}
+\def\SOUL@dimchk#1#2{\if$#1$\else\SOUL@rangechk{#2}#1--\@ne\@@\fi}
+\def\SOUL@rangechk#1#2-#3-#4\@@{\count@=#4%
+  \ifnum\count@>\z@
+    \ifdim#1\p@=#2\p@\else\let\SOUL@match=0\fi
+  \else
+    \dimen@=\if$#2$\z@\else#2\p@\fi
+    \ifdim#1\p@<\dimen@\let\SOUL@match=0\fi
+    \dimen@=\if$#3$\maxdimen\else#3\p@\fi
+    \ifdim#1\p@<\dimen@\else\let\SOUL@match=0\fi
+  \fi}
+\DeclareRobustCommand*\caps{\bgroup
+  \def\\##1{\expandafter\SOUL@capsfind##1/}%
+  \SOUL@capsbase\aftergroup\SOUL@caps\egroup}
+\def\SOUL@capsdefault{\capsdef{////}\SOUL@capsdfltfnt
+  {.028em\@plus.005em\@minus.01em}%
+  {.37em\@plus.1667em\@minus.1em}%
+  {.37em\@plus.111em\@minus.14em}}
+\let\SOUL@capsdfltfnt\scshape
+\fi
+\def\SOUL@ulbody{%
+  \let\SOUL@preamble\SOUL@ulpreamble
+  \let\SOUL@interword\SOUL@ulinterword
+  \let\SOUL@postamble\relax
+  \let\SOUL@everyhyphen\SOUL@uleveryhyphen
+  \let\SOUL@everysyllable\relax
+  \let\SOUL@everytoken\SOUL@uleverytoken}
+\DeclareRobustCommand*\ul{\SOUL@ulbody\SOUL@}
+\def\SOUL@ulpreamble{%
+  \spaceskip=\fontdimen\tw@\font\@plus\fontdimen\thr@@\font
+    \@minus\fontdimen4\font
+  \leavevmode
+  \dimen8=\SOUL@uldepth \dimen6=-\dimen8
+  \advance\dimen8 by\SOUL@ulthickness}
+\def\SOUL@ulinterword{\SOUL@ulleaders\hskip\spaceskip}
+\DeclareOption{nooverlap}{%
+  \def\SOUL@uleverytoken{{%
+    \setbox\z@\hbox{\SOUL@actual\ifdim\dimen@=\z@\else\kern\dimen@\fi}%
+    \dimen@ii\wd\z@
+    \unhbox\z@\llap{\SOUL@ulleaders\hskip\dimen@ii}}}}
+\DeclareOption{overlap}{%
+  \def\SOUL@uleverytoken{{%
+    \setbox\z@\hbox{\SOUL@actual\ifdim\dimen@=\z@\else\kern\dimen@\fi}%
+    \dimen@ii\wd\z@\advance\dimen@ii\p@
+    \unhbox\z@\llap{\SOUL@ulleaders\hskip\dimen@ii\kern-.5\p@}}}}
+\def\SOUL@uleveryhyphen{\discretionary
+  {\advance\dimen3-\dimen@\ifdim\dimen3=\z@\else\kern\dimen3\fi
+  \setbox4\hbox{\unhcopy\tw@}%
+  \rlap{\SOUL@ulleaders\hskip\wd4}\box4}{}%
+  {\hbox{\SOUL@ulleaders\hskip\dimen@}}}
+\def\setul#1#2{%
+  \if$#1$\else\def\SOUL@uldepth{#1}\fi
+  \if$#2$\else\def\SOUL@ulthickness{#2}\fi}
+\def\resetul{\setul{.65ex}{.1ex}}
+\def\SOUL@ulleaders{\leaders\hrule\@depth\dimen8\@height\dimen6}
+\def\setuldepth#1{{\def\SOUL@@{#1}%
+  \setbox\z@\hbox{\tracinglostchars\z@
+    \ifx\SOUL@@\empty
+      \count@\z@
+      \loop
+        \ifnum\catcode\count@=11\char\count@\fi
+      \ifnum\count@<\@cclv
+        \advance\count@\@ne
+      \repeat
+    \else
+      #1%
+    \fi}%
+  \dimen@\dp\z@\advance\dimen@\p@
+  \xdef\SOUL@uldepth{\the\dimen@}}}
+\DeclareRobustCommand*\st{\SOUL@ulbody
+  \let\SOUL@preamble\SOUL@stpreamble
+  \SOUL@}
+\def\SOUL@stpreamble{%
+  \dimen@\SOUL@ulthickness
+  \dimen@i=-.5ex
+  \advance\dimen@i-.5\dimen@
+  \edef\SOUL@uldepth{\the\dimen@i}%
+  \SOUL@ulpreamble}
+\resetso
+\resetul
+\expandafter\ifx\csname documentclass\endcsname\relax
+  \catcode`\@=\atcode
+  \overlap
+\else
+  \DeclareOption{capsdefault}%
+    {\AtBeginDocument{%
+      \def\SOUL@capsdfltfnt#1{\SOUL@ulbody\SOUL@ulpreamble}}}
+  \ExecuteOptions{overlap}
+  \capsreset
+  \InputIfFileExists{soul.cfg}%
+    {\PackageInfo{soul}{Local config file soul.cfg used}}{}
+  \ProcessOptions
+\fi
+\endinput
+%%
+%% End of file `soul.sty'.

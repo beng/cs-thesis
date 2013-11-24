@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99d (TeX Live 2013)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: Gelb-final-report.aux
+The style file: plain.bst
+Database file #1: Gelb-final-report.bib
+You've used 15 entries,
+            2118 wiz_defined-function locations,
+            562 strings with 5233 characters,
+and the built_in function-call counts, 3243 in all, are:
+= -- 286
+> -- 134
+< -- 0
++ -- 56
+- -- 40
+* -- 133
+:= -- 558
+add.period$ -- 35
+call.type$ -- 15
+change.case$ -- 65
+chr.to.int$ -- 0
+cite$ -- 15
+duplicate$ -- 124
+empty$ -- 322
+format.name$ -- 40
+if$ -- 685
+int.to.chr$ -- 0
+int.to.str$ -- 15
+missing$ -- 3
+newline$ -- 68
+num.names$ -- 30
+pop$ -- 121
+preamble$ -- 1
+purify$ -- 50
+quote$ -- 0
+skip$ -- 115
+stack$ -- 0
+substring$ -- 76
+swap$ -- 15
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 60
+warning$ -- 0
+while$ -- 30
+width$ -- 17
+write$ -- 134
