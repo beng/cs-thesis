@@ -1,1 +1,6 @@
 .DS_Store
+virtual/
+build/
+*.pyc
+code/midi_files
+
