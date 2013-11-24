@@ -1,6 +1,5 @@
 music21
-pymongo
-web.py
-BeautifulSoup
+Flask
 pylint
 pep8
+redis
