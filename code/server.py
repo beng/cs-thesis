@@ -112,12 +112,12 @@ def fitness(generation, id, individual=None):
         if id == psize:
             # termination requirements met?
             if generation >= tgen:
-                return redirect(url_for('terminate', generation=generation, id=id))
+                return redirect(url_for('stats', generation=generation, id=id))
             next_gen = begin_ga(key)
             return redirect(url_for('fitness', generation=next_gen, id=1))
         elif id < psize:
             return redirect(url_for('fitness', generation=generation, id=id+1))
-        return redirect(url_for('terminate', generation=generation, id=id))
+        return redirect(url_for('stats', generation=generation, id=id))
 
     return render_template('fitness.html', **kwargs)
 
@@ -157,9 +157,38 @@ def settings(option):
     return jsonify({option: cache_get('settings').get(option)})
 
 
-@app.route('/terminate/<generation>/<id>', methods=['GET'])
-def terminate(generation, id, **kwargs):
-    return render_template('terminate.html', **kwargs)
+@app.route('/export/<generation>/<id>', methods=['GET'])
+def export(generation, id):
+    """Generate a MIDI file out of the requested individual and save to
+    ./tmp"""
+    print "generation is", generation
+    print "individual ID is ", id
+    file_name = '{}_{}.mid'.format(generation, id)
+    return jsonify({'file_name': file_name})
+
+
+@app.route('/stats/<generation>/<id>', methods=['GET'])
+def stats(generation, id, **kwargs):
+    settings = cache_get('settings')
+    base_key = settings['base_key']
+    generations = range(1, int(generation) + 1)
+    all_indis = {}
+    stats = {}
+    total_score = 0
+    total_indis = 0
+    for gen in generations:
+        key = "{}:{}".format(base_key, gen)
+        individuals = cache_get(key)
+        all_indis[gen] = individuals
+        for indi, indi_info in individuals.items():
+            total_score += float(indi_info['fitness'])
+            total_indis += 1
+        stats[gen] = {
+            'best': sorted(individuals.items(), key=lambda x: x[1]['fitness'])[0][1]['fitness'],
+            'mean': total_score / total_indis,
+            'worst': sorted(individuals.items(), key=lambda x: x[1]['fitness'])[-1][1]['fitness']
+        }
+    return render_template('stats.html', stats=stats, all_indis=all_indis, **kwargs)
 
 
 if __name__ == "__main__":
