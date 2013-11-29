@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  24 NOV 2013 17:46
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  29 NOV 2013 16:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -611,13 +611,13 @@ File: Pictures/mongo_knowledge_base.pdf Graphic file (type pdf)
 Package pdftex.def Info: Pictures/mongo_knowledge_base.pdf used on input line 2
 99.
 (pdftex.def)             Requested size: 292.77629pt x 105.92213pt.
- [12 <./Pictures/mongo_knowledge_base.pdf>] <Pictures/index_ui_small.pdf, id=32
-2, 1055.945pt x 506.89375pt>
-File: Pictures/index_ui_small.pdf Graphic file (type pdf)
+ [12 <./Pictures/mongo_knowledge_base.pdf>] <Pictures/index_ui_small.png, id=32
+2, 961.5925pt x 432.61626pt>
+File: Pictures/index_ui_small.png Graphic file (type png)
 
-<use Pictures/index_ui_small.pdf>
-Package pdftex.def Info: Pictures/index_ui_small.pdf used on input line 321.
-(pdftex.def)             Requested size: 418.25368pt x 200.77385pt.
+<use Pictures/index_ui_small.png>
+Package pdftex.def Info: Pictures/index_ui_small.png used on input line 321.
+(pdftex.def)             Requested size: 418.25368pt x 188.17336pt.
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
 Missing character: There is no ™ in font cmr12!
@@ -634,7 +634,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 327--334
 
  []
 
-[13 <./Pictures/index_ui_small.pdf>]
+[13 <./Pictures/index_ui_small.png>]
 
 ! LaTeX Error: There's no line here to end.
 
@@ -666,13 +666,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 361--362
 
  []
 
-<Pictures/euclid_dist.pdf, id=350, 480.79625pt x 159.59625pt>
+<Pictures/euclid_dist.pdf, id=340, 480.79625pt x 159.59625pt>
 File: Pictures/euclid_dist.pdf Graphic file (type pdf)
 
 <use Pictures/euclid_dist.pdf>
 Package pdftex.def Info: Pictures/euclid_dist.pdf used on input line 369.
 (pdftex.def)             Requested size: 418.25368pt x 138.83786pt.
- [16]
+ [16 <./Pictures/euclid_dist.pdf>]
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
 (caption)                particular \caption on input line 376.
@@ -720,13 +720,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 426--442
 
  []
 
-[17 <./Pictures/euclid_dist.pdf>] [18]
-<Pictures/fitness_ui_small.pdf, id=397, 848.16875pt x 505.89pt>
-File: Pictures/fitness_ui_small.pdf Graphic file (type pdf)
+[17] [18] <Pictures/fitness_ui.png, id=387, 761.84625pt x 746.79pt>
+File: Pictures/fitness_ui.png Graphic file (type png)
 
-<use Pictures/fitness_ui_small.pdf>
-Package pdftex.def Info: Pictures/fitness_ui_small.pdf used on input line 444.
-(pdftex.def)             Requested size: 292.77629pt x 174.62486pt.
+<use Pictures/fitness_ui.png>
+Package pdftex.def Info: Pictures/fitness_ui.png used on input line 444.
+(pdftex.def)             Requested size: 292.77629pt x 286.98515pt.
  [19]
 Missing character: There is no â in font cmr12!
 Missing character: There is no € in font cmr12!
@@ -739,7 +738,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 453--456
 
  []
 
-[20 <./Pictures/fitness_ui_small.pdf>]
+[20 <./Pictures/fitness_ui.png>]
 ! Missing delimiter (. inserted).
 <to be read again> 
                    s
@@ -788,13 +787,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 480--484
 
  []
 
-<Pictures/selection.pdf, id=429, 468.75125pt x 376.40625pt>
+<Pictures/selection.pdf, id=408, 468.75125pt x 376.40625pt>
 File: Pictures/selection.pdf Graphic file (type pdf)
 
 <use Pictures/selection.pdf>
 Package pdftex.def Info: Pictures/selection.pdf used on input line 486.
 (pdftex.def)             Requested size: 292.77629pt x 235.09824pt.
- [22 <./Pictures/selection.pdf>]
+ [22]
 LaTeX Font Info:    Try loading font information for OML+cmr on input line 498.
 
 
@@ -803,14 +802,14 @@ File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/it' in size <12> not available
 (Font)              Font shape `OML/cmm/m/it' tried instead on input line 498.
-
-<Pictures/crossover.pdf, id=454, 373.395pt x 351.3125pt>
+ [23 <./Pictures/selection.pdf>] <Pictures/crossover.pdf, id=438, 373.395pt x 3
+51.3125pt>
 File: Pictures/crossover.pdf Graphic file (type pdf)
 
 <use Pictures/crossover.pdf>
 Package pdftex.def Info: Pictures/crossover.pdf used on input line 514.
 (pdftex.def)             Requested size: 292.77629pt x 275.47536pt.
- [23]
+
 Underfull \hbox (badness 10000) in paragraph at lines 519--522
 
  []
@@ -822,7 +821,7 @@ LaTeX Warning: Command \textgreater invalid in math mode on input line 532.
 
 LaTeX Warning: Command \textgreater invalid in math mode on input line 532.
 
-[25] <Pictures/workflow.pdf, id=494, 324.21124pt x 652.4375pt>
+[25] <Pictures/workflow.pdf, id=474, 324.21124pt x 652.4375pt>
 File: Pictures/workflow.pdf Graphic file (type pdf)
 
 <use Pictures/workflow.pdf>
@@ -843,7 +842,7 @@ Overfull \hbox (18.1828pt too wide) in paragraph at lines 571--583
  [] 
  []
 
-<results/test1.png, id=525, 586.3506pt x 218.2554pt>
+<results/test1.png, id=505, 586.3506pt x 218.2554pt>
 File: results/test1.png Graphic file (type png)
  <use results/test1.png>
 Package pdftex.def Info: results/test1.png used on input line 587.
@@ -860,7 +859,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 600--601
  []
 
 [28 <./results/test1.png>]
-<results/test2.png, id=535, 588.7596pt x 217.7736pt>
+<results/test2.png, id=515, 588.7596pt x 217.7736pt>
 File: results/test2.png Graphic file (type png)
  <use results/test2.png>
 Package pdftex.def Info: results/test2.png used on input line 604.
@@ -876,7 +875,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 617--618
 
  []
 
-[29 <./results/test2.png>] <results/test3.png, id=544, 590.205pt x 218.2554pt>
+[29 <./results/test2.png>] <results/test3.png, id=523, 590.205pt x 218.2554pt>
 File: results/test3.png Graphic file (type png)
 
 <use results/test3.png>
@@ -894,7 +893,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 635--636
  []
 
 [30 <./results/test3.png>]
-<results/test4.png, id=553, 588.2778pt x 217.7736pt>
+<results/test4.png, id=532, 588.2778pt x 217.7736pt>
 File: results/test4.png Graphic file (type png)
  <use results/test4.png>
 Package pdftex.def Info: results/test4.png used on input line 639.
@@ -940,8 +939,8 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 677.
  ) 
 Here is how much of TeX's memory you used:
  9379 strings out of 493315
- 138978 string characters out of 6137904
- 344058 words of memory out of 5000000
+ 138948 string characters out of 6137904
+ 343058 words of memory out of 5000000
  12595 multiletter control sequences out of 15000+600000
  13837 words of font info for 51 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
@@ -958,10 +957,10 @@ ocal/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/loc
 al/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/
 texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/t
 exlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on Gelb-final-report.pdf (34 pages, 600983 bytes).
+Output written on Gelb-final-report.pdf (34 pages, 613377 bytes).
 PDF statistics:
- 636 PDF objects out of 1000 (max. 8388607)
- 541 compressed objects within 6 object streams
+ 616 PDF objects out of 1000 (max. 8388607)
+ 527 compressed objects within 6 object streams
  111 named destinations out of 1000 (max. 500000)
  304 words of extra memory for PDF output out of 10000 (max. 10000000)
 
