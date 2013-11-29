@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<script type="text/javascript" src={{ url_for('static', filename='js/export.js') }}></script>
+<div class="content">
+    <div class="well span10 offset1">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Generation</th>
+              <th>Lowest Fitness</th>
+              <th>Mean Fitness</th>
+              <th>Highest Fitness<th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for generation, overall_stats in stats.items() %}
+              <tr>
+                <td>{{ generation }}</td>
+                <td>{{ overall_stats['worst'] }}</td>
+                <td>{{ overall_stats['mean'] }}</td>
+                <td>{{ overall_stats['best'] }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+    </div>
+
+    <div class="well span10 offset1">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Export</th>
+              <th>Generation</th>
+              <th>Individual ID</th>
+              <th>Individual Fitness</th>
+              <th>Individual Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for generation, individuals in all_indis.items() %}
+                {% for individual, indi_info in individuals.items() %}
+                    <tr>
+                      <td> <input type="checkbox" id={{ indi_info['generation'] }} value={{ indi_info['id'] }}> </td>
+                      <td>{{ indi_info['generation'] }}</td>
+                      <td>{{ indi_info['id'] }}</td>
+                      <td>{{ indi_info['fitness'] }}</td>
+                      <td>{{ indi_info['notes'] }}</td>
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+          </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+
+
