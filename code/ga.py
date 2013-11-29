@@ -40,7 +40,6 @@ def begin_ga(key):
     return next_generation
 
 
-# def crossover(p1, p2):
 def crossover(population, kw=None, **kwargs):
     """Single point crossover
 
@@ -63,12 +62,10 @@ def tournament(population, k=3, elitism=2, kw=None, **kwargs):
     from **kwargs. `kw` is to ensure we don't lose anything!
     """
     _population = sorted(population, reverse=True, key=itemgetter('fitness'))
-    # print "sorted pop is ", _population
     pool = map(_population.pop, [0] * elitism)
     _k = min(k, len(_population)) + elitism
     while len(pool) < _k:
         pool.append(random.choice(_population))
-        # print "pool is ", pool
         pool = [dict(t) for t in set([tuple(d.items()) for d in pool])]
     return sorted(pool, key=lambda x: x['fitness'], reverse=True)
 
