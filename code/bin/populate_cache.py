@@ -9,7 +9,7 @@ import music21
 from redis import Redis
 
 r = Redis(db=2)
-MIDI_PATH = '../midi_files'
+MIDI_PATH = './midi'
 
 
 def music_obj(path):
@@ -49,21 +49,31 @@ def cache_midi_folder():
     object, extracting the desired traits, and storing in redis with the key
     `artist`:`song_name`
     """
-    path = '../midi_files/{}'
+    path = './midi/{}'
     artists_dirs = map(path.format, os.listdir(MIDI_PATH))
     map(artists_dirs.remove, filter(lambda d: '.mid' in d or '.DS_Store' in d, artists_dirs))
     for _dir in artists_dirs:
         for root, d, files in os.walk(_dir):
             for _file in files:
+                print "\n"
                 tmp_path = root + '/' + _file
                 artist = root.split('/')[-1].lower()
                 song = _file.replace('.mid', '').lower()
                 name = '{}:{}'.format(artist, song)
                 try:
+                    print "begin parsing of:", name
                     mobj = music_obj(tmp_path)
+                    print ">> begin extraction of CHORDS for:", name
                     notes = parse(mobj)
+                    print ">> begin caching of notes with NAME: `{}` and set: `original_notes`".format(name)
                     cache_set(name, 'original_notes', notes, serialize=True)
+                    print ">> begin left push of: `{}` into list `artist pairs`".format(name)
                     r.lpush('artist_pairs', name)
                 except Exception, e:
-                    print "ISSUE PARSING SONG! Exception is ", e
+                    print "ISSUE PARSING SONG: {}! Exception is {}".format(name, e)
                     continue
+                print "\n"
+                print "-" * 100
+
+
+cache_midi_folder()
