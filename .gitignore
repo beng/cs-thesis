@@ -3,4 +3,4 @@ virtual/
 build/
 *.pyc
 code/midi_files
-
+code/bin/midi
