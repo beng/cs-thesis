@@ -7,9 +7,13 @@ import re
 
 import music21
 from redis import Redis
+from flask.ext.script import Manager
 
+from gor0x import create_app
+
+manager = Manager(create_app)
 r = Redis(db=2)
-MIDI_PATH = './midi'
+MIDI_PATH = './bin/midi'
 
 
 def music_obj(path):
@@ -44,12 +48,14 @@ def clean_midi_name(name):
     return split_capitals
 
 
+@manager.command
 def cache_midi_folder():
     """Pre-cache every song in the midi folder by converting it to a music21
     object, extracting the desired traits, and storing in redis with the key
     `artist`:`song_name`
     """
-    path = './midi/{}'
+    print "hello"
+    path = './bin/midi/{}'
     artists_dirs = map(path.format, os.listdir(MIDI_PATH))
     map(artists_dirs.remove, filter(lambda d: '.mid' in d or '.DS_Store' in d, artists_dirs))
     for _dir in artists_dirs:
@@ -74,3 +80,7 @@ def cache_midi_folder():
                     continue
                 print "\n"
                 print "-" * 100
+
+
+if __name__ == "__main__":
+    manager.run()

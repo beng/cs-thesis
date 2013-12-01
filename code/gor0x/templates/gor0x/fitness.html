@@ -1,0 +1,62 @@
+{% extends "gor0x/layout.html" %}
+{% block body %}
+    <script type="text/javascript" src={{ url_for('static', filename='js/ga.js') }}></script>
+
+
+    <!-- <form id="ns" method='POST' action="/fitness/{{individual['generation']}}/{{individual['id']}}">
+        <input type="submit" id="next" value="next">
+        <div class="span2 offset5">
+            <a id="next-song">Next Song</a>
+        </div>
+    </form> -->
+
+
+    <div id="content">
+        <!-- <div class="container-fluid"> -->
+        <div class="well span10 offset2">
+            <div class="pagination-centered page-header">
+                <h1>{{ artist }} <small>{{ song }}</small></h1>
+                <form id="ns" method='POST' action="/fitness/{{individual['generation']}}/{{individual['id']}}">
+                    <div class="span2">
+                        <a id="previous-song" href="{{ individual['id'] - 1}}">Previous Song</a>
+                    </div>
+                    <div class="span2 offset5">
+                        <a id="next-song">Next Song</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div  class="well span10 offset2">
+            <div class="well span3">
+                <legend><h2>Stats</h2></legend>
+                <h4>Current Individual: <small>{{ individual['id'] }}</small></h4>
+                <h4>Current Generation: <small>{{ individual['generation'] }}/ {{ tgen }}</small></h4>
+                <h4 id='current_score'>Current Score: <small>100/100</small></h4>
+            </div>
+            <!-- <div class="nav nav-pills span4">
+                <li>
+                <a id="listen" href="#">Listen</a></li>
+                <li><a id="save-order" href="$indi_id"></a></li>
+            </div> -->
+            <div class="well span1">
+                <i id="play" class="icon-play"></i>
+                <i id="stop" class="icon-stop"></i>
+            </div>
+            <div id="sortable-trait" class="span6">
+                <!-- <ul class="nav nav-tabs nav-stacked">
+                </ul> -->
+            </div>
+        </div>
+    </div>
+
+    <div class="well span10 offset2">
+        <div id="fitness-container"></div>
+    </div>
+    <!-- <div id="fitness-container" class="wellspan10 offset2"></div> -->
+    <!-- dont delete below, used for js to send info! -->
+    <div id="current-gen" class="{{individual['generation']}}"></div>
+    <div id="indi-id" class="{{ individual['id'] }}"></div>
+
+{% endblock %}
+
