@@ -5,7 +5,7 @@ import music21
 from markov import MarkovChain
 from model import artist_song_pair, cache_get, cache_set
 
-MIDI_PATH = './midi_files'
+MIDI_PATH = '../../bin/midi'
 
 
 def render_artist_pairs():
@@ -54,7 +54,6 @@ def render_population(**kwargs):
         notes = parse(mobj, **kwargs)
         print "setting cache of original notes"
         cache_set(name, 'original_notes', notes, serialize=True)
-
     markov = generate_markov(notes, **kwargs)
     print "caching markov"
     cache_set(name, 'markov', markov, serialize=True)
