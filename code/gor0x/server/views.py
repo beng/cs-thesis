@@ -68,33 +68,36 @@ def markov(key=None):
     return jsonify(cache_get(key))
 
 
-@mod.route('/spawn', methods=['POST'])
-def spawn_population():
-    """Given a population size, individual size, artist, and song, return
-    an initial population
-    """
-    # params = {k: v for (k, v) in request.form.copy().items()}
-    params = parse_params(request.form.copy())
-    if params['mc_nodes'] > params['mc_size']:
-        return jsonify({'msg': "mc nodes MUST be smaller than mc size!"})
-    cache_hmset('settings', params)
-    if params.get('traits'):
-        params['traits'] = params['traits'].split(',')
-    for k, v in params.items():
-        try:
-            params[k] = float(v)
-        except:
-            print "not a number. converting unicode to string"
-            params[k] = str(v)
-    # flask jsonify throws an error if you have a list of dicts so using
-    # python json instead
-    return json.dumps(render_population(**params))
+# @mod.route('/spawn', methods=['POST'])
+# def spawn_population():
+#     """Given a population size, individual size, artist, and song, return
+#     an initial population
+#     """
+#     params = parse_params(request.form.copy())
+
+#     if params['mc_nodes'] > params['mc_size']:
+#         return jsonify({'msg': "mc nodes MUST be smaller than mc size!"})
+
+#     cache_hmset('settings', params)
+
+#     if params.get('traits'):
+#         params['traits'] = params['traits'].split(',')
+
+#     # Verify that this is not needed. parse_params does this for us...
+#     # for k, v in params.items():
+#     #     try:
+#     #         params[k] = int(v)
+#     #     except:
+#     #         print "not a number. converting unicode to string"
+#     #         params[k] = str(v)
+
+#     # flask jsonify throws an error if you have a list of dicts so using
+#     # python json instead
+#     return json.dumps(render_population(**params))
 
 
 @mod.route('/fitness/<generation>/<id>', methods=['GET', 'POST'])
 def fitness(generation, id, individual=None):
-    print "Hello from Fitnes!!!"
-    # id, generation = map(int, [id, generation])
     cache_set('settings', 'current_generation', generation)
     settings = cache_get('settings')
     key = "{}:{}".format(settings['base_key'], generation)
@@ -128,7 +131,6 @@ def fitness(generation, id, individual=None):
         elif id < psize:
             return redirect(url_for('.fitness', generation=generation, id=id+1))
         return redirect(url_for('.stats', generation=generation, id=id))
-
     return render_template('gor0x/fitness.html', **kwargs)
 
 
@@ -150,9 +152,10 @@ def population(generation=None, id=None):
     if request.method == 'POST':
         # POST will always be referencing an individual
         params = parse_params(request.form.copy())
-        print "Params are ", params
         individual = cache_get(name).get(id)
         individual['fitness'] = params['fitness']
+        if params.get('adjusted_notes'):
+            individual['notes'] = json.loads(params['adjusted_notes'])
         cache_set(name, id, individual, serialize=True)
         return jsonify(individual)
 

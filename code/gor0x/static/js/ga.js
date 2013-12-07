@@ -236,11 +236,19 @@ $(function() {
                       notes: child_notes
                   });
               });
+              var new_order_notes = [];
+              adjusted_order.forEach(function(el) {
+                var chords = [];
+                for(var n in el.notes) {
+                    chords.push(el.notes[n]);
+                }
+                new_order_notes.push(chords);
+              });
               var _score = individual.fitness();
               individual.score = _score;
               $('#current_score').html("Current Score: <small>" + _score.toFixed(2) + "/100</small>");
               initializeMusic();
-              $.post(indi_uri, {fitness: _score}, function(resp) {
+              $.post(indi_uri, {fitness: _score, adjusted_notes: JSON.stringify(new_order_notes)}, function(resp) {
                   console.log("resp is ", resp);
               });
         }
