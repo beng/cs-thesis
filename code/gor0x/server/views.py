@@ -102,7 +102,7 @@ def fitness(generation, id, individual=None):
             return redirect(url_for('.fitness', generation=next_gen, id=1))
         elif id < psize:
             return redirect(url_for('.fitness', generation=generation, id=id+1))
-        return redirect(url_for('.stats', generation=generation, id=id))
+        return redirect(url_for('.stats'))
     return render_template('gor0x/fitness.html', **kwargs)
 
 
@@ -155,11 +155,12 @@ def export(generation, id):
 def stats(**kwargs):
     settings = cache_get('settings')
     base_key = settings['base_key']
-    generations = range(1, int(settings['tgen']) + 1)
     all_indis = {}
     stats = {}
     total_score = 0
     total_indis = 0
+    generations = range(1, int(settings['tgen']) + 1)
+
     for gen in generations:
         key = "{}:{}".format(base_key, gen)
         individuals = cache_get(key)
