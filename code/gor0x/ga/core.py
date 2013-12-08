@@ -55,15 +55,20 @@ def crossover(population, kw=None, **kwargs):
 
 
 def tournament(population, k=3, elitism=2, kw=None, **kwargs):
-    """Avoid selecting the same winner multiple times by filtering out
-    the pool immediately after we add to it
+    """Avoid selecting the same winner multiple times by immediately taking
+    the set of the pool after an individual is added to it
 
     NEED `kw` arugment due to python bug which strips out named parameters
     from **kwargs. `kw` is to ensure we don't lose anything!
     """
     _population = sorted(population, reverse=True, key=itemgetter('fitness'))
+
+    # pop off the N best individuals where N is elitism
     pool = map(_population.pop, [0] * elitism)
+
+    # update the value of k to reflect the elitism count
     _k = min(k, len(_population)) + elitism
+
     while len(pool) < _k:
         pool.append(random.choice(_population))
         pool = [dict(t) for t in set([tuple(d.items()) for d in pool])]
