@@ -68,34 +68,6 @@ def markov(key=None):
     return jsonify(cache_get(key))
 
 
-@mod.route('/spawn', methods=['POST'])
-def spawn_population():
-    """Given a population size, individual size, artist, and song, return
-    an initial population
-    """
-    params = parse_params(request.form.copy())
-
-    if params['mc_nodes'] > params['mc_size']:
-        return jsonify({'msg': "mc nodes MUST be smaller than mc size!"})
-
-    cache_hmset('settings', params)
-
-    if params.get('traits'):
-        params['traits'] = params['traits'].split(',')
-
-    # Verify that this is not needed. parse_params does this for us...
-    # for k, v in params.items():
-    #     try:
-    #         params[k] = int(v)
-    #     except:
-    #         print "not a number. converting unicode to string"
-    #         params[k] = str(v)
-
-    # flask jsonify throws an error if you have a list of dicts so using
-    # python json instead
-    return json.dumps(render_population(**params))
-
-
 @mod.route('/fitness/<generation>/<id>', methods=['GET', 'POST'])
 def fitness(generation, id, individual=None):
     cache_set('settings', 'current_generation', generation)
@@ -172,8 +144,7 @@ def settings(option):
 
 @mod.route('/population/export/<generation>/<id>', methods=['GET'])
 def export(generation, id):
-    """Generate a MIDI file out of the requested individual and save to
-    ./tmp"""
+    """Generate a MIDI file out of the requested individual and save to ./tmp"""
     print "generation is", generation
     print "individual ID is ", id
     file_name = '{}_{}.mid'.format(generation, id)
