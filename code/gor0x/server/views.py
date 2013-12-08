@@ -68,32 +68,32 @@ def markov(key=None):
     return jsonify(cache_get(key))
 
 
-# @mod.route('/spawn', methods=['POST'])
-# def spawn_population():
-#     """Given a population size, individual size, artist, and song, return
-#     an initial population
-#     """
-#     params = parse_params(request.form.copy())
+@mod.route('/spawn', methods=['POST'])
+def spawn_population():
+    """Given a population size, individual size, artist, and song, return
+    an initial population
+    """
+    params = parse_params(request.form.copy())
 
-#     if params['mc_nodes'] > params['mc_size']:
-#         return jsonify({'msg': "mc nodes MUST be smaller than mc size!"})
+    if params['mc_nodes'] > params['mc_size']:
+        return jsonify({'msg': "mc nodes MUST be smaller than mc size!"})
 
-#     cache_hmset('settings', params)
+    cache_hmset('settings', params)
 
-#     if params.get('traits'):
-#         params['traits'] = params['traits'].split(',')
+    if params.get('traits'):
+        params['traits'] = params['traits'].split(',')
 
-#     # Verify that this is not needed. parse_params does this for us...
-#     # for k, v in params.items():
-#     #     try:
-#     #         params[k] = int(v)
-#     #     except:
-#     #         print "not a number. converting unicode to string"
-#     #         params[k] = str(v)
+    # Verify that this is not needed. parse_params does this for us...
+    # for k, v in params.items():
+    #     try:
+    #         params[k] = int(v)
+    #     except:
+    #         print "not a number. converting unicode to string"
+    #         params[k] = str(v)
 
-#     # flask jsonify throws an error if you have a list of dicts so using
-#     # python json instead
-#     return json.dumps(render_population(**params))
+    # flask jsonify throws an error if you have a list of dicts so using
+    # python json instead
+    return json.dumps(render_population(**params))
 
 
 @mod.route('/fitness/<generation>/<id>', methods=['GET', 'POST'])
@@ -125,7 +125,7 @@ def fitness(generation, id, individual=None):
         if id == psize:
             # termination requirements met?
             if generation >= tgen:
-                return redirect(url_for('.stats', generation=generation, id=id))
+                return redirect(url_for('.stats'))
             next_gen = begin_ga(key)
             return redirect(url_for('.fitness', generation=next_gen, id=1))
         elif id < psize:
@@ -170,7 +170,7 @@ def settings(option):
     return jsonify({option: cache_get('settings').get(option)})
 
 
-@mod.route('/export/<generation>/<id>', methods=['GET'])
+@mod.route('/population/export/<generation>/<id>', methods=['GET'])
 def export(generation, id):
     """Generate a MIDI file out of the requested individual and save to
     ./tmp"""
@@ -180,11 +180,11 @@ def export(generation, id):
     return jsonify({'file_name': file_name})
 
 
-@mod.route('/stats/<generation>/<id>', methods=['GET'])
-def stats(generation, id, **kwargs):
+@mod.route('/population/stats', methods=['GET'])
+def stats(**kwargs):
     settings = cache_get('settings')
     base_key = settings['base_key']
-    generations = range(1, int(generation) + 1)
+    generations = range(1, int(settings['tgen']) + 1)
     all_indis = {}
     stats = {}
     total_score = 0
