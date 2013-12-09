@@ -4,3 +4,4 @@ build/
 *.pyc
 code/midi_files
 code/bin/midi
+presentation/presentation_outline.odt
