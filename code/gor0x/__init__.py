@@ -24,6 +24,9 @@ def create_app():
     logger_handler.setFormatter(formatter)
     app.logger.addHandler(logger_handler)
 
+    # debug mode
+    app.debug = True
+
     @app.errorhandler(404)
     def page_not_found(e):
         return render_template('404.html')
