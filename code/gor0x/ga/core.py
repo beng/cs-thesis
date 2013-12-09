@@ -43,7 +43,7 @@ def begin_ga(key):
 def crossover(population, kw=None, **kwargs):
     """Single point crossover
 
-    NEED `kw` arugment due to python bug which strips out named parameters
+    NEED `kw` argument due to python bug which strips out named parameters
     from **kwargs. `kw` is to ensure we don't lose anything!
     """
     future_population = []
@@ -58,7 +58,7 @@ def tournament(population, k=3, elitism=2, kw=None, **kwargs):
     """Avoid selecting the same winner multiple times by immediately taking
     the set of the pool after an individual is added to it
 
-    NEED `kw` arugment due to python bug which strips out named parameters
+    NEED `kw` argument due to python bug which strips out named parameters
     from **kwargs. `kw` is to ensure we don't lose anything!
     """
     _population = sorted(population, reverse=True, key=itemgetter('fitness'))
@@ -75,8 +75,12 @@ def tournament(population, k=3, elitism=2, kw=None, **kwargs):
     return sorted(pool, key=lambda x: x['fitness'], reverse=True)
 
 
-def mutation(population, m_rate=.3):
-    """This mutation mutates random subsets of an individuals genotype"""
+def mutation(population, m_rate=.3, kw=None, **kwargs):
+    """This mutation mutates random subsets of an individuals genotype
+
+    NEED `kw` argument due to python bug which strips out named parameters
+    from **kwargs. `kw` is to ensure we don't lose anything!
+    """
     _population = []
     for individual in population:
         rnd_rate = random.uniform(0, 1)
