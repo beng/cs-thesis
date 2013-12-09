@@ -1,3 +1,9 @@
+### Requirements
+This project has only been tested using the following
+* python 2.7
+* Chrome or firefox (any browser that supports the web audio API and webkit)
+* OS X
+
 ### Prerequisites
 Download the latests, stable version of [Redis](http://redis.io/)
 
