@@ -49,7 +49,7 @@ def crossover(population, kw=None, **kwargs):
     future_population = []
     while len(future_population) < len(population):
         p1, p2 = random.choice(population)['notes'], random.choice(population)['notes']
-        split = random.randint(1, len(p1))
+        split = random.randint(1, len(p1) - 1)
         map(future_population.append, [p1[:split] + p2[split:], p2[:split] + p1[split:]])
     return future_population
 
@@ -86,16 +86,17 @@ def mutation(population, m_rate=.3, kw=None, **kwargs):
         rnd_rate = random.uniform(0, 1)
         if rnd_rate > m_rate:
             print "Mutating Individual!\nRandom rate is: {}\nM Rate is: {}".format(rnd_rate, m_rate)
-            print "len of indi notes are ", len(individual['notes'])
-            split_point = random.randint(1, len(individual['notes'])-1)
-            print "split point is ", split_point
+            split_point = random.randint(1, len(individual['notes']) - 1)
             start, stop = random_sampling(0, len(individual['notes']), split_point)
 
             # generate a new corpus by using the cached markov chain
             settings = cache_get('settings')
             key = "{}:{}".format(settings['artist'], settings['song'])
             new_corpus = cache_get(key)['markov'][start:stop]
-            _population.append(new_corpus)
+
+            # tuples are immuteable so we need to remake the tuple of notes/chords
+            individual['notes'] = individual['notes'][:start] + tuple(map(tuple, new_corpus)) + individual['notes'][stop:]
+            _population.append(individual['notes'])
         else:
             print "Not mutating\nRandom rate is: {}\nM Rate is: {}".format(rnd_rate, m_rate)
             _population.append(individual['notes'])
