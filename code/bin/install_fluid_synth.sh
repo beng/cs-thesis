@@ -7,4 +7,3 @@ wget http://www.schristiancollins.com/soundfonts/GeneralUser_GS_1.44-FluidSynth.
 unzip GeneralUser_GS_1.44-FluidSynth.zip
 mkdir -p /usr/local/share/fluidsynth
 mv GeneralUser\ GS\ 1.44\ FluidSynth/GeneralUser\ GS\ FluidSynth\ v1.44.sf2 /usr/local/share/fluidsynth
-fluidsynth -i /usr/local/share/fluidsynth/generaluser.v.1.44.sf2 file.mid
