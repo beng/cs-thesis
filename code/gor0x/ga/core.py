@@ -101,3 +101,15 @@ def mutation(population, m_rate=.3, kw=None, **kwargs):
             print "Not mutating\nRandom rate is: {}\nM Rate is: {}".format(rnd_rate, m_rate)
             _population.append(individual['notes'])
     return _population
+
+
+def export_phenotype(chords):
+    """This does not work correctly at the moment!"""
+    import music21
+    partupper = music21.stream.Part()
+    m = music21.stream.Measure()
+    for _chord in chords:
+        c = music21.chord.Chord(_chord)
+        m.append(c)
+    partupper.append(m)
+    partupper.write('midi', './sample.mid')
