@@ -31,7 +31,7 @@ Individual.prototype.render_notes = function() {
     var that = this;
     var _final = [];
     this.notes.forEach(function(el) {
-        $("<div id="+el.index+">").appendTo("#sortable-trait");
+        $("<div id="+el.index+" style='border:2px solid white;'>").appendTo("#sortable-trait");
         el.notes.forEach(function(_note) {
             $("<div/>", {
                 id: el.index,
@@ -221,6 +221,13 @@ $(function() {
 
     $('#play').click(function(){
         initializeMusic();
+    });
+
+    $("#override-fitness-submit").click(function() {
+        var override_score = $("#override-fitness-score").val();
+        $.post(indi_uri, {fitness: override_score}, function(resp) {
+            $("#ns").submit();
+        });
     });
 
     $( "#sortable-trait" ).sortable({
