@@ -11,15 +11,14 @@ assets = Environment()
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_object('gor0x.default_config')
-    app.config.from_pyfile(os.path.join(app.instance_path, 'config.py'))
+    app.config.from_object('gor0x.settings.config')
 
     # register blueprints
     app.register_blueprint(main_blueprint)
 
     # app logging
     app.logger.setLevel(logging.WARNING)
-    logger_handler = logging.FileHandler(os.path.join(app.config['LOG_LOCATION'], 'app_errors.log'))
+    logger_handler = logging.FileHandler(os.path.join(app.config['SERVER_LOGS'], 'errors.log'))
     formatter = logging.Formatter('%(asctime)s  %(levelname)s - %(message)s' ' [in %(pathname)s:%(lineno)d]')
     logger_handler.setFormatter(formatter)
     app.logger.addHandler(logger_handler)
