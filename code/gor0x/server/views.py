@@ -2,7 +2,7 @@ import json
 
 from flask import Blueprint, request, jsonify, render_template, redirect, url_for
 
-from ..ga.render import render_population, render_artist_pairs
+from ..ga.render import render_population, render_artist_pairs, generate_markov, random_sampling
 from ..ga.core import begin_ga
 from ..ga.model import cache_get, cache_set, cache_hmset, clear_cache
 
@@ -120,6 +120,14 @@ def population(generation=None, id=None):
         individual['fitness'] = params['fitness']
         if params.get('adjusted_notes'):
             individual['notes'] = json.loads(params['adjusted_notes'])
+        elif individual['fitness'] == 100:
+            # trash this guy and create a new one
+            # generate a new corpus by using the cached markov chain
+            key = "{}:{}".format(settings['artist'], settings['song'])
+            original_corpus = cache_get(key)['original_notes']
+            markov = generate_markov(original_corpus, mc_size=100, mc_nodes=2)
+            start, stop = random_sampling(1, len(markov), int(settings['isize']))
+            individual['notes'] = markov[start:stop]
         cache_set(name, id, individual, serialize=True)
         return jsonify(individual)
 

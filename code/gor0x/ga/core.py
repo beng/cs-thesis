@@ -131,7 +131,7 @@ def mutation(population, m_rate=.5, kw=None, **kwargs):
             start, stop = random_sampling(0, len(individual['notes']), split_point)
 
             logger.debug("Start point is %s, stop point is %s", start, stop)
-            # generate a new corpus by using the cached markov chain
+            # generate a new corpus via Markov chain
             settings = cache_get('settings')
             key = "{}:{}".format(settings['artist'], settings['song'])
             original_corpus = cache_get(key)['original_notes']
