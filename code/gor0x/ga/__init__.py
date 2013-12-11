@@ -5,8 +5,7 @@ from functools import partial
 
 from ..settings.config import GA_LOGS
 
-LINE_BREAK = "".join(["*"] * 50)
-FORMAT = '%(asctime)s  %(levelname)s - %(message)s\n' + LINE_BREAK
+FORMAT = '\n%(asctime)s  %(levelname)s - %(message)s\n'
 NAME = "output-{}.log".format(__name__)
 PATH = os.path.join(GA_LOGS, NAME)
 
