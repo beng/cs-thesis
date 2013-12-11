@@ -2,7 +2,7 @@ import random
 from operator import itemgetter
 
 from model import cache_get, cache_set
-from render import random_sampling, render_individual
+from render import random_sampling, render_individual, generate_markov
 
 
 from ..ga import create_logger
@@ -83,7 +83,7 @@ def crossover(population, kw=None, **kwargs):
     return future_population
 
 
-def tournament(population, k=3, elitism=2, kw=None, **kwargs):
+def tournament(population, k=3, elitism=0, kw=None, **kwargs):
     """Tournament based selection. We avoid selecting the same winner multiple
     times by immediately taking the set of the pool after an individual is added to it
 
@@ -110,7 +110,7 @@ def tournament(population, k=3, elitism=2, kw=None, **kwargs):
     return sorted(pool, key=lambda x: x['fitness'], reverse=True)
 
 
-def mutation(population, m_rate=.3, kw=None, **kwargs):
+def mutation(population, m_rate=.5, kw=None, **kwargs):
     """This mutation process mutates random subsets of an individuals chromosome
 
     NEED `kw` argument due to python bug which strips out named parameters
@@ -126,14 +126,17 @@ def mutation(population, m_rate=.3, kw=None, **kwargs):
     for individual in population:
         rnd_rate = random.uniform(0, 1)
         if rnd_rate > m_rate:
-            print "Mutating Individual!\nRandom rate is: {}\nM Rate is: {}".format(rnd_rate, m_rate)
+            logger.debug("Mutating Individual!\nRandom rate is: %s\nM Rate is: %s", rnd_rate, m_rate)
             split_point = random.randint(1, len(individual['notes']) - 1)
             start, stop = random_sampling(0, len(individual['notes']), split_point)
 
+            logger.debug("Start point is %s, stop point is %s", start, stop)
             # generate a new corpus by using the cached markov chain
             settings = cache_get('settings')
             key = "{}:{}".format(settings['artist'], settings['song'])
-            new_corpus = cache_get(key)['markov'][start:stop]
+            original_corpus = cache_get(key)['original_notes']
+            new_corpus = generate_markov(original_corpus, mc_size=100, mc_nodes=2)[start:stop]
+            logger.debug("New corpus is %s", new_corpus)
 
             # tuples are immuteable so we need to remake the tuple of notes/chords
             individual['notes'] = individual['notes'][:start] + tuple(map(tuple, new_corpus)) + individual['notes'][stop:]
