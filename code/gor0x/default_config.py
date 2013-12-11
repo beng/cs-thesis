@@ -1,2 +1,2 @@
 DEBUG = True
-PORT = 8888
+PORT = 5000
