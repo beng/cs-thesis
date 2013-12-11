@@ -1,5 +1,5 @@
-import os
-import logging
+# import os
+# import logging
 
 from flask import Flask, render_template
 from flask.ext.assets import Environment, Bundle
@@ -17,11 +17,11 @@ def create_app():
     app.register_blueprint(main_blueprint)
 
     # app logging
-    app.logger.setLevel(logging.WARNING)
-    logger_handler = logging.FileHandler(os.path.join(app.config['SERVER_LOGS'], 'errors.log'))
-    formatter = logging.Formatter('%(asctime)s  %(levelname)s - %(message)s' ' [in %(pathname)s:%(lineno)d]')
-    logger_handler.setFormatter(formatter)
-    app.logger.addHandler(logger_handler)
+    # app.logger.setLevel(logging.WARNING)
+    # logger_handler = logging.FileHandler(os.path.join(app.config['SERVER_LOGS'], 'errors.log'))
+    # formatter = logging.Formatter('%(asctime)s  %(levelname)s - %(message)s' ' [in %(pathname)s:%(lineno)d]')
+    # logger_handler.setFormatter(formatter)
+    # app.logger.addHandler(logger_handler)
 
     @app.errorhandler(404)
     def page_not_found(e):
@@ -29,7 +29,7 @@ def create_app():
 
     @app.errorhandler(500)
     def internal_error(exception):
-        app.logger.exception(exception)
+        # app.logger.exception(exception)
         return "Some Internal error has taken place."
 
     assets.init_app(app)
