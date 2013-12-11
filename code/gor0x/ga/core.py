@@ -6,6 +6,15 @@ from render import random_sampling, render_individual
 
 
 def m_pipe(val, *fns, **kwargs):
+    """Utility function to pipe an infinite number of functions by passing
+    the return value of the previous function as a parameter into the next function
+
+    :param val: The initial parameter needed for the first function call
+    :type val: An unknown Python object
+
+    :returns: The output of the final function call
+    :rtype: An unknown Python object
+    """
     kw = kwargs
     _val = val
     for fn in fns:
@@ -14,6 +23,20 @@ def m_pipe(val, *fns, **kwargs):
 
 
 def begin_ga(key):
+    """Runs the genetic algorithm `pipeline`, i.e. generates the next generation
+    by running genetic operators on the current generation.
+
+    This pipeline includes
+        -Tournament selection
+        -Single point crossover
+        -Mutation
+
+    :param key: The base key of the population
+    :type key: String
+
+    :returns: The value of the next generation
+    :rtype: Integer
+    """
     _population = cache_get(key)
     population = [_population[idx] for idx in _population]
     future_population = []
@@ -45,6 +68,12 @@ def crossover(population, kw=None, **kwargs):
 
     NEED `kw` argument due to python bug which strips out named parameters
     from **kwargs. `kw` is to ensure we don't lose anything!
+
+    :param population: The population
+    :type population: List
+
+    :returns: The next generation of individuals
+    :rtype: List
     """
     future_population = []
     while len(future_population) < len(population):
@@ -55,11 +84,17 @@ def crossover(population, kw=None, **kwargs):
 
 
 def tournament(population, k=3, elitism=2, kw=None, **kwargs):
-    """Avoid selecting the same winner multiple times by immediately taking
-    the set of the pool after an individual is added to it
+    """Tournament based selection. We avoid selecting the same winner multiple
+    times by immediately taking the set of the pool after an individual is added to it
 
     NEED `kw` argument due to python bug which strips out named parameters
     from **kwargs. `kw` is to ensure we don't lose anything!
+
+    :param population: The population
+    :type population: List
+
+    :returns: The pool of individuals that were `selected` for crossover
+    :rtype: List
     """
     _population = sorted(population, reverse=True, key=itemgetter('fitness'))
 
@@ -76,10 +111,16 @@ def tournament(population, k=3, elitism=2, kw=None, **kwargs):
 
 
 def mutation(population, m_rate=.3, kw=None, **kwargs):
-    """This mutation mutates random subsets of an individuals genotype
+    """This mutation process mutates random subsets of an individuals chromosome
 
     NEED `kw` argument due to python bug which strips out named parameters
     from **kwargs. `kw` is to ensure we don't lose anything!
+
+    :param population: The population
+    :type population: List
+
+    :returns: The population with mutated individuals
+    :rtype: List
     """
     _population = []
     for individual in population:

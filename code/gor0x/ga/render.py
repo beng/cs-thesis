@@ -10,7 +10,11 @@ MIDI_PATH = '../../bin/midi'
 
 def render_artist_pairs():
     """Return a mapping of artist to song for every artist/song pair in
-    the redis list of artist pairs"""
+    the redis list of artist pairs
+
+    :returns: Artist, song pair
+    :rtype: List of lists
+    """
     pairs = []
     for key in artist_song_pair():
         artist, song = key.split(':')
@@ -20,7 +24,20 @@ def render_artist_pairs():
 
 def random_sampling(min, max, nt):
     """Return a starting index and a stopping index for a random
-    consecutive sampling from a population"""
+    consecutive sampling from a population
+
+    :param min: Minimum number
+    :type min: Integer
+
+    :param max: Maximum number
+    :type max: Integer
+
+    :param nt: (Number of traits), i.e. the size of the list we are sampling
+    :type nt: Integer
+
+    :returns: Start and stop indices
+    :rtype: Tuple of ints
+    """
     start_idx = random.randrange(min, max)
     stop_idx = start_idx + nt
     if stop_idx > max:
@@ -29,16 +46,43 @@ def random_sampling(min, max, nt):
 
 
 def render_individual(notes=None, _id=None, generation=None):
+    """Renders an individual so it can be cached in Redis
+
+    :param notes: Notes/chords for the individual
+    :type notes: List
+
+    :param _id: The individual's ID
+    :type _id: Integer
+
+    :param _generation: The generation the individual is part of
+    :type _generation: Integer
+
+    :returns: A dictionary representing an individual
+    :rtype: Dictionary
+    """
     return {
         'id': _id,
         'notes': notes,
-        'generation': generation
+        'generation': generation,
     }
 
 
 def render_population(**kwargs):
-    """Kwargs contains size of initial population, size of individual,
-    artist, and song, which are used to generate a markov chain
+    """Generates an initial population based on the user's preferences
+
+    `Kwargs` contains:
+        `psize`: Size of initial population
+        `isize`: Size of individual (how many notes/chords to make)
+        `artist`: What artist to use
+        `song`: What song to use
+        `mcsize`: Size of Markov chain
+        `mcnodes`: Markov chain node history
+
+    :param kwargs: The initialization settings for the GA
+    :type kwargs: Dictionary
+
+    :returns: The newly created population
+    :rtype: List
     """
     population = []
     mpath = map(kwargs.pop, ['artist', 'song'])
@@ -72,6 +116,14 @@ def render_population(**kwargs):
 
 
 def music_obj(path):
+    """Generate a Music21 object out of a MIDI file
+
+    :param path: The path to the MIDI file
+    :type path: String
+
+    :returns: Music21 object
+    :rtype: Music21
+    """
     return music21.converter.parse(path)
 
 
@@ -80,14 +132,37 @@ def parse(mobj, traits=['chord'], **kwargs):
     extract those traits from the music21 object, while:
         -preserving order
         -keeping a nested list of each trait(s) due to chords
-            >>> [[A4], [B5], [B5, C#4, F#3]]
+            >> [[A4], [B5], [B5, C#4, F#3]]
+
+    :param mobj: Music21 object
+    :type mobj: Music21
+
+    :param traits: List of characteristics to extract from the Music21 object
+    :type traits: List
+
+    :returns: A list of chords/pitches
+    :rtype: List
     """
     _mobj = filter(lambda x: type(x).__name__.lower() in traits, mobj.recurse())
     elements = [[pitch for pitch in element.pitches] for element in _mobj]
-    return map(lambda pitches: map(lambda pitch: pitch.nameWithOctave, pitches) , elements)
+    return map(lambda pitches: map(lambda pitch: pitch.nameWithOctave, pitches), elements)
 
 
 def generate_markov(corpus, mc_size=None, mc_nodes=None, **kwargs):
+    """Generates the Markov chain for a corpus
+
+    :param corpus: The corpus for the Markov chain
+    :type corpus: String
+
+    :param mc_size: Size of the Markov chain
+    :type mc_size: Integer
+
+    :param mc_nodes: Markov chain node history
+    :type mc_nodes: Integer
+
+    :returns: A Markov chain
+    :rtype: List
+    """
     def markov_pitch():
         # we use `:` to denote grouping of pairs, ie chords, individual notes
         # we use `(empty space)` to denote separation between groupings
@@ -99,4 +174,3 @@ def generate_markov(corpus, mc_size=None, mc_nodes=None, **kwargs):
         return chain.walk()
 
     return map(lambda x: x.split(' '), markov_pitch())
-
