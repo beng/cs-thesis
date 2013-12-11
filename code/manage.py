@@ -38,14 +38,14 @@ def cache_set(name, key, value, serialize=None):
     return r.hset(name, key, value)
 
 
-def clean_midi_name(name):
-    """Fixes the midi names so that instead of capitalizing each new word
-    in a file name, split the filename on the capital word and join the words
-    together with an underscore and then lowercase the entire filename"""
-
-    # THIS DOES NOT WORK CORRECTLY DO NOT USE!!!
-    split_capitals = map(str.lower, filter(None, re.split("([A-Z][^A-Z]*)", name)))
-    return split_capitals
+@manager.command
+def clean_midi_name():
+    """Recurses through a path converting any MIDI file name to lowercase"""
+    for root, _, files in os.walk('./bin/midi'):
+        from itertools import imap, takewhile
+        list(imap(lambda f: os.rename(f, f.lower()),
+                  map(lambda f: os.path.join(root, f),
+                      takewhile(lambda f: f != '.DS_Store', files))))
 
 
 @manager.command

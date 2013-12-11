@@ -5,6 +5,12 @@ from model import cache_get, cache_set
 from render import random_sampling, render_individual
 
 
+from ..ga import create_logger
+
+
+logger = create_logger()
+
+
 def m_pipe(val, *fns, **kwargs):
     """Utility function to pipe an infinite number of functions by passing
     the return value of the previous function as a parameter into the next function
@@ -39,7 +45,6 @@ def begin_ga(key):
     """
     _population = cache_get(key)
     population = [_population[idx] for idx in _population]
-    future_population = []
     base_key = cache_get('settings')['base_key']
     next_generation = population[0]['generation'] + 1
     name = '{}:{}'.format(base_key, next_generation)
@@ -51,15 +56,10 @@ def begin_ga(key):
         individual['notes'] = tuple(tuple(x) for x in individual['notes'])
 
     _future_population = m_pipe(population, tournament, crossover, mutation)
-    print "future population is", _future_population
     for idx, notes in enumerate(_future_population, start=1):
-        print "idx, notes in future pop are ", idx, notes
         individual = render_individual(notes=notes, _id=idx, generation=next_generation)
-        print "newly rendered indivual is ", individual
+        logger.debug("Individual << %s >> for generation << %s >>:\n%s", idx, next_generation, individual)
         cache_set(name, idx, individual, serialize=True)
-        future_population.append(individual)
-    print "future poplation is ", future_population
-    print "next generation is ", next_generation
     return next_generation
 
 
