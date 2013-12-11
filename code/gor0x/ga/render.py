@@ -64,6 +64,7 @@ def render_individual(notes=None, _id=None, generation=None):
         'id': _id,
         'notes': notes,
         'generation': generation,
+        'fitness': 0
     }
 
 
@@ -91,7 +92,6 @@ def render_population(**kwargs):
     _name = name + ":generation:{}".format(1)
     psize = kwargs['psize']
     notes = cache_get(name).get('original_notes')
-
     if not notes:
         print "cache not set. parsing music object and saving to redis"
         mobj = music_obj(path)
