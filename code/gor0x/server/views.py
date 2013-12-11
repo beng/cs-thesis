@@ -1,9 +1,3 @@
-# import random
-
-# import gevent
-# # from flask import Blueprint, render_template, Response
-
-# from ..ga.ga import GA
 import json
 
 from flask import Blueprint, request, jsonify, render_template, redirect, url_for
@@ -13,9 +7,7 @@ from ..ga.core import begin_ga
 from ..ga.model import cache_get, cache_set, cache_hmset, clear_cache
 
 
-mod = Blueprint('gor0x', __name__,
-                template_folder='templates',
-                static_folder='static')
+mod = Blueprint('gor0x', __name__, template_folder='templates', static_folder='static')
 
 
 def parse_params(params):
