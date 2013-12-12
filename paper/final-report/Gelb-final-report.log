@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  8 DEC 2013 20:49
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2013.5.30)  12 DEC 2013 10:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -489,13 +489,20 @@ Missing character: There is no Å in font cmr12!
 [1
 
 {/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-(./Gelb-final-report.toc
-LaTeX Font Info:    Try loading font information for U+msa on input line 6.
+Underfull \hbox (badness 10000) in paragraph at lines 109--111
 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 109--111
+
+ []
+
+LaTeX Font Info:    Try loading font information for U+msa on input line 112.
 (/usr/local/texlive/2013/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 6.
+LaTeX Font Info:    Try loading font information for U+msb on input line 112.
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -503,47 +510,12 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
  been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.28 ...th Euclidean Distance}{31}{subsection.8.5}
-                                                   [1])
+l.127 \newpage
+               [1] (./Gelb-final-report.toc [2])
 \tf@toc=\write4
 \openout4 = `Gelb-final-report.toc'.
 
- [2] [3]
-Underfull \hbox (badness 10000) in paragraph at lines 121--122
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 123--124
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 125--126
-
- []
-
-[4]
-Underfull \hbox (badness 10000) in paragraph at lines 132--133
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 136--137
-
- []
-
-[5]
-Underfull \hbox (badness 10000) in paragraph at lines 144--145
-
- []
-
-[6]
-Underfull \hbox (badness 10000) in paragraph at lines 146--147
-
- []
-
-
+ [3] [4]
 Underfull \hbox (badness 10000) in paragraph at lines 148--149
 
  []
@@ -553,15 +525,38 @@ Underfull \hbox (badness 10000) in paragraph at lines 150--151
 
  []
 
-[7]
-Missing character: There is no ‚ in font cmr12!
-Missing character: There is no Ä in font cmr12!
-Missing character: There is no ú in font cmr12!
-Missing character: There is no ‚ in font cmr12!
-Missing character: There is no Ä in font cmr12!
-Missing character: There is no ù in font cmr12!
 
-Underfull \hbox (badness 10000) in paragraph at lines 182--183
+Underfull \hbox (badness 10000) in paragraph at lines 152--153
+
+ []
+
+[5]
+Underfull \hbox (badness 10000) in paragraph at lines 159--160
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 163--164
+
+ []
+
+[6]
+Underfull \hbox (badness 10000) in paragraph at lines 171--172
+
+ []
+
+[7]
+Underfull \hbox (badness 10000) in paragraph at lines 173--174
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 175--176
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 177--178
 
  []
 
@@ -573,61 +568,73 @@ Missing character: There is no ‚ in font cmr12!
 Missing character: There is no Ä in font cmr12!
 Missing character: There is no ù in font cmr12!
 
-Underfull \hbox (badness 10000) in paragraph at lines 190--191
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 192--193
+Underfull \hbox (badness 10000) in paragraph at lines 209--210
 
  []
 
 [9]
-Underfull \hbox (badness 10000) in paragraph at lines 224--225
+Missing character: There is no ‚ in font cmr12!
+Missing character: There is no Ä in font cmr12!
+Missing character: There is no ú in font cmr12!
+Missing character: There is no ‚ in font cmr12!
+Missing character: There is no Ä in font cmr12!
+Missing character: There is no ù in font cmr12!
+
+Underfull \hbox (badness 10000) in paragraph at lines 217--218
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 219--220
+
+ []
+
+[10]
+Underfull \hbox (badness 10000) in paragraph at lines 251--252
 
  []
 
 Missing character: There is no ‚ in font cmr12!
 Missing character: There is no Ä in font cmr12!
 Missing character: There is no ô in font cmr12!
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 234.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 261.
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 234.
- [10]
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 261.
+ [11]
 
-! LaTeX Error: \begin{itemize} on input line 233 ended by \end{enumerate}.
+! LaTeX Error: \begin{itemize} on input line 260 ended by \end{enumerate}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.254 \end{enumerate}
+l.281 \end{enumerate}
                      
 ? 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 267.
+(caption)                particular \caption on input line 294.
 See the caption package documentation for explanation.
 
-<Pictures/mongo_knowledge_base.pdf, id=279, 341.275pt x 123.46124pt>
+<Pictures/mongo_knowledge_base.pdf, id=283, 341.275pt x 123.46124pt>
 File: Pictures/mongo_knowledge_base.pdf Graphic file (type pdf)
 
 <use Pictures/mongo_knowledge_base.pdf>
-Package pdftex.def Info: Pictures/mongo_knowledge_base.pdf used on input line 2
-87.
+Package pdftex.def Info: Pictures/mongo_knowledge_base.pdf used on input line 3
+14.
 (pdftex.def)             Requested size: 292.77629pt x 105.92213pt.
- [11]
-<Pictures/index_ui_small.png, id=289, 961.5925pt x 432.61626pt>
+ [12]
+<Pictures/index_ui_small.png, id=295, 961.5925pt x 432.61626pt>
 File: Pictures/index_ui_small.png Graphic file (type png)
 
 <use Pictures/index_ui_small.png>
-Package pdftex.def Info: Pictures/index_ui_small.png used on input line 309.
+Package pdftex.def Info: Pictures/index_ui_small.png used on input line 336.
 (pdftex.def)             Requested size: 418.25368pt x 188.17336pt.
- [12 <./Pictures/mongo_knowledge_base.pdf>]
+ [13 <./Pictures/mongo_knowledge_base.pdf>]
 Missing character: There is no ‚ in font cmr12!
 Missing character: There is no Ä in font cmr12!
 Missing character: There is no ô in font cmr12!
@@ -635,16 +642,16 @@ Missing character: There is no ‚ in font cmr12!
 Missing character: There is no Ä in font cmr12!
 Missing character: There is no ô in font cmr12!
 
-Underfull \hbox (badness 10000) in paragraph at lines 315--322
+Underfull \hbox (badness 10000) in paragraph at lines 342--349
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 315--322
+Underfull \hbox (badness 10000) in paragraph at lines 342--349
 
  []
 
-[13 <./Pictures/index_ui_small.png>]
+[14 <./Pictures/index_ui_small.png>]
 
 ! LaTeX Error: There's no line here to end.
 
@@ -652,43 +659,43 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.324 N
+l.351 N
        ow, consider a search domain that is still generated randomly, but us...
 
 ? 
 
-Underfull \hbox (badness 10000) in paragraph at lines 324--328
+Underfull \hbox (badness 10000) in paragraph at lines 351--355
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 324--328
+Underfull \hbox (badness 10000) in paragraph at lines 351--355
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 324--328
+Underfull \hbox (badness 10000) in paragraph at lines 351--355
 
  []
 
-[14] [15]
-Underfull \hbox (badness 10000) in paragraph at lines 350--351
+[15] [16]
+Underfull \hbox (badness 10000) in paragraph at lines 377--378
 
  []
 
-<Pictures/euclid_dist.pdf, id=330, 480.79625pt x 159.59625pt>
+<Pictures/euclid_dist.pdf, id=334, 480.79625pt x 159.59625pt>
 File: Pictures/euclid_dist.pdf Graphic file (type pdf)
 
 <use Pictures/euclid_dist.pdf>
-Package pdftex.def Info: Pictures/euclid_dist.pdf used on input line 358.
+Package pdftex.def Info: Pictures/euclid_dist.pdf used on input line 385.
 (pdftex.def)             Requested size: 418.25368pt x 138.83786pt.
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 365.
+(caption)                particular \caption on input line 392.
 See the caption package documentation for explanation.
 
-[16 <./Pictures/euclid_dist.pdf>]
+[17 <./Pictures/euclid_dist.pdf>]
 Missing character: There is no ‚ in font cmr12!
 Missing character: There is no Ä in font cmr12!
 Missing character: There is no ú in font cmr12!
@@ -702,42 +709,42 @@ Missing character: There is no ‚ in font cmr12!
 Missing character: There is no Ä in font cmr12!
 Missing character: There is no ù in font cmr12!
 
-Underfull \hbox (badness 10000) in paragraph at lines 415--431
+Underfull \hbox (badness 10000) in paragraph at lines 442--458
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 415--431
+Underfull \hbox (badness 10000) in paragraph at lines 442--458
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 415--431
+Underfull \hbox (badness 10000) in paragraph at lines 442--458
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 415--431
+Underfull \hbox (badness 10000) in paragraph at lines 442--458
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 415--431
+Underfull \hbox (badness 10000) in paragraph at lines 442--458
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 415--431
+Underfull \hbox (badness 10000) in paragraph at lines 442--458
 
  []
 
-[17] [18] <Pictures/fitness_ui.png, id=377, 761.84625pt x 746.79pt>
+[18] [19] <Pictures/fitness_ui.png, id=381, 761.84625pt x 746.79pt>
 File: Pictures/fitness_ui.png Graphic file (type png)
 
 <use Pictures/fitness_ui.png>
-Package pdftex.def Info: Pictures/fitness_ui.png used on input line 433.
+Package pdftex.def Info: Pictures/fitness_ui.png used on input line 460.
 (pdftex.def)             Requested size: 292.77629pt x 286.98515pt.
- [19]
+ [20]
 Missing character: There is no ‚ in font cmr12!
 Missing character: There is no Ä in font cmr12!
 Missing character: There is no ú in font cmr12!
@@ -745,19 +752,19 @@ Missing character: There is no ‚ in font cmr12!
 Missing character: There is no Ä in font cmr12!
 Missing character: There is no ù in font cmr12!
 
-Underfull \hbox (badness 10000) in paragraph at lines 442--445
+Underfull \hbox (badness 10000) in paragraph at lines 469--472
 
  []
 
-[20 <./Pictures/fitness_ui.png>]
+[21 <./Pictures/fitness_ui.png>]
 ! Missing delimiter (. inserted).
 <to be read again> 
                    s
-l.447 	s
+l.474 	s
         core: 0, id: 1, generation: 1, notes: [[A, B, C], [B], [D, D, D]]
 ? 
 
-Underfull \hbox (badness 10000) in paragraph at lines 446--449
+Underfull \hbox (badness 10000) in paragraph at lines 473--476
 
  []
 
@@ -768,204 +775,204 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.451 A
+l.478 A
         note is formed once the components are combined, which can then be c...
 
 ? 
 
-Underfull \hbox (badness 10000) in paragraph at lines 456--458
+Underfull \hbox (badness 10000) in paragraph at lines 483--485
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 459--463
+Underfull \hbox (badness 10000) in paragraph at lines 486--490
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 459--463
+Underfull \hbox (badness 10000) in paragraph at lines 486--490
 
  []
 
-[21]
-Underfull \hbox (badness 10000) in paragraph at lines 469--473
+[22]
+Underfull \hbox (badness 10000) in paragraph at lines 496--500
 
  []
 
-<Pictures/selection.pdf, id=398, 468.75125pt x 376.40625pt>
+<Pictures/selection.pdf, id=402, 468.75125pt x 376.40625pt>
 File: Pictures/selection.pdf Graphic file (type pdf)
 
 <use Pictures/selection.pdf>
-Package pdftex.def Info: Pictures/selection.pdf used on input line 475.
+Package pdftex.def Info: Pictures/selection.pdf used on input line 502.
 (pdftex.def)             Requested size: 292.77629pt x 235.09824pt.
- [22]
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 487.
+ [23]
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 514.
 
 
 (/usr/local/texlive/2013/texmf-dist/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/it' in size <12> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 487.
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 514.
 
-Overfull \hbox (29.3747pt too wide) in paragraph at lines 482--490
+Overfull \hbox (29.3747pt too wide) in paragraph at lines 509--517
 $[]$ 
  []
 
-[23 <./Pictures/selection.pdf>]
-<Pictures/crossover.pdf, id=428, 373.395pt x 351.3125pt>
+[24 <./Pictures/selection.pdf>]
+<Pictures/crossover.pdf, id=433, 373.395pt x 351.3125pt>
 File: Pictures/crossover.pdf Graphic file (type pdf)
 
 <use Pictures/crossover.pdf>
-Package pdftex.def Info: Pictures/crossover.pdf used on input line 503.
+Package pdftex.def Info: Pictures/crossover.pdf used on input line 530.
 (pdftex.def)             Requested size: 292.77629pt x 275.47536pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 508--511
+Underfull \hbox (badness 10000) in paragraph at lines 535--538
 
  []
 
-[24 <./Pictures/crossover.pdf>]
+[25 <./Pictures/crossover.pdf>]
 
-LaTeX Warning: Command \textgreater invalid in math mode on input line 521.
-
-
-LaTeX Warning: Command \textgreater invalid in math mode on input line 521.
+LaTeX Warning: Command \textgreater invalid in math mode on input line 548.
 
 
-Overfull \hbox (29.3747pt too wide) in paragraph at lines 512--524
+LaTeX Warning: Command \textgreater invalid in math mode on input line 548.
+
+
+Overfull \hbox (29.3747pt too wide) in paragraph at lines 539--551
 $[]$ 
  []
 
-[25] <Pictures/workflow.pdf, id=464, 324.21124pt x 652.4375pt>
+[26] <Pictures/workflow.pdf, id=468, 324.21124pt x 652.4375pt>
 File: Pictures/workflow.pdf Graphic file (type pdf)
 
 <use Pictures/workflow.pdf>
-Package pdftex.def Info: Pictures/workflow.pdf used on input line 548.
+Package pdftex.def Info: Pictures/workflow.pdf used on input line 575.
 (pdftex.def)             Requested size: 334.60422pt x 673.39197pt.
- [26]
+ [27]
 Overfull \vbox (108.18172pt too high) has occurred while \output is active []
 
 
-[27 <./Pictures/workflow.pdf>]
+[28 <./Pictures/workflow.pdf>]
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 559.
+(caption)                particular \caption on input line 586.
 See the caption package documentation for explanation.
 
 
-Overfull \hbox (18.1828pt too wide) in paragraph at lines 560--572
+Overfull \hbox (18.1828pt too wide) in paragraph at lines 587--599
  [] 
  []
 
-<results/test1.png, id=495, 586.3506pt x 218.2554pt>
+<results/test1.png, id=499, 586.3506pt x 218.2554pt>
 File: results/test1.png Graphic file (type png)
  <use results/test1.png>
-Package pdftex.def Info: results/test1.png used on input line 576.
+Package pdftex.def Info: results/test1.png used on input line 603.
 (pdftex.def)             Requested size: 334.60422pt x 124.54672pt.
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 581.
+(caption)                particular \caption on input line 608.
 See the caption package documentation for explanation.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 589--590
+Underfull \hbox (badness 10000) in paragraph at lines 616--617
 
  []
 
-[28 <./results/test1.png>]
-<results/test2.png, id=505, 588.7596pt x 217.7736pt>
+[29 <./results/test1.png>]
+<results/test2.png, id=509, 588.7596pt x 217.7736pt>
 File: results/test2.png Graphic file (type png)
  <use results/test2.png>
-Package pdftex.def Info: results/test2.png used on input line 593.
+Package pdftex.def Info: results/test2.png used on input line 620.
 (pdftex.def)             Requested size: 334.60422pt x 123.76671pt.
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 598.
+(caption)                particular \caption on input line 625.
 See the caption package documentation for explanation.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 606--607
+Underfull \hbox (badness 10000) in paragraph at lines 633--634
 
  []
 
-[29 <./results/test2.png>] <results/test3.png, id=513, 590.205pt x 218.2554pt>
+[30 <./results/test2.png>] <results/test3.png, id=518, 590.205pt x 218.2554pt>
 File: results/test3.png Graphic file (type png)
 
 <use results/test3.png>
-Package pdftex.def Info: results/test3.png used on input line 610.
+Package pdftex.def Info: results/test3.png used on input line 637.
 (pdftex.def)             Requested size: 334.60422pt x 123.73747pt.
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 615.
+(caption)                particular \caption on input line 642.
 See the caption package documentation for explanation.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 624--625
+Underfull \hbox (badness 10000) in paragraph at lines 651--652
 
  []
 
-[30 <./results/test3.png>]
-<results/test4.png, id=522, 588.2778pt x 217.7736pt>
+[31 <./results/test3.png>]
+<results/test4.png, id=526, 588.2778pt x 217.7736pt>
 File: results/test4.png Graphic file (type png)
  <use results/test4.png>
-Package pdftex.def Info: results/test4.png used on input line 628.
+Package pdftex.def Info: results/test4.png used on input line 655.
 (pdftex.def)             Requested size: 334.60422pt x 123.86972pt.
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 633.
+(caption)                particular \caption on input line 660.
 See the caption package documentation for explanation.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 641--642
+Underfull \hbox (badness 10000) in paragraph at lines 668--669
 
  []
 
-[31 <./results/test4.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 644--645
+[32 <./results/test4.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 671--672
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 647--648
+Underfull \hbox (badness 10000) in paragraph at lines 674--675
 
  []
 
-(./Gelb-final-report.bbl [32])
+(./Gelb-final-report.bbl [33])
 
-! LaTeX Error: \begin{enumerate} on input line 231 ended by \end{document}.
+! LaTeX Error: \begin{enumerate} on input line 258 ended by \end{document}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.666 \end{document}
+l.693 \end{document}
                     
 ? 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 666.
-[33]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 666.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 693.
+[34]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 693.
  (./Gelb-final-report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 666.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 666.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 693.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 693.
 Package rerunfilecheck Info: File `Gelb-final-report.out' has not changed.
 (rerunfilecheck)             Checksum: F71065548A43E3984E0339E5C0172934;2136.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 666.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 693.
  )
 (\end occurred inside a group at level 1)
 
-### semi simple group (level 1) entered at line 231 (\begingroup)
+### semi simple group (level 1) entered at line 258 (\begingroup)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 9374 strings out of 493315
- 138918 string characters out of 6137904
+ 9375 strings out of 493315
+ 138925 string characters out of 6137904
  343058 words of memory out of 5000000
  12595 multiletter control sequences out of 15000+600000
  13837 words of font info for 51 fonts, out of 8000000 for 9000
@@ -983,10 +990,10 @@ mmi8.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
 .pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pf
 b></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
 ></usr/local/texlive/2013/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on Gelb-final-report.pdf (34 pages, 611433 bytes).
+Output written on Gelb-final-report.pdf (35 pages, 613567 bytes).
 PDF statistics:
- 604 PDF objects out of 1000 (max. 8388607)
- 515 compressed objects within 6 object streams
- 106 named destinations out of 1000 (max. 500000)
+ 608 PDF objects out of 1000 (max. 8388607)
+ 518 compressed objects within 6 object streams
+ 107 named destinations out of 1000 (max. 500000)
  296 words of extra memory for PDF output out of 10000 (max. 10000000)
 

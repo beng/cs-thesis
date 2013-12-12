@@ -1,30 +1,30 @@
-\contentsline {section}{\numberline {1}Abstract}{3}{section.1}
-\contentsline {section}{\numberline {2}Introduction}{4}{section.2}
-\contentsline {section}{\numberline {3}Problem}{5}{section.3}
-\contentsline {section}{\numberline {4}Previous Research}{6}{section.4}
-\contentsline {section}{\numberline {5}Overview}{8}{section.5}
-\contentsline {subsection}{\numberline {5.1}Interactive Genetic Algorithm}{8}{subsection.5.1}
-\contentsline {subsection}{\numberline {5.2}Markov Chain}{8}{subsection.5.2}
-\contentsline {section}{\numberline {6}Hypothesis}{9}{section.6}
-\contentsline {section}{\numberline {7}Synthesis}{10}{section.7}
-\contentsline {subsection}{\numberline {7.1}System Architecture}{10}{subsection.7.1}
-\contentsline {subsection}{\numberline {7.2}Breakdown of Music Server}{10}{subsection.7.2}
-\contentsline {subsubsection}{\numberline {7.2.1}Extracting Metadata from MIDI files}{11}{subsubsection.7.2.1}
-\contentsline {subsection}{\numberline {7.3}Breakdown of Interactive Genetic Algorithm}{12}{subsection.7.3}
-\contentsline {subsubsection}{\numberline {7.3.1}Initialization Settings}{12}{subsubsection.7.3.1}
-\contentsline {subsubsection}{\numberline {7.3.2}Influencer}{13}{subsubsection.7.3.2}
-\contentsline {subsubsection}{\numberline {7.3.3}Markov chain Workflow}{15}{subsubsection.7.3.3}
-\contentsline {subsubsection}{\numberline {7.3.4}Evaluation}{15}{subsubsection.7.3.4}
-\contentsline {subsubsection}{\numberline {7.3.5}Fitness Workflow}{20}{subsubsection.7.3.5}
-\contentsline {subsubsection}{\numberline {7.3.6}Genotype}{20}{subsubsection.7.3.6}
-\contentsline {subsubsection}{\numberline {7.3.7}Genetic Mapping}{21}{subsubsection.7.3.7}
-\contentsline {subsubsection}{\numberline {7.3.8}Interactive Genetic Algorithm Operators}{22}{subsubsection.7.3.8}
-\contentsline {subsubsection}{\numberline {7.3.9}Interactive Genetic Algorithm Workflow}{26}{subsubsection.7.3.9}
-\contentsline {section}{\numberline {8}Results}{28}{section.8}
-\contentsline {subsection}{\numberline {8.1}Overview}{28}{subsection.8.1}
-\contentsline {subsection}{\numberline {8.2}Test 1: Random Population and User Scoring}{28}{subsection.8.2}
-\contentsline {subsection}{\numberline {8.3}Test 2: Random Population and Trait Re-ordering with Euclidean Distance}{29}{subsection.8.3}
-\contentsline {subsection}{\numberline {8.4}Test 3: Markov Chain and User Scoring}{30}{subsection.8.4}
-\contentsline {subsection}{\numberline {8.5}Test 4: Markov Chain and Trait Re-ordering with Euclidean Distance}{31}{subsection.8.5}
-\contentsline {subsection}{\numberline {8.6}Analysis of Tests}{32}{subsection.8.6}
-\contentsline {section}{\numberline {9}Conclusion}{32}{section.9}
+\contentsline {section}{\numberline {1}Abstract}{4}{section.1}
+\contentsline {section}{\numberline {2}Introduction}{5}{section.2}
+\contentsline {section}{\numberline {3}Problem}{6}{section.3}
+\contentsline {section}{\numberline {4}Previous Research}{7}{section.4}
+\contentsline {section}{\numberline {5}Overview}{9}{section.5}
+\contentsline {subsection}{\numberline {5.1}Interactive Genetic Algorithm}{9}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Markov Chain}{9}{subsection.5.2}
+\contentsline {section}{\numberline {6}Hypothesis}{10}{section.6}
+\contentsline {section}{\numberline {7}Synthesis}{11}{section.7}
+\contentsline {subsection}{\numberline {7.1}System Architecture}{11}{subsection.7.1}
+\contentsline {subsection}{\numberline {7.2}Breakdown of Music Server}{11}{subsection.7.2}
+\contentsline {subsubsection}{\numberline {7.2.1}Extracting Metadata from MIDI files}{12}{subsubsection.7.2.1}
+\contentsline {subsection}{\numberline {7.3}Breakdown of Interactive Genetic Algorithm}{13}{subsection.7.3}
+\contentsline {subsubsection}{\numberline {7.3.1}Initialization Settings}{13}{subsubsection.7.3.1}
+\contentsline {subsubsection}{\numberline {7.3.2}Influencer}{14}{subsubsection.7.3.2}
+\contentsline {subsubsection}{\numberline {7.3.3}Markov chain Workflow}{16}{subsubsection.7.3.3}
+\contentsline {subsubsection}{\numberline {7.3.4}Evaluation}{16}{subsubsection.7.3.4}
+\contentsline {subsubsection}{\numberline {7.3.5}Fitness Workflow}{21}{subsubsection.7.3.5}
+\contentsline {subsubsection}{\numberline {7.3.6}Genotype}{21}{subsubsection.7.3.6}
+\contentsline {subsubsection}{\numberline {7.3.7}Genetic Mapping}{22}{subsubsection.7.3.7}
+\contentsline {subsubsection}{\numberline {7.3.8}Interactive Genetic Algorithm Operators}{23}{subsubsection.7.3.8}
+\contentsline {subsubsection}{\numberline {7.3.9}Interactive Genetic Algorithm Workflow}{27}{subsubsection.7.3.9}
+\contentsline {section}{\numberline {8}Results}{29}{section.8}
+\contentsline {subsection}{\numberline {8.1}Overview}{29}{subsection.8.1}
+\contentsline {subsection}{\numberline {8.2}Test 1: Random Population and User Scoring}{29}{subsection.8.2}
+\contentsline {subsection}{\numberline {8.3}Test 2: Random Population and Trait Re-ordering with Euclidean Distance}{30}{subsection.8.3}
+\contentsline {subsection}{\numberline {8.4}Test 3: Markov Chain and User Scoring}{31}{subsection.8.4}
+\contentsline {subsection}{\numberline {8.5}Test 4: Markov Chain and Trait Re-ordering with Euclidean Distance}{32}{subsection.8.5}
+\contentsline {subsection}{\numberline {8.6}Analysis of Tests}{33}{subsection.8.6}
+\contentsline {section}{\numberline {9}Conclusion}{33}{section.9}
