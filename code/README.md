@@ -1,9 +1,12 @@
+### Note:
+You should be using the `README.html` file. `README.md` is rendered for github markdown and will not
+render if you open it in a text editor!
+
 ### Requirements
 This project has only been tested with:
 * Python 2.7
-* Chrome or firefox (any browser that supports the web audio API)
+* Chrome (your browser MUST be based on webkit otherwise you will not hear any music!)
 * OS X
-* Ubuntu 12.0.4
 
 ### Prerequisites
 Because this software is burnt on a CD, you must copy the contents from the CD to your machine!
@@ -13,8 +16,8 @@ You must have `pip` already installed on your system. If you do not, then the in
 
 #### Installation Script
 An installation script, `setup.sh`, has been provided to download the necessary pre-requisites. In order to run
-the installation script, you must make it executable otherwise `VirtualEnv` will fail to activate, resulting in 
-errors when installing libraries from `pip`. 
+the installation script, you must make it executable otherwise `VirtualEnv` will fail to activate, resulting in
+errors when installing libraries from `pip`.
 ```bash
 % chmod +x setup.sh
 % ./setup.sh
@@ -26,7 +29,7 @@ The installation script (`setup.sh`) does the following things:
 * Compiles Redis
 * Copies the Redis conf file from `./bin/redis.conf` to `./bin/redis-2.8.2`
 * Deletes the `redis-2.8.2.tar.gz` that was downloaded
-* Downloads `VirtualEnv` for Python 
+* Downloads `VirtualEnv` for Python
   * Creates a sandboxed environment to avoid cluttering your system's Python path
   * This step requires `sudo` because `VirtualEnv` must be installed to your default Python path, heh
 * Installs the necessary third party libraries from `pip`, which are found in `requirements.txt`
