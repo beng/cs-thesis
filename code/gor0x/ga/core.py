@@ -127,12 +127,10 @@ def mutation(population, m_rate=.5, kw=None, **kwargs):
             split_point = random.randint(1, len(individual['notes']) - 1)
             start, stop = random_sampling(0, len(individual['notes']), split_point)
 
-            logger.debug("Start point is %s, stop point is %s", start, stop)
-            # generate a new corpus via Markov chain
+            # generate a new corpus via cached markov chain
             settings = cache_get('settings')
             key = "{}:{}".format(settings['artist'], settings['song'])
-            original_corpus = cache_get(key)['original_notes']
-            new_corpus = generate_markov(original_corpus, mc_size=100, mc_nodes=2)[start:stop]
+            new_corpus = cache_get(key)['markov'][start:stop]
             logger.debug("New corpus is %s", new_corpus)
 
             # tuples are immuteable so we need to remake the tuple of notes/chords

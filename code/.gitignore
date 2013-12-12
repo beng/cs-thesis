@@ -1,0 +1,6 @@
+.DS_Store
+virtual/
+build/
+*.pyc
+bin/midi
+bin/redis-2.8.2

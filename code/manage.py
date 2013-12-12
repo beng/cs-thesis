@@ -11,7 +11,7 @@ from flask.ext.script import Manager
 from gor0x import create_app
 
 manager = Manager(create_app)
-r = Redis(db=2)
+r = Redis()
 MIDI_PATH = './bin/midi'
 
 
@@ -53,7 +53,6 @@ def cache_midi_folder():
     object, extracting the desired traits, and storing in redis with the key
     `artist`:`song_name`
     """
-    print "hello"
     path = './bin/midi/{}'
     artists_dirs = map(path.format, os.listdir(MIDI_PATH))
     map(artists_dirs.remove, filter(lambda d: '.mid' in d or '.DS_Store' in d, artists_dirs))
@@ -70,10 +69,12 @@ def cache_midi_folder():
                     mobj = music_obj(tmp_path)
                     print ">> begin extraction of CHORDS for:", name
                     notes = parse(mobj)
-                    print ">> begin caching of notes with NAME: `{}` and set: `original_notes`".format(name)
-                    cache_set(name, 'original_notes', notes, serialize=True)
-                    print ">> begin left push of: `{}` into list `artist pairs`".format(name)
-                    r.lpush('artist_pairs', name)
+                    if notes:
+                        print ">> notes are", notes
+                        print ">> begin caching of notes with NAME: `{}` and set: `original_notes`".format(name)
+                        cache_set(name, 'original_notes', notes, serialize=True)
+                        print ">> begin left push of: `{}` into list `artist pairs`".format(name)
+                        r.lpush('artist_pairs', name)
                 except Exception, e:
                     print "ISSUE PARSING SONG: {}! Exception is {}".format(name, e)
                     continue

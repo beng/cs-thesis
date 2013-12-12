@@ -124,8 +124,7 @@ def population(generation=None, id=None):
             # trash this guy and create a new one
             # generate a new corpus by using the cached markov chain
             key = "{}:{}".format(settings['artist'], settings['song'])
-            original_corpus = cache_get(key)['original_notes']
-            markov = generate_markov(original_corpus, mc_size=100, mc_nodes=2)
+            markov = cache_get(key)['markov']
             start, stop = random_sampling(1, len(markov), int(settings['isize']))
             individual['notes'] = markov[start:stop]
         cache_set(name, id, individual, serialize=True)

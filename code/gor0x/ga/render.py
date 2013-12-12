@@ -96,7 +96,15 @@ def render_population(**kwargs):
         mobj = music_obj(path)
         notes = parse(mobj, **kwargs)
         cache_set(name, 'original_notes', notes, serialize=True)
-    markov = generate_markov(notes, **kwargs)
+
+    # our corpuses are really lists of lists and the markov chain is performing
+    # permutations on each sub list when determining the possible transitions.
+    # we need to take a sample of the corpus before generating a markov chain
+    # to reduce the running time.
+    sample_size = min(len(notes), 300)
+    start, stop = random_sampling(1, sample_size, 250)
+    markov_notes = notes[start:stop]
+    markov = generate_markov(markov_notes, **kwargs)
     cache_set(name, 'markov', markov, serialize=True)
 
     # need to start at one to ensure ids and population size sync up

@@ -2,7 +2,7 @@ import pickle
 
 from redis import Redis
 
-r = Redis(db=2)
+r = Redis()
 
 
 def artist_song_pair():

@@ -8,7 +8,7 @@ import re
 import music21
 from redis import Redis
 
-r = Redis(db=2)
+r = Redis()
 MIDI_PATH = './midi'
 
 
