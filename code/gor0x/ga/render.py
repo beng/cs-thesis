@@ -93,13 +93,10 @@ def render_population(**kwargs):
     psize = kwargs['psize']
     notes = cache_get(name).get('original_notes')
     if not notes:
-        print "cache not set. parsing music object and saving to redis"
         mobj = music_obj(path)
         notes = parse(mobj, **kwargs)
-        print "setting cache of original notes"
         cache_set(name, 'original_notes', notes, serialize=True)
     markov = generate_markov(notes, **kwargs)
-    print "caching markov"
     cache_set(name, 'markov', markov, serialize=True)
 
     # need to start at one to ensure ids and population size sync up
@@ -109,7 +106,6 @@ def render_population(**kwargs):
         start, stop = random_sampling(1, len(markov), kwargs['isize'])
         notes = markov[start: stop]
         individual = render_individual(notes=notes, generation=1, _id=idx)
-        print "indivudal is in RENDER POP  ", individual
         cache_set(_name, idx, individual, serialize=True)
         population.append(individual)
     return population

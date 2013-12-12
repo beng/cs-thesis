@@ -26,3 +26,6 @@ def create_logger():
         _handler.setLevel(logging.DEBUG)
         logger.addHandler(_handler)
     return logger
+
+
+logger = create_logger()

@@ -3,7 +3,6 @@ Pre-compute music21 objects out of every midi file in the `midi_files` folder
 """
 import pickle
 import os
-import re
 
 import music21
 from redis import Redis

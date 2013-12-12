@@ -5,10 +5,7 @@ from model import cache_get, cache_set
 from render import random_sampling, render_individual, generate_markov
 
 
-from ..ga import create_logger
-
-
-logger = create_logger()
+from ..ga import logger
 
 
 def m_pipe(val, *fns, **kwargs):
@@ -142,7 +139,7 @@ def mutation(population, m_rate=.5, kw=None, **kwargs):
             individual['notes'] = individual['notes'][:start] + tuple(map(tuple, new_corpus)) + individual['notes'][stop:]
             _population.append(individual['notes'])
         else:
-            print "Not mutating\nRandom rate is: {}\nM Rate is: {}".format(rnd_rate, m_rate)
+            logger.debug("Not mutating\nRandom rate is: %s\nM Rate is: %s", rnd_rate, m_rate)
             _population.append(individual['notes'])
     return _population
 

@@ -145,8 +145,6 @@ def settings(option):
 @mod.route('/population/export/<generation>/<id>', methods=['GET'])
 def export(generation, id):
     """Generate a MIDI file out of the requested individual and save to ./tmp"""
-    print "generation is", generation
-    print "individual ID is ", id
     file_name = '{}_{}.mid'.format(generation, id)
     return jsonify({'file_name': file_name})
 
