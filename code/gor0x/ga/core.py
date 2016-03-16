@@ -21,7 +21,7 @@ def m_pipe(val, *fns, **kwargs):
     kw = kwargs
     _val = val
     for fn in fns:
-        _val = fn(val, **kw)
+        _val = fn(_val, **kw)
     return _val
 
 
